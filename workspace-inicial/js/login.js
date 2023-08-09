@@ -1,8 +1,8 @@
 function showAlertSuccess() {
     document.getElementById("alert-success").classList.add("show");
     setTimeout(() => {
-    document.getElementById("alert-success").classList.remove("show")
-        }, 3000);
+        document.getElementById("alert-success").classList.remove("show")
+    }, 3000);
 
 }
 
@@ -11,7 +11,7 @@ function showAlertError() {
     setTimeout(() => {
         document.getElementById("alert-danger").classList.remove("show")
     }, 3000);
-    
+
 
 }
 
@@ -41,7 +41,6 @@ signBtn.addEventListener("click", function () {
     } else {
         // Mostrar alerta de éxito
         showAlertSuccess();
+        window.location.href = "../index.html";
     }
 });
-
-// window.location.href = "../index.html"
