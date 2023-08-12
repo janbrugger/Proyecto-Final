@@ -6,11 +6,23 @@ function mostrarHTML(dataArray) {
     const contenido = document.querySelector(".pb-5 .container");
 
     contenido.innerHTML += `
-    <p>Nombre: ${item.name}<p/>
-    <p>Costo: ${item.cost}<p/>
-    <p>Descripción: ${item.description}<p/>
-    <p>Cantidad vendidos: ${item.soldCount}<p/>
-    <p>Imagen: ${item.image}<p/>
+    <div class="list-group-item list-group-item-action">
+        <div class="row">
+            <div class="col-3">
+                <img src="${item.image}" alt="product image" class="img-thumbnail"/>
+            </div>
+            <div class="col">
+                <div class="d-flex w-100 justify-content-between">
+                    <div class="mb-1">
+                    <h4>${item.name}</h4> 
+                    <p>${item.description}</p> 
+                    </div>
+                    <small class="text-muted"> ${item.soldCount} vendidos</small> 
+                </div>
+
+            </div>
+        </div>
+    </div>
     `; 
   }
 }
@@ -20,3 +32,4 @@ fetch(url)
 .then(response => response.json()) 
 .then(data => mostrarHTML(data)) 
 .catch(error => console.error("error fetchig data:", error));
+
