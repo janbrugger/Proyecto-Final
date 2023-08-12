@@ -14,7 +14,7 @@ function mostrarHTML(dataArray) {
             <div class="col">
                 <div class="d-flex w-100 justify-content-between">
                     <div class="mb-1">
-                    <h4>${item.name}</h4> 
+                    <h4>${item.name} - ${item.currency} ${item.cost}</h4> 
                     <p>${item.description}</p> 
                     </div>
                     <small class="text-muted"> ${item.soldCount} vendidos</small> 
