@@ -17,16 +17,15 @@ function showAlertError() {
 
 
 // Obtener referencia al botón de registro
-const signBtn = document.getElementById("sBtn");
+const logForm = document.querySelector("#logForm");
 
 
 // Agregar evento de click al botón de registro
-signBtn.addEventListener("click", function () {
-    // Obtener los valores ingresados por el usuario
+logForm.addEventListener("submit",  (e) => {
+    e.preventDefault() //evita que la pagina se recargue
 
-
-    const email = document.getElementById("floatingInput").value;            // Obtener el valor del campo "Email"
-    const password = document.getElementById("floatingPassword").value;    // Obtener el valor del campo "Contraseña"
+    const email = document.querySelector("#floatingInput").value;            // Obtener el valor del campo "Email"
+    const password = document.querySelector("#floatingPassword").value;    // Obtener el valor del campo "Contraseña"
     //const recuerdame = document.getElementById("chkbox").checked;    // Verificar si el checkbox de "remember me" está marcado
 
 
@@ -41,6 +40,6 @@ signBtn.addEventListener("click", function () {
     } else {
         // Mostrar alerta de éxito
         showAlertSuccess();
-        window.location.href = "../index.html";
+        window.location.href = "index.html";
     }
 });
