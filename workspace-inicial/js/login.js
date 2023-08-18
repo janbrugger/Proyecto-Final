@@ -28,8 +28,8 @@ logForm.addEventListener("submit",  (e) => {
     const password = document.querySelector("#floatingPassword").value;    // Obtener el valor del campo "Contraseña"
     //const recuerdame = document.getElementById("chkbox").checked;    // Verificar si el checkbox de "remember me" está marcado
 
-
-    // Realizar validaciones
+    function validUser(){
+        // Realizar validaciones
     if (
         email.trim() === "" ||            // Verificar si el campo "Email" está vacío
         password.length < 6               // Verificar si la contraseña tiene menos de 6 caracteres
@@ -42,4 +42,7 @@ logForm.addEventListener("submit",  (e) => {
         showAlertSuccess();
         window.location.href = "index.html";
     }
+    }
+    
+    localStorage.setItem('login_success', JSON.stringify(validUser()))
 });
