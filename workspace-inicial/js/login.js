@@ -6,6 +6,14 @@ function showAlertSuccess() {
 
 }
 
+function showAlertSuccess() {
+    document.getElementById("alert-success").classList.add("show");
+    setTimeout(() => {
+        document.getElementById("alert-success").classList.remove("show")
+    }, 3000);
+
+}
+
 function showAlertError() {
     document.getElementById("alert-danger").classList.add("show");
     setTimeout(() => {
@@ -26,10 +34,15 @@ logForm.addEventListener("submit",  (e) => {
 
     const email = document.querySelector("#floatingInput").value;            // Obtener el valor del campo "Email"
     const password = document.querySelector("#floatingPassword").value;    // Obtener el valor del campo "Contraseña"
-    //const recuerdame = document.getElementById("chkbox").checked;    // Verificar si el checkbox de "remember me" está marcado
+    
 
-    function validUser(){
-        // Realizar validaciones
+    var User = JSON.parse(localStorage.getItem("user")) || []; //el  storage es donde se va a guardar el mail y contraseña
+    User = {email:email, password:password}; //agregamos el email y contraseña
+    localStorage.setItem("user", JSON.stringify(User)); //guardamos en el storage
+
+
+
+    // Realizar validaciones
     if (
         email.trim() === "" ||            // Verificar si el campo "Email" está vacío
         password.length < 6               // Verificar si la contraseña tiene menos de 6 caracteres
@@ -42,7 +55,5 @@ logForm.addEventListener("submit",  (e) => {
         showAlertSuccess();
         window.location.href = "index.html";
     }
-    }
-    
-    localStorage.setItem('login_success', JSON.stringify(validUser()))
 });
+
