@@ -1,4 +1,5 @@
-const url = "https://japceibal.github.io/emercado-api/cats_products/101.json"
+const categoryID = localStorage.getItem("catID") ?? 101;
+const url = `https://japceibal.github.io/emercado-api/cats_products/${categoryID}.json`
 
 function mostrarHTML(dataArray) {
 
