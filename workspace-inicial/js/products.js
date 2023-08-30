@@ -67,7 +67,12 @@ function limpiar() {
 
 //evento al cargar el sitio
 document.addEventListener("DOMContentLoaded", () => { 
-  getData(); // 
+  getData(); //
+
+  verificacionLogin();
+
+  showUserNavbar();
+   
   });
   //evento de escribir en el buscador
   searchInput.addEventListener('input', function () { 
