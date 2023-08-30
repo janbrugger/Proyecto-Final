@@ -12,16 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location = "products.html"
     });
 
+    verificacionLogin();
 
+    showUserNavbar();
 });
-
- 
-
-const User = JSON.parse(localStorage.getItem("user")) || []//user es la key con la que identifico la session.
-
-
-//VerificaciÃ³n del login:
-if (User.email == undefined || User.email === "" || User.password == undefined || User.password.length < 6){ //si se cumple redirecciona al login.
-    alert("Inicia sesion para continuar");
-    window.location.href = "login.html";
-};

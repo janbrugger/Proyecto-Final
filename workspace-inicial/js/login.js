@@ -56,4 +56,3 @@ logForm.addEventListener("submit",  (e) => {
         window.location.href = "index.html";
     }
 });
-
