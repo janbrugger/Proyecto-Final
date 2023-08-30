@@ -1,10 +1,26 @@
 const categoryID = localStorage.getItem("catID") ?? 101;
 const url = `https://japceibal.github.io/emercado-api/cats_products/${categoryID}.json`
 
-function mostrarHTML(dataArray) {
+let originalData = []; 
 
+function getData() {
+    return fetch(url)
+        .then(respuesta => respuesta.json())
+        .then(data => {
+            originalData = data; // aca aparece dentro del fetch para llevarse datos
+            showData(data);
+        })
+        .catch(error => console.error("Error fetching data:", error));
+}
+
+document.addEventListener("DOMContentLoaded", () => { 
+    getData(); // El evento que trae todo lo original de la API
+});
+
+
+function showData(dataArray) {
   for (const item of dataArray.products) {
-    const contenido = document.querySelector(".pb-5 .container");
+    const contenido = document.getElementById("list-container");
 
     contenido.innerHTML += `
     <div class="list-group-item list-group-item-action">
@@ -27,10 +43,4 @@ function mostrarHTML(dataArray) {
     `; 
   }
 }
-
-
-fetch(url) 
-.then(response => response.json()) 
-.then(data => mostrarHTML(data)) 
-.catch(error => console.error("error fetchig data:", error));
 
