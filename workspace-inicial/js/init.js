@@ -43,14 +43,10 @@ let getJSONData = function (url) {
 }
 
 let showUserNavbar = function () { //funcion para mostrar usuario en navbar.
-  if (verificacionLogin()) {
+  if (!verificacionLogin()) {
     navbar.innerHTML += `<li class="nav-item">
-    <a class="nav-link active">Login</a>
+    <a class="nav-link active">${User.email}</a>
     </li>`
-  } else {
-    navbar.innerHTML += `<li class="nav-item">
-  <a class="nav-link active">${User.email}</a>
-  </li>`
   }
 };
 
