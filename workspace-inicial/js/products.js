@@ -11,6 +11,10 @@ const btnLimpiar = document.getElementById("clearRangeFilter");
 const minInput = document.getElementById("rangeFilterCountMin");
 const maxInput = document.getElementById("rangeFilterCountMax");
 
+const btnOrdenDesc = document.getElementById("sortByPriceDesc");
+const btnOrdenAsc = document.getElementById("sortByPriceAsc");
+const btnOrdenRelev = document.getElementById("sortBySoldCount");
+
 let originalData = []; 
 
 //función fetch de los datos de la api
@@ -65,6 +69,36 @@ function limpiar() {
   maxInput.value = "";
 };
 
+ //funcion para ordenar por relevancia
+ function sortBySoldCount(dataArray) {
+  let dataOrdenada = [...dataArray];
+
+  dataOrdenada.sort((a, b) => {
+      const soldCountA = a.soldCount;
+      const soldCountB = b.soldCount;
+      return  soldCountB - soldCountA;
+  });
+  showData(dataOrdenada);
+}
+
+//funcion para ordenar por precio ascendente o descendente
+function sortByPrice(dataArray, orden) {
+let dataOrdenada = [...dataArray]; // Crear una copia de los datos originales
+
+dataOrdenada.sort((a, b) => {
+    const priceA = parseFloat(a.cost);
+    const priceB = parseFloat(b.cost);
+
+    if (orden === "asc") {
+        return priceA - priceB;
+    } else if (orden === "desc") {
+        return priceB - priceA;
+    }
+});
+showData(dataOrdenada);
+}
+
+
 //evento al cargar el sitio
 document.addEventListener("DOMContentLoaded", () => { 
   getData(); //
@@ -91,4 +125,20 @@ document.addEventListener("DOMContentLoaded", () => {
   btnLimpiar.addEventListener("click", () => {
     limpiar();
   });
+
+  //evento al hacer click en "orden descendente"
+  btnOrdenDesc.addEventListener("click", () => {
+  sortByPrice(originalData, "desc");
+});
+
+//evento al hacer click en "orden ascendente"
+  btnOrdenAsc.addEventListener("click", () => {
+  sortByPrice(originalData, "asc");
+});
+
+ //evento al hacer click en Rel. (relevancia)
+ btnOrdenRelev.addEventListener("click", () => {
+  sortBySoldCount(originalData);
+});
+
 
