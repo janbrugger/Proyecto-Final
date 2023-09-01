@@ -86,8 +86,8 @@ function sortByPrice(dataArray, orden) {
 let dataOrdenada = [...dataArray]; // Crear una copia de los datos originales
 
 dataOrdenada.sort((a, b) => {
-    const priceA = parseFloat(a.cost);
-    const priceB = parseFloat(b.cost);
+    const priceA = a.cost;
+    const priceB = b.cost;
 
     if (orden === "asc") {
         return priceA - priceB;
