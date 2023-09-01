@@ -60,8 +60,29 @@ function filtrarPrecio(elements) {
           contFiltrado.push(element);
       }
   }
-  showData(contFiltrado);
+  if(contFiltrado.length ) {
+    showData(contFiltrado);
+  } else {
+    noResultado();
+  }
 };
+
+function noResultado() {
+
+  LimpiarHTML()
+
+  const noResultado = document.createElement("DIV");
+  noResultado.classList.add("alerta", "error");
+  noResultado.textContent = "No hay resultados"
+  contenidoProductos.appendChild(noResultado);
+}
+
+function LimpiarHTML (){
+  while(contenidoProductos.firstChild) {
+      contenidoProductos.removeChild(contenidoProductos.firstChild);
+  }
+
+}
 
 function limpiar() {
   getData(); // Vuelve a obtener los datos originales del listado

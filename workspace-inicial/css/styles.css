@@ -188,3 +188,15 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.alerta {
+  padding: 0.3rem;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  font-size: 1.3rem;
+}
+.error {
+  background-color: rgb(43, 32, 139);
+}
