@@ -124,8 +124,6 @@ showData(dataOrdenada);
 document.addEventListener("DOMContentLoaded", () => { 
   getData(); //
 
-  verificacionLogin();
-
   showUserNavbar();
    
   });
