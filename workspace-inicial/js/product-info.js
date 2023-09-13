@@ -3,7 +3,8 @@ const url_products = `https://japceibal.github.io/emercado-api/products/${produc
 const url_comments = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
 const container = document.getElementById("products-container");
 const comments = document.getElementById("comments")
-
+const rating = document.getElementById("rating");
+const selectedRating = document.getElementById("selected-rating");
 
 document.addEventListener("DOMContentLoaded", function() {
     getData()
@@ -69,3 +70,26 @@ function showComments(data_comments){
 function stars(quantity) {
     return "<i class='fa fa-star checked'></i>".repeat(Math.floor(quantity)) + "<i class='fa fa-star'></i>".repeat(5 - Math.floor(quantity));
 }
+
+// Manejador de clic en las estrellas
+rating.addEventListener("click", (event) => {
+    if (event.target.classList.contains("star")) {
+      const ratingValue = event.target.getAttribute("data-rating");
+      
+      // Actualizamos la puntuación seleccionada en el DOM
+      selectedRating.textContent = ratingValue;
+  
+      // Obtener todas las estrellas
+      const stars = document.querySelectorAll(".star");
+  
+      // Iterar sobre las estrellas y aplicar el estilo según la puntuación seleccionada
+      stars.forEach((star) => {
+        const starRating = star.getAttribute("data-rating");
+        if (starRating <= ratingValue) {
+          star.classList.add("selected");
+        } else {
+          star.classList.remove("selected");
+        }
+      });
+    }
+  });

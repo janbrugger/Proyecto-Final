@@ -210,6 +210,6 @@ a.custom-card:hover {
   cursor: pointer;
 }
 
-.star:hover {
+.selected {
   color: #ffcc00; /* Color de las estrellas al pasar el ratón */
 }
