@@ -28,12 +28,17 @@ function getData() {
         .catch(error => console.error("error fetchig data:", error));
 }
 
+function setProductID(id) {
+  localStorage.setItem("productID", id);
+  window.location = "product-info.html"
+}
+
 // funcion que muestra los datos en el html
 function showData(dataArray) {
   contenidoProductos.innerHTML = ''; //primero vacía el contenido 
   for (const item of dataArray) {
     contenidoProductos.innerHTML += `
-      <div class="list-group-item list-group-item-action">
+      <div onclick="setProductID(${item.id})" class="list-group-item list-group-item-action cursor-active">
           <div class="row">
               <div class="col-3"> <img src="${item.image}" alt="product image" class="img-thumbnail"/> </div>
               <div class="col">

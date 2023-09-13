@@ -200,3 +200,16 @@ a.custom-card:hover {
 .error {
   background-color: rgb(43, 32, 139);
 }
+
+.rating {
+  font-size: 24px; /* Tamaño de las estrellas */
+}
+
+.star {
+  color: #ccc; /* Color de las estrellas apagadas */
+  cursor: pointer;
+}
+
+.star:hover {
+  color: #ffcc00; /* Color de las estrellas al pasar el ratón */
+}
