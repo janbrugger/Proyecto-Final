@@ -43,19 +43,17 @@ let getJSONData = function (url) {
 }
 
 let showUserNavbar = function () { //funcion para mostrar usuario en navbar.
-  if (User.email === undefined) {
+  if (!verificacionLogin()) {
     navbar.innerHTML += `<li class="nav-item">
-    <a class="nav-link active">Login</a>
+    <a class="nav-link active">${User.email}</a>
     </li>`
-  } else
-    navbar.innerHTML += `<li class="nav-item">
-  <a class="nav-link active">${User.email}</a>
-  </li>`
+  }
 };
 
 let verificacionLogin = function () { //Verificacion del login:
   if (User.email == undefined || User.email === "" || User.password == undefined || User.password.length < 6) { //si se cumple redirecciona al login.
     alert("Inicia sesion para continuar");
     window.location.href = "login.html";
+    return true;
   };
 };

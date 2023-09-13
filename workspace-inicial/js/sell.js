@@ -149,8 +149,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     });
 
-    verificacionLogin();
-
+ 
     showUserNavbar();
 
 });

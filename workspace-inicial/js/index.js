@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location = "products.html"
     });
 
-    verificacionLogin();
 
     showUserNavbar();
 });
