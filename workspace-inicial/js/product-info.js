@@ -1,18 +1,18 @@
 const productID = localStorage.getItem("productID");
-const url_products = `https://japceibal.github.io/emercado-api/products/${productID}.json`;
-const url_comments = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
 const container = document.getElementById("products-container");
 const comments = document.getElementById("comments")
 const rating = document.getElementById("rating");
 const selectedRating = document.getElementById("selected-rating");
+const btnComment = document.getElementById("btnComment");
 
 document.addEventListener("DOMContentLoaded", function() {
+    showUserNavbar();
     getData()
     getComments()
 })
 
 function getData(){
-    return fetch(url_products)
+    return fetch(PRODUCT_INFO_URL + productID + ".json")
     .then(response => response.json())
         .then(data => { 
           showProducts(data);
@@ -21,7 +21,7 @@ function getData(){
 }
 
 function getComments(){
-    return fetch(url_comments)
+    return fetch(PRODUCT_INFO_COMMENTS_URL + productID + ".json")
     .then(response => response.json())
         .then(data_comments => { 
           showComments(data_comments);
@@ -51,9 +51,9 @@ function showProducts(data) {
 
 
 function showComments(data_comments){
+    container.innerHTML += `<h3>Comentarios</h3>`
     for (const comment of data_comments) {
         container.innerHTML += `
-        <h3>Comentarios</h3>
         <div class="list-group-item">
             <h4>${comment.user}</h4>
             <span>
@@ -92,4 +92,30 @@ rating.addEventListener("click", (event) => {
         }
       });
     }
+  });
+
+  //agrega comentario con usuario y fecha actual 
+  btnComment.addEventListener("click", () => {
+    const comment = document.getElementById("opinion").value
+
+    var today = new Date();
+    var fechaActual = today.toLocaleString();
+
+    if (comment != "") {
+      container.innerHTML += `
+      <div class="list-group-item">
+          <h4>${User.email}</h4>
+          <span>
+          estrellas
+          </span>
+          <p>${comment}</p>
+          <small class="text-muted">
+          ${fechaActual} </small>
+      </div>
+      `
+      document.getElementById("opinion").value = "";
+    } else {
+      alert("Debe agregar un comentario")
+    }
+
   });

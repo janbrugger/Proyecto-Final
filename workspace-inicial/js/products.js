@@ -1,5 +1,4 @@
 const categoryID = localStorage.getItem("catID") ?? 101;
-const url = `https://japceibal.github.io/emercado-api/cats_products/${categoryID}.json`
 
 // Buscador
 const searchInput = document.getElementById('buscador'); //toma datos del input
@@ -19,7 +18,7 @@ let originalData = [];
 
 //función fetch de los datos de la api
 function getData() { 
-        return fetch(url)
+        return fetch(PRODUCTS_URL + categoryID + ".json")
         .then(response => response.json())
         .then(data => {
             originalData = data.products; //aqui se almacenan los datos en el array originalData
