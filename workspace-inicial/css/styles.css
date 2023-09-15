@@ -211,5 +211,5 @@ a.custom-card:hover {
 }
 
 .selected {
-  color: #ffcc00; /* Color de las estrellas al pasar el ratón */
+  color: #ffcc00; /* Color de las estrellas al hacer click */
 }

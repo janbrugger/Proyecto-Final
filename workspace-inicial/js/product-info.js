@@ -97,6 +97,7 @@ rating.addEventListener("click", (event) => {
   //agrega comentario con usuario y fecha actual 
   btnComment.addEventListener("click", () => {
     const comment = document.getElementById("opinion").value
+    const ratingValue = selectedRating.textContent;
 
     var today = new Date();
     var fechaActual = today.toLocaleString();
@@ -106,7 +107,7 @@ rating.addEventListener("click", (event) => {
       <div class="list-group-item">
           <h4>${User.email}</h4>
           <span>
-          estrellas
+          ${stars(ratingValue)}
           </span>
           <p>${comment}</p>
           <small class="text-muted">
