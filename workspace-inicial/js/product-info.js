@@ -28,7 +28,7 @@ function getComments(){
         .catch(error => console.error("error fetchig data:", error));
 }
 
-function showProducts(data) { //funcion que muestra informacion y detalles del producto
+function showProducts(data) {
     container.innerHTML += `<div class="container">
     <h1 class="p-5">${data.name}</h1>
     <hr>
@@ -49,11 +49,11 @@ function showProducts(data) { //funcion que muestra informacion y detalles del p
 }
 
 
-function showComments(data_comments){ //funcion que muestra los comentarios del producto
+function showComments(data_comments){ 
     container.innerHTML += '<h3>Comentarios</h3>';
     if (data_comments.length === 0) {
-        comments.innerHTML = `<div class=text-center><h4 class="text-muted" class=small >
-        No se han agregado comentarios sobre este producto</h4></div>`;
+        comments.innerHTML = `<h5 class="text-center text-muted" >
+        No se han agregado comentarios sobre este producto</h5>`;
     } else {
     for (const comment of data_comments) {
         container.innerHTML += `
