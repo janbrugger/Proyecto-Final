@@ -33,7 +33,7 @@ return `<div id="carouselExampleControls" class="carousel slide" data-bs-ride="c
   <div class="carousel-inner">
   ${images.map((image,index) => {
     return `<div class="carousel-item ${index===0 ? "active" : ""}">
-    <img src="${image}" class="d-block w-100" alt="...">
+    <img src="${image}" class="d-block w-100 rounded" alt="...">
   </div>`
   })}
   </div>
