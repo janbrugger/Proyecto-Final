@@ -35,6 +35,10 @@ function setProductID(id) {
 // funcion que muestra los datos en el html
 function showData(dataArray) {
   contenidoProductos.innerHTML = ''; //primero vacía el contenido 
+  if (dataArray.length === 0) {
+    contenidoProductos.innerHTML = `<h4 class="text-center text-muted mt-5">
+    No se han agregado productos a esta categoría</h4>`;
+} else {
   for (const item of dataArray) {
     contenidoProductos.innerHTML += `
       <div onclick="setProductID(${item.id})" class="list-group-item list-group-item-action cursor-active">
@@ -52,6 +56,7 @@ function showData(dataArray) {
           </div>
       </div>
       `; 
+  }
   }
 };
 
