@@ -12,7 +12,8 @@ function getData(){
         .then(data => { 
           showProducts(data);
         })
-  } catch (error) {console.error("error fetchig data:", error)}   
+  } catch (error) {console.error("error fetchig data:", error)}
+  getComments()
 };
 
 //Función que trae los comentarios ya ingresados de cada producto
@@ -155,5 +156,4 @@ rating.addEventListener("click", (event) => {
   document.addEventListener("DOMContentLoaded", function() {
     showUserNavbar();
     getData()
-    getComments()
   });
