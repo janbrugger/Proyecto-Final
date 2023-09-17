@@ -18,14 +18,15 @@ let originalData = [];
 
 //función fetch de los datos de la api
 function getData() { 
-        return fetch(PRODUCTS_URL + categoryID + ".json")
+      try {
+        fetch(PRODUCTS_URL + categoryID + ".json")
         .then(response => response.json())
         .then(data => {
             originalData = data.products; //aqui se almacenan los datos en el array originalData
           showData(originalData);
         })
-        .catch(error => console.error("error fetchig data:", error));
-}
+      } catch (error) {console.error("error fetchig data:", error)}
+};
 
 function setProductID(id) {
   localStorage.setItem("productID", id);

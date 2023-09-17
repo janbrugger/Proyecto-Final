@@ -5,48 +5,28 @@ const rating = document.getElementById("rating");
 const selectedRating = document.getElementById("selected-rating");
 const btnComment = document.getElementById("btnComment");
 
-document.addEventListener("DOMContentLoaded", function() {
-    showUserNavbar();
-    getData()
-    getComments()
-})
-
 function getData(){
-    return fetch(PRODUCT_INFO_URL + productID + ".json")
+  try {
+    fetch(PRODUCT_INFO_URL + productID + ".json")
     .then(response => response.json())
         .then(data => { 
           showProducts(data);
         })
-        .catch(error => console.error("error fetchig data:", error));
-}
+  } catch (error) {console.error("error fetchig data:", error)}   
+};
 
+//Función que trae los comentarios ya ingresados de cada producto
 function getComments(){
-    return fetch(PRODUCT_INFO_COMMENTS_URL + productID + ".json")
+  try {
+    fetch(PRODUCT_INFO_COMMENTS_URL + productID + ".json")
     .then(response => response.json())
         .then(data_comments => { 
           showComments(data_comments);
         })
-        .catch(error => console.error("error fetchig data:", error));
-}
-function getCarrousel(images) {
-return `<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-  ${images.map((image,index) => {
-    return `<div class="carousel-item ${index===0 ? "active" : ""}">
-    <img src="${image}" class="d-block w-100 rounded" alt="...">
-  </div>`
-  })}
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>`
-}
+  } catch (error) {console.error("error fetchig data:", error)}
+};
+
+//Función que muestra los detalles de cada producto
 function showProducts(data) {
     container.innerHTML += `<div class="container">
     <h1 class="p-5">${data.name}</h1>
@@ -62,11 +42,12 @@ function showProducts(data) {
     <h3>Imagenes ilustrativas</h3>
     <div class="d-flex flex-row">
     
-    ${getCarrousel(data.images)}
+    ${createCarrousel(data.images)}
      </div>
     </div>`
-}
+};
 
+//Función que muestra los comentarios ya ingresados de cada producto
 function showComments(data_comments){ 
   container.innerHTML += '<h3>Comentarios</h3>';
   if (data_comments.length === 0) {
@@ -87,10 +68,33 @@ function showComments(data_comments){
       `
   }
 }
-}
+};
+
+//Función para otorgar puntaje a través de estrellas
 function stars(quantity) {
     return "<i class='fa fa-star checked'></i>".repeat(Math.floor(quantity)) + "<i class='fa fa-star'></i>".repeat(5 - Math.floor(quantity));
-}
+};
+
+//Función para crear el carrusel de Imágenes
+function createCarrousel(images) {
+  return `<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+    ${images.map((image,index) => {
+      return `<div class="carousel-item ${index===0 ? "active" : ""}">
+      <img src="${image}" class="d-block w-100 rounded" alt="...">
+    </div>`
+    })}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>`
+  };
 
 // Manejador de clic en las estrellas
 rating.addEventListener("click", (event) => {
@@ -146,4 +150,10 @@ rating.addEventListener("click", (event) => {
       alert("Debe agregar un comentario y una puntuación")
     }
 
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    showUserNavbar();
+    getData()
+    getComments()
   });
