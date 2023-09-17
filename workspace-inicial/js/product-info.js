@@ -113,25 +113,31 @@ rating.addEventListener("click", (event) => {
 
   //agrega comentario con usuario y fecha actual 
   btnComment.addEventListener("click", () => {
-    const comment = document.getElementById("opinion").value
+    const comment = document.getElementById("opinion");
     const ratingValue = selectedRating.textContent;
 
     var today = new Date();
     var fechaActual = today.toLocaleString();
 
-    if (comment != "" && ratingValue != 0 ) {
+    if (comment.value != "" && ratingValue != 0 ) {
       container.innerHTML += `
       <div class="list-group-item">
           <h4>${User.email}</h4>
           <span>
           ${stars(ratingValue)}
           </span>
-          <p>${comment}</p>
+          <p>${comment.value}</p>
           <small class="text-muted">
           ${fechaActual} </small>
       </div>
       `
-      document.getElementById("opinion").value = "";
+      comment.value = "";  //se limpia el textarea
+      selectedRating.textContent = 0;   //se vuelve a 0 el contador de estrellas seleccionadas
+      const allStars = document.querySelectorAll(".star");
+      allStars.forEach((star) => {    //se remueven todas las estrellas seleccionadas
+        star.classList.remove("selected");
+        });
+
     } else {
       alert("Debe agregar un comentario y una puntuación")
     }
