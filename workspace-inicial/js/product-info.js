@@ -67,23 +67,27 @@ function showProducts(data) {
     </div>`
 }
 
-function showComments(data_comments){
-    container.innerHTML += `<h3>Comentarios</h3>`
-    for (const comment of data_comments) {
-        container.innerHTML += `
-        <div class="list-group-item">
-            <h4>${comment.user}</h4>
-            <span>
-            ${stars(comment.score)}
-            </span>
-            <p>${comment.description}</p>
-            <small class="text-muted">
-            ${comment.dateTime}</small>
-        </div>
-        `
-    }
+function showComments(data_comments){ 
+  container.innerHTML += '<h3>Comentarios</h3>';
+  if (data_comments.length === 0) {
+      comments.innerHTML = `<h5 class="text-center text-muted" >
+      No se han agregado comentarios sobre este producto</h5>`;
+  } else {
+  for (const comment of data_comments) {
+      container.innerHTML += `
+      <div class="list-group-item">
+          <h4>${comment.user}</h4>
+          <span>
+          ${stars(comment.score)}
+          </span>
+          <p>${comment.description}</p>
+          <small class="text-muted">
+          ${comment.dateTime}</small>
+      </div>
+      `
+  }
 }
-
+}
 function stars(quantity) {
     return "<i class='fa fa-star checked'></i>".repeat(Math.floor(quantity)) + "<i class='fa fa-star'></i>".repeat(5 - Math.floor(quantity));
 }
