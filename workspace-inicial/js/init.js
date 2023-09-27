@@ -8,7 +8,7 @@ const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 const User = JSON.parse(localStorage.getItem("user")) || []//user es la key con la que identifico la session.
 const navbar = document.getElementById("navbar");
-const closeSesion = document.querySelector(".dropdown-item");
+
 
 
 let showSpinner = function () {
@@ -44,7 +44,7 @@ let getJSONData = function (url) {
     });
 }
 
-let showUserNavbar = function () { //funcion para mostrar usuario en navbar.
+let userMenu = function () { //funcion para mostrar usuario en navbar.
   if (!verificacionLogin()) {
     // Muestra el menú desplegable desde el email del usuario.
     navbar.innerHTML += `<li class="nav-item">
@@ -74,7 +74,7 @@ let showUserNavbar = function () { //funcion para mostrar usuario en navbar.
           <path d="M17 17h-11v-14h-2" />
           <path d="M6 5l14 1l-1 7h-13" />
         </svg></a></li>
-        <li><a class="dropdown-item" href="login.html">Cerrar sesión <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <li><a class="dropdown-item" id="itemLogout" href="login.html">Cerrar sesión <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
             <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
             <path d="M9 12h12l-3 -3" />
@@ -82,6 +82,7 @@ let showUserNavbar = function () { //funcion para mostrar usuario en navbar.
           </svg></a></li>
             </li>`
   }
+  logout();
 };
 
 let verificacionLogin = function () { //Verificacion del login:
@@ -92,6 +93,15 @@ let verificacionLogin = function () { //Verificacion del login:
   };
 };
 
-if(closeSesion) {
-  localStorage.removeItem()
-};
+//funcion para eliminar "user" del localStorage
+let logout = function () {
+  try {
+    const itemLogout = document.getElementById("itemLogout"); //itemLogout es el id del dropdown-item "Cerrar sesion"
+
+    itemLogout.addEventListener("click", function () {
+      localStorage.removeItem("user")
+    })
+  } catch (error) {
+    console.log(error); //error que se genera al intentar obtener el elemento "logout"
+  }
+}

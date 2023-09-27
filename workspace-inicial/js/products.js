@@ -132,11 +132,13 @@ showData(dataOrdenada);
 
 //evento al cargar el sitio
 document.addEventListener("DOMContentLoaded", () => { 
-  getData(); //
+  
+  getData();
 
-  showUserNavbar();
+  userMenu();
    
   });
+
   //evento de escribir en el buscador
   searchInput.addEventListener('input', function () { 
   const searchText = searchInput.value.toLowerCase();
