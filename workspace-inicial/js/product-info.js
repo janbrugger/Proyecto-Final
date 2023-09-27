@@ -94,6 +94,7 @@ function getRelatedProducts() {
   }
 };
 
+
 //Función que muestra los productos relacionados
 function showRelatedProducts(data_relatedProducts) {
   relatedProducts.innerHTML += '<h3 class="mt-4">Productos relacionados</h3>';
@@ -103,7 +104,7 @@ function showRelatedProducts(data_relatedProducts) {
   } else {
     for (const product of data_relatedProducts.relatedProducts) {
       relatedProducts.innerHTML += `
-        <div class="list-group-item d-inline-block mr-2 mb-2"> 
+        <div onclick="setProductID(${product.id})" class="list-group-item d-inline-block mr-2 mb-2 cursor-active"> 
         <div>
             <img src="${product.image}" class="img-fluid mt-2" style="max-width: 300px; max-height: 100px;">
         </div>  
@@ -112,6 +113,13 @@ function showRelatedProducts(data_relatedProducts) {
     }
   }
 };
+
+//Función para guardar id del producto relacionado y volver a cargar la página
+function setProductID(id) {
+  localStorage.setItem("productID", id);
+  window.location = "product-info.html"
+}
+
 
 //Función para otorgar puntaje a través de estrellas
 function stars(quantity) {
