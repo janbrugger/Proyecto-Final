@@ -9,6 +9,7 @@ const EXT_TYPE = ".json";
 const User = JSON.parse(localStorage.getItem("user")) || []//user es la key con la que identifico la session.
 const navbar = document.getElementById("navbar");
 
+
 let showSpinner = function () {
   document.getElementById("spinner-wrapper").style.display = "block";
 }
@@ -45,8 +46,23 @@ let getJSONData = function (url) {
 let showUserNavbar = function () { //funcion para mostrar usuario en navbar.
   if (!verificacionLogin()) {
     navbar.innerHTML += `<li class="nav-item">
-    <a class="nav-link active">${User.email}</a>
-    </li>`
+   
+    <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          ${User.email}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Mi carrito</a></li>
+            <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+            </li>`
   }
 };
 
@@ -57,3 +73,4 @@ let verificacionLogin = function () { //Verificacion del login:
     return true;
   };
 };
+
