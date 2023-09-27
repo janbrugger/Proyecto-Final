@@ -7,24 +7,49 @@ const btnComment = document.getElementById("btnComment");
 
 const relatedProducts = document.getElementById("related-products-container")
 
-//Función que trae los detalles de cada producto
-function getData(){
-  try {
-    fetch(PRODUCT_INFO_URL + productID + ".json")
-    .then(response => response.json())
-        .then(data => { 
-          showProducts(data);
-          if (data.relatedProducts) {
-            getRelatedProducts(data.relatedProducts); //Trae los datos de productos relacionado en caso de haber
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching product data:", error);
-        });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+
+
+  function getProduct(data) {
+    return new Promise((resolve, reject) => { //la funcion devuelve una promesa
+      fetch(data)
+        .then(response => response.json())
+        .then(data => resolve(data)) //si obtenemos la data devolvemos una promesa resuelta
+        .catch(error => reject(error)) //en caso contrario devolvemos una promesa rechazada
+    });
+  }
+  
+  //Función que trae los comentarios ya ingresados de cada producto
+  function getComments(data) {
+    return new Promise((resolve, reject) => {
+      fetch(data)
+        .then(response => response.json())
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    });
+  }
+  
+
+  async function showData() {
+  
+    try {
+      let product = await getProduct(PRODUCT_INFO_URL + productID + ".json"); //espera a recibir los resultados de la funcion.
+      showProducts(product);
+      if (data.relatedProducts) {
+        getRelatedProducts(data.relatedProducts); //Trae los datos de productos relacionado en caso de haber
+      }
+    } catch (error) { console.log(error) }
+  
+    try {
+      let comments = await getComments(PRODUCT_INFO_COMMENTS_URL + productID + ".json");
+      showComments(comments);
+    } catch (error) { console.log(error) }
+
+    try {
+      let related = await getProduct(PRODUCT_INFO_URL + productID + ".json");
+      showRelatedProducts(related);
+    } catch (error) { console.log(error) }
+  
+  }
 
 //Función que muestra los detalles de cada producto
 function showProducts(data) {
@@ -47,16 +72,6 @@ function showProducts(data) {
   </div>`
 };
 
-//Función que trae los comentarios ya ingresados de cada producto
-function getComments(){
-  try {
-    fetch(PRODUCT_INFO_COMMENTS_URL + productID + ".json")
-    .then(response => response.json())
-        .then(data_comments => { 
-          showComments(data_comments);
-        })
-  } catch (error) {console.error("error fetchig data:", error)}
-};
 
 //Función que muestra los comentarios ya ingresados de cada producto
 function showComments(data_comments){ 
@@ -79,19 +94,6 @@ function showComments(data_comments){
       `
   }
 }
-};
-
-//Función que trae los productos relacionados
-function getRelatedProducts() {
-  try {
-    fetch(PRODUCT_INFO_URL + productID + ".json")
-      .then((response) => response.json())
-      .then((data_relatedProducts) => {
-        showRelatedProducts(data_relatedProducts);
-      });
-  } catch (error) {
-    console.error("error fetching data:", error);
-  }
 };
 
 
@@ -205,6 +207,6 @@ rating.addEventListener("click", (event) => {
 
   document.addEventListener("DOMContentLoaded", function() {
     showUserNavbar();
-    getData();
+    showData();
     getComments();
   });
