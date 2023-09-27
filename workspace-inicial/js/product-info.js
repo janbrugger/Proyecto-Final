@@ -5,27 +5,38 @@ const rating = document.getElementById("rating");
 const selectedRating = document.getElementById("selected-rating");
 const btnComment = document.getElementById("btnComment");
 
-function getData(){
-  try {
-    fetch(PRODUCT_INFO_URL + productID + ".json")
-    .then(response => response.json())
-        .then(data => { 
-          showProducts(data);
-        })
-  } catch (error) {console.error("error fetchig data:", error)}
-  getComments()
-};
+function getProduct(data) {
+  return new Promise((resolve, reject) => { //la funcion devuelve una promesa
+    fetch(data)
+      .then(response => response.json())
+      .then(data => resolve(data)) //si obtenemos la data devolvemos una promesa resuelta
+      .catch(error => reject(error)) //en caso contrario devolvemos una promesa rechazada
+  });
+}
 
 //Función que trae los comentarios ya ingresados de cada producto
-function getComments(){
+function getComments(data) {
+  return new Promise((resolve, reject) => {
+    fetch(data)
+      .then(response => response.json())
+      .then(data => resolve(data))
+      .catch(error => reject(error))
+  });
+}
+
+async function showData() {
+
   try {
-    fetch(PRODUCT_INFO_COMMENTS_URL + productID + ".json")
-    .then(response => response.json())
-        .then(data_comments => { 
-          showComments(data_comments);
-        })
-  } catch (error) {console.error("error fetchig data:", error)}
-};
+    let product = await getProduct(PRODUCT_INFO_URL + productID + ".json"); //espera a recibir los resultados de la funcion.
+    showProducts(product);
+  } catch (error) { console.log(error) }
+
+  try {
+    let comments = await getComments(PRODUCT_INFO_COMMENTS_URL + productID + ".json");
+    showComments(comments);
+  } catch (error) { console.log(error) }
+
+}
 
 //Función que muestra los detalles de cada producto
 function showProducts(data) {
@@ -155,5 +166,5 @@ rating.addEventListener("click", (event) => {
 
   document.addEventListener("DOMContentLoaded", function() {
     showUserNavbar();
-    getData()
+    showData()
   });
