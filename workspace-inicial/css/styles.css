@@ -225,7 +225,7 @@ input[type=checkbox]{
 	visibility: hidden;
 }
 
-label {
+label.switch {
 	cursor: pointer;
 	text-indent: -9999px;
 	width: 100px;
@@ -236,7 +236,7 @@ label {
 	position: relative;
 }
 
-label:after {
+label.switch:after {
 	content: '';
 	position: absolute;
 	top: 5px;
@@ -257,7 +257,7 @@ input:checked + label:after {
 	transform: translateX(-100%);
 }
 
-label:active:after {
+label.switch:active:after {
 	width: 100px;
 }
 

@@ -28,7 +28,7 @@ function getData() {
       } catch (error) {console.error("error fetchig data:", error)}
 };
 
-function setProductID(id) {
+let setProductID = function (id) {
   localStorage.setItem("productID", id);
   window.location = "product-info.html"
 }

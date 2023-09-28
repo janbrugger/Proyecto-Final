@@ -80,6 +80,7 @@ let userMenu = function () { //funcion para mostrar usuario en navbar.
             <path d="M9 12h12l-3 -3" />
             <path d="M18 15l3 -3" />
           </svg></a></li>
+          <li><input onclick="cambiarTema()" class="dropdown-item" type="checkbox" id="switch"/><label for="switch" class="switch">Toggle</label></li>
             </li>`
   }
   logout();
