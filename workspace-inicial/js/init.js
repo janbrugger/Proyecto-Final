@@ -84,7 +84,7 @@ let userMenu = function () { //funcion para mostrar usuario en navbar.
             </li>`
   }
   logout();
- 
+
 };
 
 let verificacionLogin = function () { //Verificacion del login:
@@ -107,3 +107,22 @@ let logout = function () {
     console.log(error); //error que se genera al intentar obtener el elemento "logout"
   }
 }
+
+
+//DARK MODE
+const currentTheme = localStorage.getItem("theme");
+if (currentTheme) {
+  document.querySelector("body").setAttribute("data-bs-theme", currentTheme);
+  // document.getElementById("switch").checked = currentTheme === "dark";
+}
+
+
+//dark mode
+const cambiarTema = () => {
+  const body = document.querySelector("body");
+  const isLightMode = body.getAttribute("data-bs-theme") === "light";
+  const newTheme = isLightMode ? "dark" : "light";
+
+  body.setAttribute("data-bs-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+};
