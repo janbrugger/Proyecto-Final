@@ -80,10 +80,11 @@ let userMenu = function () { //funcion para mostrar usuario en navbar.
             <path d="M9 12h12l-3 -3" />
             <path d="M18 15l3 -3" />
           </svg></a></li>
-          <li><input onclick="cambiarTema()" class="dropdown-item" type="checkbox" id="switch"/><label for="switch" class="switch">Toggle</label></li>
+          <li><input onclick="cambiarTema()" class="dropdown-item" type="checkbox"  id="switch"/><label for="switch" class="switch">Toggle</label></li>
             </li>`
   }
   logout();
+  switchMode()
 
 };
 
@@ -111,10 +112,8 @@ let logout = function () {
 
 //DARK MODE
 const currentTheme = localStorage.getItem("theme");
-if (currentTheme) {
-  document.querySelector("body").setAttribute("data-bs-theme", currentTheme);
-  // document.getElementById("switch").checked = currentTheme === "dark";
-}
+
+
 
 
 //dark mode
@@ -126,3 +125,13 @@ const cambiarTema = () => {
   body.setAttribute("data-bs-theme", newTheme);
   localStorage.setItem("theme", newTheme);
 };
+
+function switchMode(){ //switch que se queda activo si esta en modo oscuro.
+  if (currentTheme) {
+    document.querySelector("body").setAttribute("data-bs-theme", currentTheme);
+    if(localStorage.getItem("theme") === "dark"){
+      document.getElementById("switch").setAttribute("checked", "checked");
+  
+    }
+  }
+}
