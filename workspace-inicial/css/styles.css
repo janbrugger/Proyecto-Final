@@ -228,21 +228,23 @@ input[type=checkbox]{
 label.switch {
 	cursor: pointer;
 	text-indent: -9999px;
-	width: 100px;
-	height: 50px;
+	width: 70px;
+	height: 30px;
 	background: grey;
 	display: block;
 	border-radius: 100px;
 	position: relative;
+  left: 15px;
 }
 
 label.switch:after {
 	content: '';
 	position: absolute;
-	top: 5px;
-	left: 5px;
-	width: 40px;
-	height: 40px;
+	top: 2px;
+	left: 2px;
+  bottom: 2px;
+	width: 26px;
+	height: 26px;
 	background: #fff;
 	border-radius: 90px;
 	transition: 0.3s;

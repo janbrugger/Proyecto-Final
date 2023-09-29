@@ -84,6 +84,7 @@ let userMenu = function () { //funcion para mostrar usuario en navbar.
             </li>`
   }
   logout();
+ 
 };
 
 let verificacionLogin = function () { //Verificacion del login:

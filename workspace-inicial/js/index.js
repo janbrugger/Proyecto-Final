@@ -12,12 +12,30 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location = "products.html"
     });
 
+    //DARK MODE
+    const currentTheme = localStorage.getItem("theme");
+  if (currentTheme) {
+    document.querySelector("body").setAttribute("data-bs-theme", currentTheme);
+    document.getElementById("switch").checked = currentTheme === "dark";
+  }
+    
+
     userMenu();
     showUserNavbar();
 });
 
 
+//dark mode
+const cambiarTema = () => {
+  const body = document.querySelector("body");
+  const isLightMode = body.getAttribute("data-bs-theme") === "light";
+  const newTheme = isLightMode ? "dark" : "light";
 
+  body.setAttribute("data-bs-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+};
+
+/*
   const temaOscuro = () => {
     document.querySelector("body").setAttribute("data-bs-theme", "dark");
   }
@@ -30,3 +48,4 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector("body").getAttribute("data-bs-theme") === "light"?
     temaOscuro() : temaClaro();
   }
+  */
