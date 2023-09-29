@@ -84,7 +84,7 @@ let userMenu = function () { //funcion para mostrar usuario en navbar.
             </li>`
   }
   logout();
-  switchMode()
+  themeCheck()
 
 };
 
@@ -113,7 +113,15 @@ let logout = function () {
 //DARK MODE
 const currentTheme = localStorage.getItem("theme");
 
-
+function themeCheck(){ 
+  if (currentTheme) {
+    document.querySelector("body").setAttribute("data-bs-theme", currentTheme);
+    if(localStorage.getItem("theme") === "dark"){  //switch que se queda activo si esta en modo oscuro.
+      document.getElementById("switch").setAttribute("checked", "checked");
+  
+    }
+  }
+}
 
 
 //dark mode
@@ -126,12 +134,3 @@ const cambiarTema = () => {
   localStorage.setItem("theme", newTheme);
 };
 
-function switchMode(){ //switch que se queda activo si esta en modo oscuro.
-  if (currentTheme) {
-    document.querySelector("body").setAttribute("data-bs-theme", currentTheme);
-    if(localStorage.getItem("theme") === "dark"){
-      document.getElementById("switch").setAttribute("checked", "checked");
-  
-    }
-  }
-}
