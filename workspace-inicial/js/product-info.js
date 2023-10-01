@@ -5,6 +5,7 @@ const rating = document.getElementById("rating");
 const selectedRating = document.getElementById("selected-rating");
 const btnComment = document.getElementById("btnComment");
 const relatedProducts = document.getElementById("related-products-container")
+const relatedProductsTitle = document.getElementById("related-products-title")
 
 
 
@@ -98,7 +99,7 @@ function showComments(data_comments){
 
 //Función que muestra los productos relacionados
 function showRelatedProducts(data_relatedProducts) {
-  relatedProducts.innerHTML += '<h3 class="mt-4">Productos relacionados</h3>';
+  relatedProductsTitle.innerHTML += '<h3 class="mt-4">Productos relacionados</h3>';
   if (data_relatedProducts.length === 0) {
     relatedProducts.innerHTML += `<h5 class="text-center text-muted">
       No hay productos relacionados</h5>`;
