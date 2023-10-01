@@ -206,6 +206,8 @@ rating.addEventListener("click", (event) => {
   });
 
   document.addEventListener("DOMContentLoaded", function() {
+    userMenu();
+    getData();
     showUserNavbar();
     showData();
   });

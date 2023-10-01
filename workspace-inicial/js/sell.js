@@ -150,6 +150,6 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
  
-    showUserNavbar();
+    userMenu();
 
 });
