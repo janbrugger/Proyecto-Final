@@ -4,8 +4,12 @@ const comments = document.getElementById("comments-container")
 const rating = document.getElementById("rating");
 const selectedRating = document.getElementById("selected-rating");
 const btnComment = document.getElementById("btnComment");
+const relatedProducts = document.getElementById("related-products-container")
 
 const relatedProducts = document.getElementById("related-products-container")
+
+
+
 
 
 
@@ -206,8 +210,15 @@ rating.addEventListener("click", (event) => {
   });
 
   document.addEventListener("DOMContentLoaded", function() {
+
+    showUserNavbar();
+    showData();
+    getComments();
+
     userMenu();
     getData();
+
+
     showUserNavbar();
     showData();
   });
