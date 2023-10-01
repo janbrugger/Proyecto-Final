@@ -6,16 +6,9 @@ const selectedRating = document.getElementById("selected-rating");
 const btnComment = document.getElementById("btnComment");
 const relatedProducts = document.getElementById("related-products-container")
 
-function getData(){
-  try {
-    fetch(PRODUCT_INFO_URL + productID + ".json")
-    .then(response => response.json())
-        .then(data => { 
-          showProducts(data);
-        })
-  } catch (error) {console.error("error fetchig data:", error)}
-  getComments()
-};
+const relatedProducts = document.getElementById("related-products-container")
+
+
 
 
 
@@ -225,4 +218,7 @@ rating.addEventListener("click", (event) => {
     userMenu();
     getData();
 
+
+    showUserNavbar();
+    showData();
   });
