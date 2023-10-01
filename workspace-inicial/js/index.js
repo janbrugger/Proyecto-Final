@@ -17,19 +17,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-
-/*
-  const temaOscuro = () => {
-    document.querySelector("body").setAttribute("data-bs-theme", "dark");
-  }
-
-  const temaClaro = () => {
-    document.querySelector("body").setAttribute("data-bs-theme", "light");
-  }
-
-  const cambiarTema = () => {
-    document.querySelector("body").getAttribute("data-bs-theme") === "light"?
-    temaOscuro() : temaClaro();
-  }
-  */
