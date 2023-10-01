@@ -11,7 +11,25 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
-
-
-    showUserNavbar();
+  
+    userMenu();
+   
 });
+
+
+
+
+/*
+  const temaOscuro = () => {
+    document.querySelector("body").setAttribute("data-bs-theme", "dark");
+  }
+
+  const temaClaro = () => {
+    document.querySelector("body").setAttribute("data-bs-theme", "light");
+  }
+
+  const cambiarTema = () => {
+    document.querySelector("body").getAttribute("data-bs-theme") === "light"?
+    temaOscuro() : temaClaro();
+  }
+  */
