@@ -36,9 +36,6 @@ const relatedProducts = document.getElementById("related-products-container")
     try {
       let product = await getProduct(PRODUCT_INFO_URL + productID + ".json"); //espera a recibir los resultados de la funcion.
       showProducts(product);
-      if (data.relatedProducts) {
-        getRelatedProducts(data.relatedProducts); //Trae los datos de productos relacionado en caso de haber
-      }
     } catch (error) { console.log(error) }
   
     try {
@@ -205,8 +202,6 @@ rating.addEventListener("click", (event) => {
 
   document.addEventListener("DOMContentLoaded", function() {
     showData();
-    getComments();
     userMenu();
-    getData();
 
   });
