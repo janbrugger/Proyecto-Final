@@ -118,11 +118,7 @@ function showRelatedProducts(data_relatedProducts) {
   }
 };
 
-//Función para guardar id del producto relacionado y volver a cargar la página
-function setProductID(id) {
-  localStorage.setItem("productID", id);
-  window.location = "product-info.html"
-}
+
 
 
 //Función para otorgar puntaje a través de estrellas

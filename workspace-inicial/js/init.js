@@ -134,3 +134,9 @@ const cambiarTema = () => {
   localStorage.setItem("theme", newTheme);
 };
 
+
+//Función para guardar id del producto y redirigir a la página
+function setProductID(id) {
+  localStorage.setItem("productID", id);
+  window.location = "product-info.html"
+}
