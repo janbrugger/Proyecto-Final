@@ -5,16 +5,7 @@ const rating = document.getElementById("rating");
 const selectedRating = document.getElementById("selected-rating");
 const btnComment = document.getElementById("btnComment");
 
-function getData(){
-  try {
-    fetch(PRODUCT_INFO_URL + productID + ".json")
-    .then(response => response.json())
-        .then(data => { 
-          showProducts(data);
-        })
-  } catch (error) {console.error("error fetchig data:", error)}
-  getComments()
-};
+
 
 //Función que trae los comentarios ya ingresados de cada producto
 function getComments(){
@@ -154,6 +145,9 @@ rating.addEventListener("click", (event) => {
   });
 
   document.addEventListener("DOMContentLoaded", function() {
-    showUserNavbar();
-    getData()
+    showData();
+    getComments();
+    userMenu();
+    getData();
+
   });
