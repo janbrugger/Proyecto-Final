@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         showCategoriesList();
     });
 
-
-    userMenu();
+        
+        showUserNavbar();
 });
 

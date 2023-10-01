@@ -28,7 +28,7 @@ function getData() {
       } catch (error) {console.error("error fetchig data:", error)}
 };
 
-let setProductID = function (id) {
+function setProductID(id) {
   localStorage.setItem("productID", id);
   window.location = "product-info.html"
 }
@@ -132,13 +132,11 @@ showData(dataOrdenada);
 
 //evento al cargar el sitio
 document.addEventListener("DOMContentLoaded", () => { 
-  
-  getData();
+  getData(); //
 
-  userMenu();
+  showUserNavbar();
    
   });
-
   //evento de escribir en el buscador
   searchInput.addEventListener('input', function () { 
   const searchText = searchInput.value.toLowerCase();
