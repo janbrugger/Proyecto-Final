@@ -42,6 +42,7 @@ async function showData() {
   try {
     let comments = await getComments(PRODUCT_INFO_COMMENTS_URL + productID + ".json");
     showComments(comments);
+    hayComentarios()
   } catch (error) { console.log(error) }
 
   try {
@@ -75,8 +76,6 @@ function showProducts(data) {
 
 //Función que muestra los comentarios ya ingresados de cada producto
 function showComments(data_comments) {
-  container.innerHTML += '<h3 class="mt-4">Comentarios</h3>';
-
   for (const comment of data_comments) {
     commentsContainer.innerHTML += `
       <div class="list-group-item">
@@ -189,6 +188,7 @@ btnComment.addEventListener("click", () => {
     const allStars = document.querySelectorAll(".star");
     allStars.forEach((star) => {    //se remueven todas las estrellas seleccionadas
       star.classList.remove("selected");
+      hayComentarios()
     });
 
   } else {
@@ -200,5 +200,16 @@ btnComment.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", function () {
   showData();
   userMenu();
+  hayComentarios()
 
 });
+
+
+
+function hayComentarios() { //verifica si hay comentarios y cambia la propiedad del mensaje para mostrarlo/ocultarlo.
+  if (commentsContainer.children.length === 0) {
+    document.getElementById("mensajeNoComentarios").style.display = "block";
+  } else {
+    document.getElementById("mensajeNoComentarios").style.display = "none"
+  }
+}
