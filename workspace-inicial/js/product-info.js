@@ -75,13 +75,13 @@ function showProducts(data) {
 
 //Función que muestra los comentarios ya ingresados de cada producto
 function showComments(data_comments){ 
-  container.innerHTML += '<h3 class="mt-4">Comentarios</h3>';
+  comments.innerHTML += '<h3 class="mt-4">Comentarios</h3>';
   if (data_comments.length === 0) {
       comments.innerHTML = `<h5 class="text-center text-muted" >
       No se han agregado comentarios sobre este producto</h5>`;
   } else {
   for (const comment of data_comments) {
-      container.innerHTML += `
+      comments.innerHTML += `
       <div class="list-group-item">
           <h4>${comment.user}</h4>
           <span>
@@ -177,7 +177,7 @@ rating.addEventListener("click", (event) => {
     var fechaActual = today.toLocaleString();
 
     if (comment.value != "" && ratingValue != 0 ) {
-      container.innerHTML += `
+      comments.innerHTML += `
       <div class="list-group-item">
           <h4>${User.email}</h4>
           <span>
