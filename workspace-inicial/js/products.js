@@ -130,7 +130,7 @@ showData(dataOrdenada);
 document.addEventListener("DOMContentLoaded", () => { 
   getData(); //
 
-  showUserNavbar();
+  userMenu();
    
   });
   //evento de escribir en el buscador

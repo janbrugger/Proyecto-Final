@@ -1,6 +1,6 @@
 const productID = localStorage.getItem("productID");
 const container = document.getElementById("products-container");
-const comments = document.getElementById("comments")
+const comments = document.getElementById("comments-container")
 const rating = document.getElementById("rating");
 const selectedRating = document.getElementById("selected-rating");
 const btnComment = document.getElementById("btnComment");
@@ -74,7 +74,7 @@ function showProducts(data) {
 
 //Función que muestra los comentarios ya ingresados de cada producto
 function showComments(data_comments){ 
-  container.innerHTML += '<h3>Comentarios</h3>';
+  container.innerHTML += '<h3 class="mt-4">Comentarios</h3>';
   if (data_comments.length === 0) {
       comments.innerHTML = `<h5 class="text-center text-muted" >
       No se han agregado comentarios sobre este producto</h5>`;
@@ -129,7 +129,7 @@ function createCarrousel(images) {
     <div class="carousel-inner">
     ${images.map((image,index) => {
       return `<div class="carousel-item ${index===0 ? "active" : ""}">
-      <img src="${image}" class="d-block w-100 rounded" alt="...">
+      <img src="${image}" class="d-block rounded" alt="...">
     </div>`
     })}
     </div>
