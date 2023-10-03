@@ -28,10 +28,6 @@ function getData() {
       } catch (error) {console.error("error fetchig data:", error)}
 };
 
-function setProductID(id) {
-  localStorage.setItem("productID", id);
-  window.location = "product-info.html"
-}
 
 // funcion que muestra los datos en el html
 function showData(dataArray) {

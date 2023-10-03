@@ -4,19 +4,52 @@ const comments = document.getElementById("comments")
 const rating = document.getElementById("rating");
 const selectedRating = document.getElementById("selected-rating");
 const btnComment = document.getElementById("btnComment");
+const relatedProducts = document.getElementById("related-products-container")
+const relatedProductsTitle = document.getElementById("related-products-title")
 
 
 
-//Función que trae los comentarios ya ingresados de cada producto
-function getComments(){
-  try {
-    fetch(PRODUCT_INFO_COMMENTS_URL + productID + ".json")
-    .then(response => response.json())
-        .then(data_comments => { 
-          showComments(data_comments);
-        })
-  } catch (error) {console.error("error fetchig data:", error)}
-};
+
+
+
+  function getProduct(data) {
+    return new Promise((resolve, reject) => { //la funcion devuelve una promesa
+      fetch(data)
+        .then(response => response.json())
+        .then(data => resolve(data)) //si obtenemos la data devolvemos una promesa resuelta
+        .catch(error => reject(error)) //en caso contrario devolvemos una promesa rechazada
+    });
+  }
+  
+  //Función que trae los comentarios ya ingresados de cada producto
+  function getComments(data) {
+    return new Promise((resolve, reject) => {
+      fetch(data)
+        .then(response => response.json())
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    });
+  }
+  
+
+  async function showData() {
+  
+    try {
+      let product = await getProduct(PRODUCT_INFO_URL + productID + ".json"); //espera a recibir los resultados de la funcion.
+      showProducts(product);
+    } catch (error) { console.log(error) }
+  
+    try {
+      let comments = await getComments(PRODUCT_INFO_COMMENTS_URL + productID + ".json");
+      showComments(comments);
+    } catch (error) { console.log(error) }
+
+    try {
+      let related = await getProduct(PRODUCT_INFO_URL + productID + ".json");
+      showRelatedProducts(related);
+    } catch (error) { console.log(error) }
+  
+  }
 
 //Función que muestra los detalles de cada producto
 function showProducts(data) {
@@ -61,6 +94,29 @@ function showComments(data_comments){
   }
 }
 };
+
+
+//Función que muestra los productos relacionados
+function showRelatedProducts(data_relatedProducts) {
+  relatedProductsTitle.innerHTML += '<h3 class="mt-4">Productos relacionados</h3>';
+  if (data_relatedProducts.length === 0) {
+    relatedProducts.innerHTML += `<h5 class="text-center text-muted">
+      No hay productos relacionados</h5>`;
+  } else {
+    for (const product of data_relatedProducts.relatedProducts) {
+      relatedProducts.innerHTML += `
+        <div onclick="setProductID(${product.id})" class="list-group-item d-inline-block mr-2 mb-2 cursor-active"> 
+        <div>
+            <img src="${product.image}" class="img-fluid mt-2" style="max-width: 300px; max-height: 100px;">
+        </div>  
+        <h4 class="h6 text-center mt-2">${product.name}</h4> 
+        </div>`;
+    }
+  }
+};
+
+
+
 
 //Función para otorgar puntaje a través de estrellas
 function stars(quantity) {
@@ -146,8 +202,6 @@ rating.addEventListener("click", (event) => {
 
   document.addEventListener("DOMContentLoaded", function() {
     showData();
-    getComments();
     userMenu();
-    getData();
 
   });
