@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
-
-
-    showUserNavbar();
+ 
+    userMenu();
+   
 });
+
+
