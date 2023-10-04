@@ -1,5 +1,10 @@
 const userID = 25801;
 const container = document.getElementById("items");
+let map, marker, infoWindow;
+const mapDiv = document.getElementById("mapDiv");
+const departamentosSelect  = document.getElementById("Departamento");
+const ciudadesSelect = document.getElementById("ciudades");
+const url = "https://raw.githubusercontent.com/mmejiadeveloper/uruguay-departamentos-y-localidades-json/master/uruguay.json";
 
 //Fecth Carrito
 function getCartInfo(data) {
@@ -32,9 +37,97 @@ function showCartInfo(data_cart){
     }
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function (){
 showData();
 
 });
+
+fetch(url)
+.then(response => response.json())
+.then(data => {
+    console.log(data);
+    data.forEach(departamento => {
+        const option = document.createElement('option');
+        option.value = departamento.departamento;
+        option.textContent = departamento.departamento;
+        departamentosSelect.appendChild(option);
+    
+});
+// Agregar un evento de cambio al elemento <select> de departamentos
+departamentosSelect.addEventListener('change', () => {
+    // Obtener el departamento seleccionado
+    const selectedDepartamento = departamentosSelect.value;
+
+    // Llenar el elemento <select> de ciudades con las ciudades del departamento seleccionado
+    ciudadesSelect.innerHTML = ''; // Limpiar opciones anteriores
+
+    const departamento = data.find(d => d.departamento === selectedDepartamento);
+    if (departamento) {
+        departamento.ciudades.forEach(ciudad => {
+            const option = document.createElement('option');
+            option.value = ciudad;
+            option.textContent = ciudad;
+            ciudadesSelect.appendChild(option);
+        });
+    }
+});
+});
+
+function initMap(){
+   map = new google.maps.Map(mapDiv, {
+        center: {lat: -33.61, lng:-63.61 },
+        zoom: 6,
+   })
+    infoWindow = new google.maps.InfoWindow();
+
+    const locationButton = document.createElement("button");
+    locationButton.textContent = "Mi ubicación";
+    locationButton.classList.add("custom-map-control-button");
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+
+    locationButton.addEventListener("click", () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const myPosition = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                }
+
+                infoWindow.setPosition(myPosition);
+                infoWindow.setContent("Mi ubicación");
+                infoWindow.open(map);
+                map.setCenter(myPosition);
+            }, () => handleLocationError(true, infoWindow, map.getCenter()));
+        } else {
+            // Navegador no soportado
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+    });
+    
+    map.addListener("click", (event) => {
+        addMarker(event.latLng);
+    })
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Hubo un error al tratar de obtener tu ubicación"
+      : "Tu navegador no esta soportado"
+  );
+  infoWindow.open(map);
+}
+
+function addMarker(position) {
+    if (marker) {
+        marker.setMap(null);
+    }
+    
+     marker = new google.maps.Marker({
+        position,
+        map,
+    })
+
+    marker.setMap(map);
+}
