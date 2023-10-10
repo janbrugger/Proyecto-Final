@@ -1,3 +1,9 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
 .jumbotron,
 .card-body,
 .container,
@@ -263,6 +269,18 @@ label.switch:active:after {
 	width: 100px;
 }
 
+/* Media for Phone size */
+.form-control{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
 
+.card-body{
+  padding: 0em 0.7em 0.5em ;
+}
+
+.card-text {
+font-size: 15px;
+}
 
 
