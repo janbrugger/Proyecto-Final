@@ -263,6 +263,8 @@ label.switch:active:after {
 	width: 100px;
 }
 
-
+#mensajeNoComentarios {
+ display: none;
+}
 
 
