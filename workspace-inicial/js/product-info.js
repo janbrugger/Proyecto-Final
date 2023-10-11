@@ -7,10 +7,7 @@ const btnComment = document.getElementById("btnComment");
 const relatedProducts = document.getElementById("related-products-container")
 const relatedProductsTitle = document.getElementById("related-products-title")
 
-
-
-
-
+let carrito = [];
 
   function getProduct(data) {
     return new Promise((resolve, reject) => { //la funcion devuelve una promesa
@@ -55,6 +52,7 @@ const relatedProductsTitle = document.getElementById("related-products-title")
 function showProducts(data) {
     container.innerHTML += `<div class="container">
     <h1 class="p-5">${data.name}</h1>
+    <button id="addToCartButton" class="btn btn-primary">Agregar al carrito</button>
     <hr>
     <h3>Precio</h3>
     <p class="pb-4">${data.cost} ${data.currency}</p>
