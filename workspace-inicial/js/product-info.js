@@ -42,7 +42,7 @@ async function showData() {
   try {
     let comments = await getComments(PRODUCT_INFO_COMMENTS_URL + productID + ".json");
     showComments(comments);
-    hayComentarios();
+    hayComentarios()
   } catch (error) { console.log(error) }
 
   try {
@@ -178,17 +178,21 @@ btnComment.addEventListener("click", () => {
   var fechaActual = today.toLocaleString();
 
   if (comment.value != "" && ratingValue != 0) {
-    commentsContainer.innerHTML += `
-      <div class="list-group-item">
-          <h4>${User.email}</h4>
-          <span>
-          ${stars(ratingValue)}
-          </span>
-          <p>${comment.value}</p>
-          <small class="text-muted">
-          ${fechaActual} </small>
-      </div>
-      `
+    const comentarioGuardado = `  <div class="list-group-item">
+    <h4>${User.email}</h4>
+    <span>
+    ${stars(ratingValue)}
+    </span>
+    <p>${comment.value}</p>
+    <small class="text-muted">
+    ${fechaActual} </small>
+</div>
+`
+
+    saveLocalComment(localStorage.getItem("productID"), comentarioGuardado)
+    commentsContainer.innerHTML += comentarioGuardado
+
+
     comment.value = "";  //se limpia el textarea
     selectedRating.textContent = 0;   //se vuelve a 0 el contador de estrellas seleccionadas
     const allStars = document.querySelectorAll(".star");
@@ -206,7 +210,9 @@ btnComment.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", function () {
   showData();
   userMenu();
-  hayComentarios()
+  showLocalComments(localStorage.getItem("productID"));
+  hayComentarios();
+
 
 });
 
@@ -218,4 +224,38 @@ function hayComentarios() { //verifica si hay comentarios y cambia la propiedad 
   } else {
     document.getElementById("mensajeNoComentarios").style.display = "none"
   }
+}
+
+
+//funcion que guarda el comentario junto con el id del producto en localStorage
+function saveLocalComment(productID, comentario) {
+
+  //obtiene los comentarios del localStorage si los hay
+  const comentariosExistentes = JSON.parse(localStorage.getItem("comentarios")) || {};
+
+  if (!comentariosExistentes[productID]) { //verifica si ya hay un arreglo de comentarios, de lo contrario crea uno vacio
+    comentariosExistentes[productID] = []
+
+  }
+
+  comentariosExistentes[productID].push(comentario)
+
+  localStorage.setItem("comentarios", JSON.stringify(comentariosExistentes))
+
+}
+
+//funcion que muestra los comentarios que coincidan con el id del producto.
+function showLocalComments(productID) {
+
+  const comentarios = JSON.parse(localStorage.getItem("comentarios")) || {}
+
+  if (comentarios[productID]) {
+    comentarios[productID].forEach(comentario => {
+      commentsContainer.innerHTML += comentario
+
+    })
+  } else {
+    console.log("no hay comentarios")
+  }
+
 }
