@@ -42,7 +42,7 @@ async function showData() {
   try {
     let comments = await getComments(PRODUCT_INFO_COMMENTS_URL + productID + ".json");
     showComments(comments);
-    hayComentarios()
+    hayComentarios();
   } catch (error) { console.log(error) }
 
   try {
@@ -73,9 +73,15 @@ function showProducts(data) {
   </div>`
 };
 
+function compararPorFecha(a, b) {
+  const fechaA = new Date(a.dateTime);
+  const fechaB = new Date(b.dateTime);
+  return fechaB - fechaA;
+}
 
 //Función que muestra los comentarios ya ingresados de cada producto
 function showComments(data_comments) {
+  data_comments.sort(compararPorFecha);
   for (const comment of data_comments) {
     commentsContainer.innerHTML += `
       <div class="list-group-item">
