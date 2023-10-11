@@ -54,20 +54,20 @@ async function showData() {
 
 //Función que muestra los detalles de cada producto
 function showProducts(data) {
-  container.innerHTML += `<div class="container">
-  <h1 class="p-5">${data.name}</h1>
-  <hr>
-  <h3>Precio</h3>
-  <p class="pb-4">${data.cost} ${data.currency}</p>
-  <h3>Descripción</h3>
-  <p class="pb-4">${data.description}</p>
-  <h3>Categoría</h3>
-  <p class="pb-4">${data.category}</p>
-  <h3>Cantidad vendidos</h3>
-  <p class="pb-4">${data.soldCount}</p>
+  container.innerHTML += `
+  <div class="container">
+  <h1 class="p-4 m-0">${data.name}</h1>
+  <hr class="my-2">
+  <h3 class="m-0">Precio</h3>
+  <p class="pb-2">${data.cost} ${data.currency}</p>
+  <h3 class="m-0">Descripción</h3>
+  <p class="fs-6">${data.description}</p>
+  <h3 class="m-0">Categoría</h3>
+  <p class="pb-2">${data.category}</p>
+  <h3 class="m-0">Cantidad vendidos</h3>
+  <p class="pb-2">${data.soldCount}</p>
   <h3>Imagenes ilustrativas</h3>
-  <div class="d-flex flex-row">
-  
+  <div class="">
   ${createCarrousel(data.images)}
    </div>
   </div>`
@@ -84,14 +84,17 @@ function showComments(data_comments) {
   data_comments.sort(compararPorFecha);
   for (const comment of data_comments) {
     commentsContainer.innerHTML += `
-      <div class="list-group-item">
-          <h4>${comment.user}</h4>
+      <div class="list-group-item container border border-secondary-subtle rounded my-2 p-1">
+       <div class="d-flex flex-wrap justify-content-between ">
+          <h6 class="fw-bold ">${comment.user}</h6>
           <span>
           ${stars(comment.score)}
           </span>
-          <p>${comment.description}</p>
-          <small class="text-muted">
-          ${comment.dateTime}</small>
+        </div>
+        <div>
+          <p class="mb-1">${comment.description}</p>
+          <small class="text-muted">${comment.dateTime}</small>
+        </div>
       </div>
       `
   }
@@ -109,7 +112,7 @@ function showRelatedProducts(data_relatedProducts) {
       relatedProducts.innerHTML += `
         <div onclick="setProductID(${product.id})" class="list-group-item d-inline-block mr-2 mb-2 cursor-active"> 
         <div>
-            <img src="${product.image}" class="img-fluid mt-2" style="max-width: 300px; max-height: 100px;">
+            <img src="${product.image}" class="img-fluid mt-2">
         </div>  
         <h4 class="h6 text-center mt-2">${product.name}</h4> 
         </div>`;
@@ -178,16 +181,21 @@ btnComment.addEventListener("click", () => {
   var fechaActual = today.toLocaleString();
 
   if (comment.value != "" && ratingValue != 0) {
-    const comentarioGuardado = `  <div class="list-group-item">
-    <h4>${User.email}</h4>
-    <span>
-    ${stars(ratingValue)}
-    </span>
-    <p>${comment.value}</p>
-    <small class="text-muted">
-    ${fechaActual} </small>
-</div>
-`    
+    const comentarioGuardado = `
+    <div class="list-group-item container border border-secondary-subtle rounded my-2 p-1">
+     <div class="d-flex flex-wrap justify-content-between ">
+        <h6 class="fw-bold ">${User.email}</h6>
+        <span>
+        ${stars(ratingValue)}
+        </span>
+      </div>
+      <div>
+        <p class="mb-1">${comment.value}</p>
+        <small class="text-muted">${fechaActual}</small>
+      </div>
+    </div>
+    `
+
 
     saveLocalComment(localStorage.getItem("productID"), comentarioGuardado)
     commentsContainer.insertAdjacentHTML("afterbegin", comentarioGuardado)
