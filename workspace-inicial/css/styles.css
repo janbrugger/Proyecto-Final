@@ -264,7 +264,7 @@ label.switch:active:after {
 }
 
 #mapDiv{
-  width: 500px;
+  width: 100%;
   height: 500px;
 }
 
