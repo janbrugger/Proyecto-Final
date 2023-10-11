@@ -133,7 +133,7 @@ function createCarrousel(images) {
     <div class="carousel-inner">
     ${images.map((image, index) => {
     return `<div class="carousel-item ${index === 0 ? "active" : ""}">
-      <img src="${image}" class="d-block rounded" alt="...">
+      <img src="${image}" class="w-100 d-block rounded" alt="...">
     </div>`
   })}
     </div>
