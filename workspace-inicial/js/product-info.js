@@ -106,7 +106,7 @@ function showRelatedProducts(data_relatedProducts) {
       relatedProducts.innerHTML += `
         <div onclick="setProductID(${product.id})" class="list-group-item d-inline-block mr-2 mb-2 cursor-active"> 
         <div>
-            <img src="${product.image}" class="img-fluid mt-2" style="max-width: 300px; max-height: 100px;">
+            <img src="${product.image}" class="img-fluid mt-2" >
         </div>  
         <h4 class="h6 text-center mt-2">${product.name}</h4> 
         </div>`;
