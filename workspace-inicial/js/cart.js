@@ -13,7 +13,7 @@ function getCartInfo(data) {
 }
 
 // Mostrar información del carrito
-async function showData() {
+async function showCartData() {
   try {
     data_cart = await getCartInfo(CART_INFO_URL + userID + ".json");
     showCartInfo(data_cart);
@@ -56,5 +56,5 @@ function updateSubtotal(inputElement) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  showData();
+  showCartData();
 });
