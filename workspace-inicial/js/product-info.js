@@ -9,9 +9,6 @@ const relatedProductsTitle = document.getElementById("related-products-title")
 
 
 
-
-
-
 function getProduct(data) {
   return new Promise((resolve, reject) => { //la funcion devuelve una promesa
     fetch(data)
@@ -84,6 +81,7 @@ function showComments(data_comments) {
   data_comments.sort(compararPorFecha);
   for (const comment of data_comments) {
     commentsContainer.innerHTML += `
+
       <div class="list-group-item container border border-secondary-subtle rounded my-2 p-1">
        <div class="d-flex flex-wrap justify-content-between ">
           <h6 class="fw-bold ">${comment.user}</h6>
@@ -113,6 +111,7 @@ function showRelatedProducts(data_relatedProducts) {
         <div onclick="setProductID(${product.id})" class="list-group-item d-inline-block mr-2 mb-2 cursor-active"> 
         <div>
             <img src="${product.image}" class="img-fluid mt-2">
+
         </div>  
         <h4 class="h6 text-center mt-2">${product.name}</h4> 
         </div>`;
@@ -130,7 +129,7 @@ function stars(quantity) {
 
 //Función para crear el carrusel de Imágenes
 function createCarrousel(images) {
-  return `<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  return `<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel ">
     <div class="carousel-inner">
     ${images.map((image, index) => {
     return `<div class="carousel-item ${index === 0 ? "active" : ""}">

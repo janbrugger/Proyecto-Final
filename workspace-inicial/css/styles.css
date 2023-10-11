@@ -1,3 +1,14 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html {
+  padding-right: 0px !important;
+  margin-right: 0px !important;
+}
+
 .jumbotron,
 .card-body,
 .container,
@@ -35,7 +46,7 @@ nav a {
   background-color: #53C0FB;
   background: url('../img/cover_back.png');
   background-size: cover;
-  background-position: center;
+  background-position: block;
   background-repeat: no-repeat;
   color: black;
   font-weight: bold;
@@ -45,6 +56,13 @@ nav a {
   .jumbotron {
     padding-top: 6rem;
     padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 310px) {
+  .jumbotron {
+    background-position-x: 20%;
+
   }
 }
 
@@ -263,8 +281,28 @@ label.switch:active:after {
 	width: 100px;
 }
 
+/* Media for Phone size */
+.form-control{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.card-body{
+  padding: 0em 0.7em 0.5em ;
+}
+
+.card-text {
+font-size: 15px;
+}
+
+.sm-fs{
+  font-size: 0.7em;
+}
+
+
 #mensajeNoComentarios {
  display: none;
 }
+
 
 
