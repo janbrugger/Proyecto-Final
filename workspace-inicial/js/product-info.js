@@ -187,10 +187,10 @@ btnComment.addEventListener("click", () => {
     <small class="text-muted">
     ${fechaActual} </small>
 </div>
-`
+`    
 
     saveLocalComment(localStorage.getItem("productID"), comentarioGuardado)
-    commentsContainer.innerHTML += comentarioGuardado
+    commentsContainer.insertAdjacentHTML("afterbegin", comentarioGuardado)
 
 
     comment.value = "";  //se limpia el textarea
@@ -251,7 +251,7 @@ function showLocalComments(productID) {
 
   if (comentarios[productID]) {
     comentarios[productID].forEach(comentario => {
-      commentsContainer.innerHTML += comentario
+      commentsContainer.insertAdjacentHTML("afterbegin", comentario)
 
     })
   } else {
