@@ -90,10 +90,15 @@ function LimpiarHTML (){
 
 }
 
+
+
 function limpiar() {
   getData(); // Vuelve a obtener los datos originales del listado
   minInput.value = "";
   maxInput.value = "";
+  btnOrdenAsc.checked = false;
+  btnOrdenDesc.checked = false;
+  btnOrdenRelev.checked = false;
 };
 
  //funcion para ordenar por relevancia
