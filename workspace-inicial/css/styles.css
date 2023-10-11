@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html {
+  padding-right: 0px !important;
+  margin-right: 0px !important;
+}
+
 .jumbotron,
 .card-body,
 .container,
