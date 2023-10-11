@@ -56,7 +56,7 @@ async function showData() {
 function showProducts(data) {
   container.innerHTML += `
   <div class="container">
-  <h1 class="p-4 m-0">${data.name}</h1>
+  <h1 class="p-4 m-0">${data.name}</h1> <button id="btnCarrito">boton</button>
   <hr class="my-2">
   <h3 class="m-0">Precio</h3>
   <p class="pb-2">${data.cost} ${data.currency}</p>
@@ -71,6 +71,21 @@ function showProducts(data) {
   ${createCarrousel(data.images)}
    </div>
   </div>`
+
+  const btnCarrito = document.getElementById("btnCarrito")
+  const productosSeleccionados = JSON.parse(localStorage.getItem("productosSeleccionados")) || [];
+
+  btnCarrito.addEventListener('click', () => {
+
+    const productoExistente = productosSeleccionados.find(producto => producto.id === data.id)
+
+    // comprueba si ya existe ese producto en el array, si no existe lo agrega.
+    if (!productoExistente) {
+      productosSeleccionados.push(data);
+      localStorage.setItem("productosSeleccionados", JSON.stringify(productosSeleccionados))
+    }
+  });
+
 };
 
 function compararPorFecha(a, b) {
