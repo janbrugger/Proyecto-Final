@@ -52,15 +52,14 @@ function showCategoriesList() {
             htmlContentToAppend += `
             <div onclick="setCatID(${category.id})" class="col-12 list-group-item list-group-item-action cursor-active">
                 <div class="row">
-                    <div class="col-3">
-                        <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail">
-                    </div>
-                    <div class="col-8">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">${category.name}</h4>
-                            <small class="text-muted fs-9 fw-light">${category.productCount} artículos</small>
+                    <div class="col-12 col-md-3 p-0">
+                        <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail"></div>
+                    <div class="col-12 col-md-9">
+                        <div class="d-flex justify-content-between flex-wrap">
+                            <h4 class="m-0">${category.name}</h4>
+                            <small class="text-muted fw-light sm-fs py-1 float-end">${category.productCount} artículos</small>
                         </div>
-                        <p class="mb-1">${category.description}</p>
+                        <p class="my-1">${category.description}</p>
                     </div>
                 </div>
             </div>

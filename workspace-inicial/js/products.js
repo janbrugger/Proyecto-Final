@@ -38,17 +38,16 @@ function showData(dataArray) {
 } else {
   for (const item of dataArray) {
     contenidoProductos.innerHTML += `
-      <div onclick="setProductID(${item.id})" class="list-group-item list-group-item-action cursor-active">
+      <div onclick="setProductID(${item.id})" class="col-12 list-group-item list-group-item-action cursor-active">
           <div class="row">
-              <div class="col-3"> <img src="${item.image}" alt="product image" class="img-thumbnail"/> </div>
-              <div class="col">
-                  <div class="d-flex w-100 justify-content-between">
-                      <div class="mb-1">
-                      <h4>${item.name} - ${item.currency} ${item.cost}</h4> 
-                      <p>${item.description}</p> 
-                      </div>
-                      <small class="text-muted"> ${item.soldCount} vendidos</small> 
+              <div class="col-12 col-md-3 p-0"> 
+                    <img src="${item.image}" alt="product image" class="img-thumbnail"/> </div>
+              <div class="col-12 col-md-9">
+                  <div class="d-flex justify-content-between flex-wrap">
+                         <h4>${item.name} - ${item.currency} ${item.cost}</h4> 
+                         <small class="text-muted fw-light sm-fs py-1 float-end"> ${item.soldCount} vendidos</small> 
                   </div>
+                  <p>${item.description}</p>
               </div>
           </div>
       </div>

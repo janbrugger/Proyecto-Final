@@ -8,10 +8,6 @@ const relatedProducts = document.getElementById("related-products-container")
 const relatedProductsTitle = document.getElementById("related-products-title")
 
 
-
-
-
-
   function getProduct(data) {
     return new Promise((resolve, reject) => { //la funcion devuelve una promesa
       fetch(data)
@@ -53,20 +49,20 @@ const relatedProductsTitle = document.getElementById("related-products-title")
 
 //Función que muestra los detalles de cada producto
 function showProducts(data) {
-  container.innerHTML += `<div class="container">
-  <h1 class="p-5">${data.name}</h1>
-  <hr>
-  <h3>Precio</h3>
-  <p class="pb-4">${data.cost} ${data.currency}</p>
-  <h3>Descripción</h3>
-  <p class="pb-4">${data.description}</p>
-  <h3>Categoría</h3>
-  <p class="pb-4">${data.category}</p>
-  <h3>Cantidad vendidos</h3>
-  <p class="pb-4">${data.soldCount}</p>
+  container.innerHTML += `
+  <div class="container">
+  <h1 class="p-4 m-0">${data.name}</h1>
+  <hr class="my-2">
+  <h3 class="m-0">Precio</h3>
+  <p class="pb-2">${data.cost} ${data.currency}</p>
+  <h3 class="m-0">Descripción</h3>
+  <p class="fs-6">${data.description}</p>
+  <h3 class="m-0">Categoría</h3>
+  <p class="pb-2">${data.category}</p>
+  <h3 class="m-0">Cantidad vendidos</h3>
+  <p class="pb-2">${data.soldCount}</p>
   <h3>Imagenes ilustrativas</h3>
-  <div class="d-flex flex-row">
-  
+  <div class="">
   ${createCarrousel(data.images)}
    </div>
   </div>`
@@ -75,21 +71,23 @@ function showProducts(data) {
 
 //Función que muestra los comentarios ya ingresados de cada producto
 function showComments(data_comments){ 
-  container.innerHTML += '<h3 class="mt-4">Comentarios</h3>';
   if (data_comments.length === 0) {
       comments.innerHTML = `<h5 class="text-center text-muted" >
       No se han agregado comentarios sobre este producto</h5>`;
   } else {
   for (const comment of data_comments) {
-      container.innerHTML += `
-      <div class="list-group-item">
-          <h4>${comment.user}</h4>
+    comments.innerHTML += `
+      <div class="list-group-item container border border-secondary-subtle rounded my-2 p-1">
+       <div class="d-flex flex-wrap justify-content-between ">
+          <h6 class="fw-bold ">${comment.user}</h6>
           <span>
           ${stars(comment.score)}
           </span>
-          <p>${comment.description}</p>
-          <small class="text-muted">
-          ${comment.dateTime}</small>
+        </div>
+        <div>
+          <p class="mb-1">${comment.description}</p>
+          <small class="text-muted">${comment.dateTime}</small>
+        </div>
       </div>
       `
   }
@@ -126,11 +124,11 @@ function stars(quantity) {
 
 //Función para crear el carrusel de Imágenes
 function createCarrousel(images) {
-  return `<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  return `<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel ">
     <div class="carousel-inner">
     ${images.map((image,index) => {
       return `<div class="carousel-item ${index===0 ? "active" : ""}">
-      <img src="${image}" class="d-block rounded" alt="...">
+      <img src="${image}" class="w-100 d-block rounded" alt="...">
     </div>`
     })}
     </div>
