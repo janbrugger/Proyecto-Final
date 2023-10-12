@@ -1,8 +1,8 @@
 const userID = 25801;
 const container = document.getElementById("items");
-let data_cart; // Variable global para almacenar los datos del carrito
+const articles = JSON.parse(localStorage.getItem("productosSeleccionados"))
 
-// Fetch Carrito
+//Fecth Carrito
 function getCartInfo(data) {
   return new Promise((resolve, reject) => {
     fetch(data)
@@ -29,32 +29,32 @@ container.addEventListener("input", function (event) {
   }
 });
 
-// Mostrar información del carrito
-function showCartInfo(data_cart) {
-  for (const [index, article] of data_cart.articles.entries()) {
-    container.innerHTML += `
-      <tr data-index="${index}">
-        <td><img onclick="setProductID(${article.id})" src="${article.image}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></td>
-        <td>${article.name}</td>
-        <td>${article.currency} <span>${article.unitCost}</span></td>
-        <td><input class="col-lg-2 quantity-input" type="number" min="1" value="${article.count}"></td>
-        <td><strong>${article.currency} <span>${article.unitCost * article.count}</span></strong></td>
-      </tr>
-    `;
-  }
-}
-
-// Actualizar subtotal en tiempo real
-function updateSubtotal(inputElement) {
-  const rowIndex = inputElement.closest("tr").getAttribute("data-index");
-  const quantity = parseInt(inputElement.value);
-  const article = data_cart.articles[rowIndex];
-  const subtotal = quantity * article.unitCost;
-
-  const subtotalElement = inputElement.closest("tr").querySelector("td:last-child strong span");
-  subtotalElement.textContent = subtotal;
-}
-
+//Mostrar info del carrito traida del Localstorage
 document.addEventListener("DOMContentLoaded", function () {
   showCartData();
+  for (const article of articles) {
+    container.innerHTML += `
+    <tr>
+      <td><img onclick="setProductID(${article.id})" src="${article.images[1]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
+      <td>${article.name}</td>
+      <td>${article.currency} <span>${article.cost}</span></td>
+      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
+      <td><strong>${article.currency} <span>${article.cost}</span></strong></td>
+    </tr>
+    `
+  };
+
 });
+
+// Función para actualizar el subtotal
+function updateSubtotal(inputElement) {
+  const row = inputElement.closest("tr");
+  const costElement = row.querySelector("td:nth-child(3) span");
+  const quantity = parseInt(inputElement.value);
+  const cost = parseFloat(costElement.textContent);
+  const subtotal = quantity * cost;
+  const subtotalElement = row.querySelector("td:nth-child(5) span");
+
+  subtotalElement.textContent = subtotal;
+};
+
