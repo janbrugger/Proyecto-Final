@@ -47,41 +47,48 @@ let getJSONData = function (url) {
 let userMenu = function () { //funcion para mostrar usuario en navbar.
   if (!verificacionLogin()) {
     // Muestra el menú desplegable desde el email del usuario.
-    navbar.innerHTML += `<li class="nav-item">
-   
-    <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+    navbar.innerHTML += `  <li class="nav-item">
+    <div class="collapse navbar-collapse show" id="navbarNavDarkDropdown">
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          ${User.email}
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            ${User.email}
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-          <li><a class="dropdown-item" href="my-profile.html">Mi perfil <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-          <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-          <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
-        </svg></a></li>  
-          <li><a class="dropdown-item" href="cart.html">Mi carrito <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-          <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-          <path d="M17 17h-11v-14h-2" />
-          <path d="M6 5l14 1l-1 7h-13" />
-        </svg></a></li>
-        <li><a class="dropdown-item" id="itemLogout" href="login.html">Cerrar sesión <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-            <path d="M9 12h12l-3 -3" />
-            <path d="M18 15l3 -3" />
-          </svg></a></li>
-          <li><input onclick="cambiarTema()" class="dropdown-item" type="checkbox"  id="switch"/><label for="switch" class="switch">Toggle</label></li>
-            </li>`
+            <li><a class="dropdown-item" href="my-profile.html">Mi perfil <svg xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-user-circle" width="20" height="20" viewBox="0 0 24 24"
+                  stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                  <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                  <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+                </svg></a></li>
+            <li><a class="dropdown-item" href="cart.html">Mi carrito <svg xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-shopping-cart" width="20" height="20" viewBox="0 0 24 24"
+                  stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                  <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                  <path d="M17 17h-11v-14h-2" />
+                  <path d="M6 5l14 1l-1 7h-13" />
+                </svg></a></li>
+            <li><a class="dropdown-item" id="itemLogout" href="login.html">Cerrar sesión <svg
+                  xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="20" height="20"
+                  viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                  <path d="M9 12h12l-3 -3" />
+                  <path d="M18 15l3 -3" />
+                </svg></a></li>
+            <li><input onclick="cambiarTema()" class="dropdown-item" type="checkbox" id="switch" /><label for="switch"
+                class="switch">Toggle</label></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </li>`
   }
   logout();
   themeCheck()
@@ -113,12 +120,12 @@ let logout = function () {
 //DARK MODE
 const currentTheme = localStorage.getItem("theme");
 
-function themeCheck(){ 
+function themeCheck() {
   if (currentTheme) {
     document.querySelector("body").setAttribute("data-bs-theme", currentTheme);
-    if(localStorage.getItem("theme") === "dark"){  //switch que se queda activo si esta en modo oscuro.
+    if (localStorage.getItem("theme") === "dark") {  //switch que se queda activo si esta en modo oscuro.
       document.getElementById("switch").setAttribute("checked", "checked");
-  
+
     }
   }
 }
