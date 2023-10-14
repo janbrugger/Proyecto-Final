@@ -1,6 +1,6 @@
 const userID = 25801;
 const container = document.getElementById("items");
-const articles = JSON.parse(localStorage.getItem("productosSeleccionados"))
+const articles = JSON.parse(localStorage.getItem("productosSeleccionados")) || [];
 let map, marker, infoWindow;
 const mapDiv = document.getElementById("mapDiv");
 const departamentosSelect  = document.getElementById("Departamento");
@@ -36,6 +36,8 @@ container.addEventListener("input", function (event) {
 
 //Mostrar info del carrito traida del Localstorage
 document.addEventListener("DOMContentLoaded", function () {
+  //showData() funcion que da error ya que no esta definida.
+  userMenu();
   showCartData();
   for (const article of articles) {
     container.innerHTML += `
@@ -63,10 +65,7 @@ function updateSubtotal(inputElement) {
   subtotalElement.textContent = subtotal;
 };
 
-document.addEventListener("DOMContentLoaded", function (){
-showData();
 
-});
 
 fetch(url)
 .then(response => response.json())
