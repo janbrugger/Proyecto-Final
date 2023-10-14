@@ -36,6 +36,7 @@
     </div>
   </nav>
   <main>
+    <div>
     <div class="container" id="cart-container">
       <!-- <div class="alert alert-danger text-center" role="alert">
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
@@ -57,6 +58,38 @@
 			<tbody id="items"></tbody>
     </table>
     </div>
+    <div class="container">
+      <h3>Tipo de envío</h3>
+     <div id="opciones"  class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+          <input type="radio" name="options" id="option1" autocomplete="off" checked>Premium 2 a 5 dias (15%)
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="option2" autocomplete="off">Express 5 a 8 dias (7%)
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="option3" autocomplete="off">Standard 12 a 15 dias (5%)
+        </label>
+          </div>
+       <br> <br>
+      <h3>Dirección de envío</h3>
+    <label for="Departamento" id="Dpto">Departamento:</label>
+    <select class="form-select" id="Departamento"></select>
+    <label for="ciudades">Ciudad:</label>
+    <select class="form-select" id="ciudades"></select> 
+    <div class="form-group">
+      <label for="inputAddress">Calle:</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="Ansina esq. Espinosa">
+    </div>
+    <div class="form-group">
+      <label for="inputNumber">Número:</label>
+      <input type="number" min="1" class="form-control" id="inputNumber" placeholder="1234">
+    </div>
+    <br><br>
+  </div>
+    <div id="mapDiv" class="container">
+    </div>
+  </div>
   </main>
 
   <footer class="text-muted">
@@ -78,6 +111,9 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap"
+  defer
+  ></script>
 </body>
 
 </html>
