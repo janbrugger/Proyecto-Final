@@ -27,6 +27,23 @@ async function showCartData() {
   }
 }
 
+//Muestra los datos traídos del id del usuario
+function showCartInfo(data){
+  let userArticles = '';
+  for (const article of data.articles) {
+    userArticles += `
+    <tr>
+      <td><img onclick="setProductID(${article.id})" src="${article.image}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
+      <td>${article.name}</td>
+      <td>${article.currency} <span>${article.unitCost}</span></td>
+      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
+      <td><strong>${article.currency} <span>${article.unitCost}</span></strong></td>
+    </tr>
+    `
+    container.insertAdjacentHTML('afterbegin', userArticles);
+  };
+}
+
 // Agregar evento input a los elementos de cantidad
 container.addEventListener("input", function (event) {
   if (event.target.classList.contains("quantity-input")) {
@@ -49,9 +66,12 @@ document.addEventListener("DOMContentLoaded", function () {
       <td><strong>${article.currency} <span>${article.cost}</span></strong></td>
     </tr>
     `
-  };
-
+  }
 });
+
+
+
+
 
 // Función para actualizar el subtotal
 function updateSubtotal(inputElement) {
@@ -64,7 +84,6 @@ function updateSubtotal(inputElement) {
 
   subtotalElement.textContent = subtotal;
 };
-
 
 
 fetch(url)

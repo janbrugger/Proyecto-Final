@@ -53,7 +53,8 @@ async function showData() {
 function showProducts(data) {
   container.innerHTML += `
   <div class="container">
-  <h1 class="p-4 m-0">${data.name}</h1> <button id="btnCarrito">boton</button>
+  <h1 class="p-4 m-0">${data.name}</h1> <button id="btnCarrito">Comprar</button>
+  <button id="btnViewCart">Ver carrito</button>
   <hr class="my-2">
   <h3 class="m-0">Precio</h3>
   <p class="pb-2">${data.cost} ${data.currency}</p>
@@ -80,8 +81,16 @@ function showProducts(data) {
     if (!productoExistente) {
       productosSeleccionados.push(data);
       localStorage.setItem("productosSeleccionados", JSON.stringify(productosSeleccionados))
+      alert('¡Artículo agregado al carrito con éxito!');
+    } else {
+      alert('¡Este artículo ya fue agregado a su carrito!')
     }
   });
+
+const btnGoToCart = document.getElementById("btnViewCart");
+btnGoToCart.addEventListener('click', () => {
+  window.location = "cart.html"
+})
 
 };
 
@@ -189,7 +198,7 @@ btnComment.addEventListener("click", () => {
   const comment = document.getElementById("opinion");
   const ratingValue = selectedRating.textContent;
 
-  // Obtén la fecha actual
+  // Obtiene la fecha actual
 const fechaHoraActual = new Date();
 
 // Obtiene el año, mes y día
