@@ -189,8 +189,22 @@ btnComment.addEventListener("click", () => {
   const comment = document.getElementById("opinion");
   const ratingValue = selectedRating.textContent;
 
-  var today = new Date();
-  var fechaActual = today.toLocaleString();
+  // Obtén la fecha actual
+const fechaHoraActual = new Date();
+
+// Obtiene el año, mes y día
+const year = fechaHoraActual.getFullYear();
+const month = (fechaHoraActual.getMonth() + 1).toString().padStart(2, '0'); // Agrega un cero inicial si es necesario
+const day = fechaHoraActual.getDate().toString().padStart(2, '0'); // Agrega un cero inicial si es necesario
+
+// Obtiene la hora, minuto y segundo
+const hours = fechaHoraActual.getHours().toString().padStart(2, '0');
+const minutes = fechaHoraActual.getMinutes().toString().padStart(2, '0');
+const seconds = fechaHoraActual.getSeconds().toString().padStart(2, '0');
+
+// Crea la cadena de fecha y hora con el formato deseado
+const fechaHoraFormateada = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
 
   if (comment.value != "" && ratingValue != 0) {
     const comentarioGuardado = `
@@ -203,7 +217,7 @@ btnComment.addEventListener("click", () => {
       </div>
       <div>
         <p class="mb-1">${comment.value}</p>
-        <small class="text-muted">${fechaActual}</small>
+        <small class="text-muted">${fechaHoraFormateada}</small>
       </div>
     </div>
     `
