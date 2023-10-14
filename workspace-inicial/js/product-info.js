@@ -53,7 +53,7 @@ async function showData() {
 function showProducts(data) {
   container.innerHTML += `
   <div class="container">
-  <h1 class="p-4 m-0">${data.name}</h1>
+  <h1 class="p-4 m-0">${data.name}</h1> <button id="btnCarrito">boton</button>
   <hr class="my-2">
   <h3 class="m-0">Precio</h3>
   <p class="pb-2">${data.cost} ${data.currency}</p>
@@ -68,6 +68,21 @@ function showProducts(data) {
   ${createCarrousel(data.images)}
    </div>
   </div>`
+
+  const btnCarrito = document.getElementById("btnCarrito")
+  const productosSeleccionados = JSON.parse(localStorage.getItem("productosSeleccionados")) || [];
+
+  btnCarrito.addEventListener('click', () => {
+
+    const productoExistente = productosSeleccionados.find(product => product.id === data.id)
+
+    // comprueba si ya existe ese producto en el array, si no existe lo agrega.
+    if (!productoExistente) {
+      productosSeleccionados.push(data);
+      localStorage.setItem("productosSeleccionados", JSON.stringify(productosSeleccionados))
+    }
+  });
+
 };
 
 function compararPorFecha(a, b) {
@@ -81,7 +96,6 @@ function showComments(data_comments) {
   data_comments.sort(compararPorFecha);
   for (const comment of data_comments) {
     commentsContainer.innerHTML += `
-
       <div class="list-group-item container border border-secondary-subtle rounded my-2 p-1">
        <div class="d-flex flex-wrap justify-content-between ">
           <h6 class="fw-bold ">${comment.user}</h6>
@@ -111,7 +125,6 @@ function showRelatedProducts(data_relatedProducts) {
         <div onclick="setProductID(${product.id})" class="list-group-item d-inline-block mr-2 mb-2 cursor-active"> 
         <div>
             <img src="${product.image}" class="img-fluid mt-2">
-
         </div>  
         <h4 class="h6 text-center mt-2">${product.name}</h4> 
         </div>`;
