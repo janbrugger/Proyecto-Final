@@ -72,7 +72,7 @@
           <input type="radio" name="options" id="option3" autocomplete="off">Standard 12 a 15 dias (5%)
         </label>
           </div>
-       <br> <br>
+       <hr>
       <h3>Dirección de envío</h3>
     <label for="Departamento" id="Dpto">Departamento:</label>
     <select class="form-select" id="Departamento"></select>
@@ -86,8 +86,76 @@
       <label for="inputNumber">Número:</label>
       <input type="number" min="1" class="form-control" id="inputNumber" placeholder="1234">
     </div>
-    <br><br>
+    <hr>
+   </div>
+
+<div class="container">
+ <h3>Forma de pago</h3>
+
+<!-- Button modal -->
+<div class="d-flex align-items-center">
+<div id="miDiv">
+No ha seleccionado
+</div>
+<div>
+<button id="buttonSelect" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Seleccionar
+</button>
+</div>
+</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Forma de pago</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div id="tarjCredito" class="form-check">
+          <input class="form-check-input" type="radio" name="radioDefault" id="radio1" onclick="tarjeta()">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Tarjeta de crédito
+          </label><hr>
+          <div class="form-group" id="card-number-field">
+            <label for="cardNumber">Número de tarjeta</label>
+            <input type="text" required class="form-control" id="cardNumber">
+          </div> <br><div class="form-group">
+            <label for="cvv">Código de seg.</label>
+            <input type="text" maxlength="3" required class="form-control" id="cvv">
+          </div> <br>
+          <div required class="form-group" id="expiration-date">
+            <label>Vencimiento</label>
+            <span class="expiration">
+               <input required id="expiry" type="text" name="month"
+                placeholder="MM" maxlength="2" size="2" /> <span class="expiration">/</span>
+                 <input id="expiry1" type="text" name="year"
+                placeholder="YY" maxlength="2" size="2" /> </span> 
+          </div><br>
+        </div>
+        <div id="transfBancaria" class="form-check">
+          <input class="form-check-input" type="radio" name="radioDefault" onclick="cuentaBancaria()" id="radio2">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Transferencia bancaria
+          </label> <hr>
+          <div>
+          <label for="cuentab">Número de cuenta</label>
+        <input class="form-group form-control" id="cuentaban" type="text" name="cuentab">
+        </div> <br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
   </div>
+</div>
+</div>
+
+
     <div id="mapDiv" class="container">
     </div>
   </div>
