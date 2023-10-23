@@ -38,59 +38,109 @@
   </nav>
   <main>
     <div>
-    <div class="container" id="cart-container">
-      <!-- <div class="alert alert-danger text-center" role="alert">
+      <div class="container" id="cart-container">
+        <!-- <div class="alert alert-danger text-center" role="alert">
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
       </div> -->
-      <h1 class="mt-4">Carrito de compras</h1>
-      <br>
-    <h3>Articulos a comprar</h3>
-    <br>
-    <table class="table">
-			<thead>
-			  <tr>
-          <th></th>
-				<th scope="col">Nombre</th>
-				<th scope="col">Costo</th>
-				<th scope="col">Cantidad</th>
-				<th scope="col">Subtotal</th>
-			  </tr>
-			</thead>
-			<tbody id="items"></tbody>
-    </table>
-    </div>
-    <div class="container">
-      <h3>Tipo de envío</h3>
-     <div id="opciones"  class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-secondary active">
-          <input type="radio" name="options" id="option1" autocomplete="off" checked>Premium 2 a 5 dias (15%)
-        </label>
-        <label class="btn btn-secondary">
-          <input type="radio" name="options" id="option2" autocomplete="off">Express 5 a 8 dias (7%)
-        </label>
-        <label class="btn btn-secondary">
-          <input type="radio" name="options" id="option3" autocomplete="off">Standard 12 a 15 dias (5%)
-        </label>
+        <h1 class="mt-4">Carrito de compras</h1>
+        <br>
+        <h3>Articulos a comprar</h3>
+        <br>
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Costo</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="items"></tbody>
+        </table>
+      </div>
+      <div class="container">
+        <form class="row g-3 needs-validation" novalidate>
+          <h3>Tipo de envío</h3>
+          <div id="opciones" class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="radio" name="options" id="option1" autocomplete="off">Premium 2 a 5 dias (15%)
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option2" autocomplete="off">Express 5 a 8 dias (7%)
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option3" autocomplete="off">Standard 12 a 15 dias (5%)
+            </label>
           </div>
-       <br> <br>
-      <h3>Dirección de envío</h3>
-    <label for="Departamento" id="Dpto">Departamento:</label>
-    <select class="form-select" id="Departamento"></select>
-    <label for="ciudades">Ciudad:</label>
-    <select class="form-select" id="ciudades"></select> 
-    <div class="form-group">
-      <label for="inputAddress">Calle:</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="Ansina esq. Espinosa">
+          <br> <br>
+          <h3>Dirección de envío</h3>
+
+          <div class="">
+            <label for="Departamento" id="Dpto" class="form-label">Departamento</label>
+            <select class="form-select" id="Departamento" required>
+              <option selected disabled value="">Selecciona...</option>
+            </select>
+            <div class="invalid-feedback">
+              Debes seleccionar un departamento
+            </div>
+          </div>
+
+          <div class="">
+            <label for="ciudades" class="form-label">Ciudad:</label>
+            <select class="form-select" id="ciudades" required>
+            </select>
+            <div class="invalid-feedback">
+              Debes seleccionar una ciudad
+            </div>
+          </div>
+
+          <div class="">
+            <label for="inputAddress" class="form-label">Calle:</label>
+            <input type="text" class="form-control" name="inputAddress" id="inputAddress"
+              placeholder="Ansina esq. Espinosa" required>
+            <div class="invalid-feedback">
+              Es necesario poner la calle
+            </div>
+          </div>
+
+          <div class="">
+            <label for="inputNumber" class="form-label">Número:</label>
+            <input type="number" min="1" class="form-control" name="inputNumber" id="inputNumber" placeholder="1234"
+              required>
+            <div class="invalid-feedback">
+              Es necesario poner el número
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="inputCorner">Esquina:</label>
+            <input type="text" class="form-control" name="inputCorner" id="inputCorner"
+              placeholder="Esquina Gastón Ramón" required>
+            <div class="invalid-feedback">
+              Es necesario poner la esquina
+            </div>
+          </div>
+
+          <br><br>
+
+          <hr />
+
+          <h3>Costos</h3>
+
+          <hr />
+
+          <h3>Forma de pago</h3>
+
+          <div class="col-12 text-center">
+            <button class="btn btn-primary" type="submit">Finalizar compra</button>
+          </div>
+        </form>
+      </div>
+      <div id="mapDiv" class="container mt-5">
+      </div>
     </div>
-    <div class="form-group">
-      <label for="inputNumber">Número:</label>
-      <input type="number" min="1" class="form-control" id="inputNumber" placeholder="1234">
-    </div>
-    <br><br>
-  </div>
-    <div id="mapDiv" class="container">
-    </div>
-  </div>
   </main>
 
   <footer class="text-muted">
@@ -98,7 +148,8 @@
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
   <div id="spinner-wrapper">
@@ -112,9 +163,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap"
-  defer
-  ></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap" defer></script>
 </body>
 
 </html>
