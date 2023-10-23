@@ -38,7 +38,7 @@ function showCartInfo(data){
       <td>${article.currency} <span>${article.unitCost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
       <td><strong>${article.currency} <span>${article.unitCost}</span></strong></td>
-      <td><button onclick="eliminarArticulo(${article.id})"><i class="fa fa-trash"></i></button></td>
+      <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
     container.insertAdjacentHTML('afterbegin', userArticles);
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <td>${article.currency} <span>${article.cost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
       <td><strong>${article.currency} <span>${article.cost}</span></strong></td>
-      <td><button onclick="eliminarArticulo(${article.id})"><i class="fa fa-trash"></i></button></td>
+      <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
   }
