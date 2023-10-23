@@ -6,6 +6,7 @@ const mapDiv = document.getElementById("mapDiv");
 const departamentosSelect  = document.getElementById("Departamento");
 const ciudadesSelect = document.getElementById("ciudades");
 const url = "https://raw.githubusercontent.com/mmejiadeveloper/uruguay-departamentos-y-localidades-json/master/uruguay.json";
+const precioSubtotal = document.getElementById("precioSubtotal")
 
 //Fecth Carrito
 function getCartInfo(data) {
@@ -66,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <td><strong>${article.currency} <span>${article.cost}</span></strong></td>
     </tr>
     `
+    agregarAlCarrito(article.cost)
   }
 });
 
@@ -175,3 +177,24 @@ function addMarker(position) {
 
     marker.setMap(map);
 }
+
+
+// Carrito de compras inicial
+const carrito = [];
+let total = 0;
+
+// Función para agregar un precio al carrito y actualizar el total
+function agregarAlCarrito(precio) {
+  carrito.push(precio);
+  total += precio;
+  console.log('Precio agregado al carrito:', precio);
+  console.log('Total del carrito:', total);
+
+  precioSubtotal.innerHTML += `
+  ${total}
+  `
+}
+
+
+
+
