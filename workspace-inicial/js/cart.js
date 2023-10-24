@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //showData() funcion que da error ya que no esta definida.
   userMenu();
   showCartData();
+  themeMenu();
   for (const article of articles) {
     container.innerHTML += `
     <tr>

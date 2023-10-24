@@ -136,6 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
   getData();
 
   userMenu();
+
+  themeMenu();
    
   });
 
