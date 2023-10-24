@@ -364,3 +364,7 @@ font-size: 15px;
 .dropdown-item:active { /*(menu desplegable) color cuando se clickea en la opción*/
   background-color: #ff9100;
 }
+
+.navbar {
+  background-color:rgb(31, 31, 31);
+}
