@@ -60,19 +60,25 @@
         </table>
       </div>
       <div class="container">
-        <form class="row g-3 needs-validation" novalidate>
+        <form name="formulario" class="row g-3 needs-validation" novalidate>
           <h3>Tipo de envío</h3>
           <div id="opciones" class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary active">
-              <input type="radio" name="options" id="option1" autocomplete="off">Premium 2 a 5 dias (15%)
+            <label class="btn btn-secondary">
+              <input type="radio" class="form-check-input" name="options" id="option1" autocomplete="off"
+                required>Premium 2 a 5 dias (15%)
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option2" autocomplete="off">Express 5 a 8 dias (7%)
+              <input type="radio" class="form-check-input" name="options" id="option2" autocomplete="off"
+                required>Express 5 a 8 dias (7%)
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option3" autocomplete="off">Standard 12 a 15 dias (5%)
+              <input type="radio" class="form-check-input" name="options" id="option3" autocomplete="off"
+                required>Standard 12 a 15 dias (5%)
             </label>
           </div>
+
+          <small id="mensajeNoTipoEnvio" class="mt-1" style="color:rgba(220,53,69,.9); display:none;">Debes elegir el
+            tipo de envio</small>
           <br> <br>
 
           <div class="col">
@@ -129,6 +135,9 @@
                 </div>
               </div>
             </div>
+
+            <div id="mapDiv" class="container mt-5">
+            </div>
           </div>
 
           <br><br>
@@ -139,10 +148,79 @@
 
           <hr />
 
-          <h3>Forma de pago</h3>
+          <div class="container">
+            <h3>Forma de pago</h3>
+
+            <!-- Button modal -->
+            <div class="d-flex align-items-center">
+              <div id="miDiv">
+                No ha seleccionado
+              </div>
+              <div>
+                <button id="buttonSelect" type="button" class="btn btn-link" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  Seleccionar
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Forma de pago</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                  <div id="tarjCredito" class="form-check">
+                    <input class="form-check-input" type="radio" name="radioDefault" id="radio1" onclick="tarjeta()">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Tarjeta de crédito
+                    </label>
+                    <hr>
+                    <div class="form-group" id="card-number-field">
+                      <label for="cardNumber">Número de tarjeta</label>
+                      <input type="text" required class="form-control" id="cardNumber">
+                    </div> <br>
+                    <div class="form-group">
+                      <label for="cvv">Código de seg.</label>
+                      <input type="text" maxlength="3" required class="form-control" id="cvv">
+                    </div> <br>
+                    <div required class="form-group" id="expiration-date">
+                      <label>Vencimiento</label>
+                      <span class="expiration">
+                        <input required id="expiry" type="text" name="month" placeholder="MM" maxlength="2" size="2" />
+                        <span class="expiration">/</span>
+                        <input id="expiry1" type="text" name="year" placeholder="YY" maxlength="2" size="2" /> </span>
+                    </div><br>
+                  </div>
+                  <div id="transfBancaria" class="form-check">
+                    <input class="form-check-input" type="radio" name="radioDefault" onclick="cuentaBancaria()"
+                      id="radio2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Transferencia bancaria
+                    </label>
+                    <hr>
+                    <div>
+                      <label for="cuentab">Número de cuenta</label>
+                      <input class="form-group form-control" id="cuentaban" type="text" name="cuentab">
+                    </div> <br>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
 
           <div class="col-12 text-center">
-            <button class="btn btn-primary" type="submit">Finalizar compra</button>
+            <button id="btnSubmit" class="btn btn-primary" type="submit">Finalizar compra</button>
           </div>
         </form>
       </div>
