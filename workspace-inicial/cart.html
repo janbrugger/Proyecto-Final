@@ -74,52 +74,60 @@
             </label>
           </div>
           <br> <br>
-          <h3>Dirección de envío</h3>
 
-          <div class="">
-            <label for="Departamento" id="Dpto" class="form-label">Departamento</label>
-            <select class="form-select" id="Departamento" required>
-              <option selected disabled value="">Selecciona...</option>
-            </select>
-            <div class="invalid-feedback">
-              Debes seleccionar un departamento
+          <div class="col">
+            <h3>Dirección de envío</h3>
+
+            <div class="row mb-2">
+              <div class="col-5">
+                <label for="Departamento" id="Dpto" class="form-label">Departamento</label>
+                <select class="form-select" id="Departamento" required>
+                  <option selected disabled value="">Selecciona...</option>
+                </select>
+                <div class="invalid-feedback">
+                  Debes seleccionar un departamento
+                </div>
+              </div>
+
+              <div class="col-4">
+                <label for="ciudades" class="form-label">Ciudad:</label>
+                <select class="form-select" id="ciudades" required>
+                </select>
+                <div class="invalid-feedback">
+                  Debes seleccionar una ciudad
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="">
-            <label for="ciudades" class="form-label">Ciudad:</label>
-            <select class="form-select" id="ciudades" required>
-            </select>
-            <div class="invalid-feedback">
-              Debes seleccionar una ciudad
+            <div class="row mb-2">
+              <div class="col-5">
+                <label for="inputAddress" class="form-label">Calle:</label>
+                <input type="text" class="form-control" name="inputAddress" id="inputAddress"
+                  placeholder="Ansina esq. Espinosa" required>
+                <div class="invalid-feedback">
+                  Ingresa una calle
+                </div>
+              </div>
+
+              <div class="col-4">
+                <label for="inputNumber" class="form-label">Número:</label>
+                <input type="number" min="1" class="form-control" name="inputNumber" id="inputNumber" placeholder="1234"
+                  required>
+                <div class="invalid-feedback">
+                  Ingresa un número
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="">
-            <label for="inputAddress" class="form-label">Calle:</label>
-            <input type="text" class="form-control" name="inputAddress" id="inputAddress"
-              placeholder="Ansina esq. Espinosa" required>
-            <div class="invalid-feedback">
-              Ingresa una calle
-            </div>
-          </div>
-
-          <div class="">
-            <label for="inputNumber" class="form-label">Número:</label>
-            <input type="number" min="1" class="form-control" name="inputNumber" id="inputNumber" placeholder="1234"
-              required>
-            <div class="invalid-feedback">
-              Ingresa un número
-            </div>
-          </div>
-
-
-          <div class="form-group">
-            <label for="inputCorner">Esquina:</label>
-            <input type="text" class="form-control" name="inputCorner" id="inputCorner"
-              placeholder="Esquina Gastón Ramón" required>
-            <div class="invalid-feedback">
-              Ingresa una esquina
+            <div class="row mb-2">
+              <div class="form-group col-5">
+                <label for="inputCorner" class="form-label">Esquina:</label>
+                <input type="text" class="form-control" name="inputCorner" id="inputCorner"
+                  placeholder="Esquina Gastón Ramón" required>
+                <div class="invalid-feedback">
+                  Ingresa una esquina
+                </div>
+              </div>
             </div>
           </div>
 
