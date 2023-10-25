@@ -53,8 +53,8 @@ async function showData() {
 function showProducts(data) {
   container.innerHTML += `
   <div class="container">
-  <h1 class="p-4 m-0">${data.name}</h1> <button id="btnCarrito">Comprar</button>
-  <button id="btnViewCart">Ver carrito</button>
+  <h1 class="p-4 m-0">${data.name}</h1> <button id="btnCarrito" class="btn btn-success">Comprar</button>
+  <button id="btnViewCart" class="btn btn-secondary">Ver carrito</button>
   <hr class="my-2">
   <h3 class="m-0">Precio</h3>
   <p class="pb-2">${data.cost} ${data.currency}</p>
@@ -80,10 +80,18 @@ function showProducts(data) {
     // comprueba si ya existe ese producto en el array, si no existe lo agrega.
     if (!productoExistente) {
       productosSeleccionados.push(data);
-      localStorage.setItem("productosSeleccionados", JSON.stringify(productosSeleccionados))
-      alert('¡Artículo agregado al carrito con éxito!');
+      localStorage.setItem("productosSeleccionados", JSON.stringify(productosSeleccionados));
+      // Mostrar la alerta de éxito
+      document.getElementById('success-alert').classList.add('show');
+      setTimeout(function() {
+        document.getElementById('success-alert').classList.remove('show');
+      }, 3000); 
     } else {
-      alert('¡Este artículo ya fue agregado a su carrito!')
+      // Mostrar la alerta de error
+      document.getElementById('error-alert').classList.add('show');
+      setTimeout(function() {
+        document.getElementById('error-alert').classList.remove('show');
+      }, 3000); 
     }
   });
 
@@ -93,6 +101,7 @@ btnGoToCart.addEventListener('click', () => {
 })
 
 };
+
 
 function compararPorFecha(a, b) {
   const fechaA = new Date(a.dateTime);
