@@ -184,14 +184,11 @@ function tarjeta() {
   document.getElementById("expiry1").disabled = false;
   document.getElementById("cvv").disabled = false;
   const miDiv = document.getElementById("miDiv");
-  const botonSeleccionar = document.getElementById("buttonSelect");
-  const radio1 = document.getElementById("radio1");
-  const radio2 = document.getElementById("radio2");
-
   var cuentabanco = document.getElementById("cuentaban")
 
   cuentabanco.value = "";
-  miDiv.style.display = "none"; // Oculta el div cuando se selecciona la tarjeta de crédito
+  miDiv.innerHTML= "";
+  miDiv.textContent ="Tarjeta de crédito";
 }
 //Funcion selecciona cuenta bancaria
 function cuentaBancaria() {
@@ -204,15 +201,10 @@ function cuentaBancaria() {
   var numerito = document.getElementById("cardNumber");
   var expiracion = document.getElementById("expiry");
   var elcvv = document.getElementById("cvv");
-  var dueño = document.getElementById("owner");
   const miDiv = document.getElementById("miDiv");
-  const botonSeleccionar = document.getElementById("buttonSelect");
-  const radio1 = document.getElementById("radio1");
-  const radio2 = document.getElementById("radio2");
-  dueño.value = "";
   elcvv.value = "";
   expiracion.value = "";
   numerito.value = "";
-  miDiv.style.display = "none"; // Oculta el div cuando se selecciona la cuenta bancaria
-
+  miDiv.innerHTML= "";
+  miDiv.textContent ="Transferencia bancaria";
 }
