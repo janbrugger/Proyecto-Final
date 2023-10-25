@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
   for (const article of articles) {
     container.innerHTML += `
     <tr>
-      <td><img onclick="setProductID(${article.id})" src="${article.images[1]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
+      <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
       <td>${article.name}</td>
       <td>${article.currency} <span>${article.cost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
