@@ -76,6 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
     showSubTotalCarrito(article.cost)
   }
 });
+
+//posible solucion a guardar la cantidad de articulos en el local storage
 /*
 function changeCounter(article) {
   const subtotalElement = ;
@@ -103,12 +105,6 @@ function updateSubtotal(inputElement) {
   const subtotalElement = row.querySelector("td:nth-child(5) span");
 
   subtotalElement.textContent = subtotal;
-
-  //  // Actualizar el contador
-  //  contador += quantity;
-
-  //  // Guardar el contador en el localStorage
-  //  localStorage.setItem(articles.quantity, contador);
   
   for (const article of articles) {
     showSubTotalCarrito(article.cost)
@@ -333,11 +329,11 @@ if (localStorage.getItem('carrito')) {
   subTotalCostos = parseFloat(localStorage.getItem('subTotalCostos'));
 }
 
-/*
+
 tipoEnvio.addEventListener("change", () => {
   showCostoDeEnvio()
 });
-*/
+
 
 function showCostoDeEnvio() {
   if (premium.checked) {
@@ -356,40 +352,4 @@ function showTotalCarrito() {
   
 }
 
-
-/*
-const premium = document.querySelector("#option1");
-const express = document.querySelector("#option2");
-const standad = document.querySelector("#option3");
-const precioSubtotal = document.getElementById("precioSubtotal");
-const envio = document.querySelector("#precioCostoDeEnvio");
-
-// Agregar evento change a los elementos de radio (opciones de envío)
-
-
-// Función para calcular y mostrar el costo de envío
-function calcularCostoDeEnvio(porcentaje) {
-  const costoEnvio = (total * porcentaje) / 100;
-  // Actualizar el elemento HTML que muestra el costo de envío
-  envio.textContent = "$" + costoEnvio.toFixed(1); // Formatear a dos decimales
-  // Actualizar el total
-  actualizarTotal();
-}
-// Función para actualizar el total (subtotal + costo de envío)
-function actualizarTotal() {
-  const subtotal = total;
-  const costoDeEnvio = parseFloat(envio.textContent.substring(1)); // Obtener el costo de envío como número
-  const totalAPagar = subtotal + costoDeEnvio;
-  // Actualizar el elemento HTML que muestra el total
-  document.getElementById("precioTotal").textContent = "$" + totalAPagar.toFixed(1); // Formatear a dos decimales
-}
-// Inicializar el cálculo del costo de envío en función del tipo de envío seleccionado
-if (premium.checked) {
-  calcularCostoDeEnvio(15);
-} else if (express.checked) {
-  calcularCostoDeEnvio(7);
-} else if (standad.checked) {
-  calcularCostoDeEnvio(5);
-}
-*/
 
