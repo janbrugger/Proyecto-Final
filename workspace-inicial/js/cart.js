@@ -6,6 +6,9 @@ const mapDiv = document.getElementById("mapDiv");
 const departamentosSelect  = document.getElementById("Departamento");
 const ciudadesSelect = document.getElementById("ciudades");
 const url = "https://raw.githubusercontent.com/mmejiadeveloper/uruguay-departamentos-y-localidades-json/master/uruguay.json";
+const precioSubtotal = document.getElementById("precioSubtotal");
+const costoDeEnvio = document.getElementById("precioCostoDeEnvio");
+const precioTotal = document.getElementById("precioTotal");
 
 //Fecth Carrito
 function getCartInfo(data) {
@@ -65,11 +68,27 @@ document.addEventListener("DOMContentLoaded", function () {
       <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
       <td>${article.name}</td>
       <td>${article.currency} <span>${article.cost}</span></td>
-      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
+      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1" ></td>
       <td><strong>${article.currency} <span>${article.cost}</span></strong></td>
       <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
+    showSubTotalCarrito(article.cost)
+  }
+});
+/*
+function changeCounter(article) {
+  const subtotalElement = ;
+}
+*/
+// const contadorKey = 'contador'; // Clave para el contador en el localStorage
+// let contador = parseInt(localStorage.getItem((articles.quantity))) || 0; // Recuperar el valor del contador del localStorage o usar 0 si no existe
+
+
+// Agregar evento input a los elementos de cantidad
+container.addEventListener("input", function (event) {
+  if (event.target.classList.contains("quantity-input")) {
+    updateSubtotal(event.target);
   }
 });
 
@@ -78,12 +97,23 @@ document.addEventListener("DOMContentLoaded", function () {
 function updateSubtotal(inputElement) {
   const row = inputElement.closest("tr");
   const costElement = row.querySelector("td:nth-child(3) span");
-  const quantity = parseInt(inputElement.value);
+  const quantity = parseInt(inputElement.value); //parseInt(articles.quantity)
   const cost = parseFloat(costElement.textContent);
   const subtotal = quantity * cost;
   const subtotalElement = row.querySelector("td:nth-child(5) span");
 
   subtotalElement.textContent = subtotal;
+
+  //  // Actualizar el contador
+  //  contador += quantity;
+
+  //  // Guardar el contador en el localStorage
+  //  localStorage.setItem(articles.quantity, contador);
+  
+  for (const article of articles) {
+    showSubTotalCarrito(article.cost)
+  }
+  
 };
 
 
@@ -158,10 +188,10 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
     browserHasGeolocation
-      ? "Hubo un error al tratar de obtener tu ubicación"
+      ? "Hubo un error al tratar de obtener tuG ubicación"
       : "Tu navegador no esta soportado"
   );
-  infoWindow.open(map);
+  infoWindow.open(map);F
 }
 
 function addMarker(position) {
@@ -267,3 +297,99 @@ function eliminarArticulo(id) {
   localStorage.setItem("productosSeleccionados", JSON.stringify(nuevoCarrito));
   location.reload(); // Recarga la página y actualiza la vista del carrito
 }
+
+// Carrito de compras inicial
+let carrito = [];
+let subTotalCostos = 0;
+let elCostoDelEnvio = costoDeEnvio.value;
+const premium = document.querySelector("#option1");
+const express = document.querySelector("#option2");
+const standad = document.querySelector("#option3");
+const tipoEnvio = document.querySelector("#opciones");
+
+function showSubTotalCarrito(precio) {
+  // Agregar el precio al carrito y actualizar el total
+  carrito.push(precio);
+  subTotalCostos += precio;
+  //console.log('Precio agregado al carrito:', precio);
+  //console.log('Total del carrito:', total);
+
+  // Actualizar el contenido del elemento HTML precioSubtotal con el nuevo total
+  precioSubtotal.innerHTML = "USD " + subTotalCostos;
+
+  // Guardar el carrito en el localStorage
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  
+  // Guardar el total en el localStorage
+  localStorage.setItem('subTotalCostos', subTotalCostos);
+
+  showTotalCarrito()
+  showCostoDeEnvio()
+}
+
+// Recuperar el carrito y el total del localStorage al cargar la página
+if (localStorage.getItem('carrito')) {
+  carrito = JSON.parse(localStorage.getItem('carrito'));
+  subTotalCostos = parseFloat(localStorage.getItem('subTotalCostos'));
+}
+
+/*
+tipoEnvio.addEventListener("change", () => {
+  showCostoDeEnvio()
+});
+*/
+
+function showCostoDeEnvio() {
+  if (premium.checked) {
+    elCostoDelEnvio = (subTotalCostos * 0.15);
+  } else if (express.checked) {
+    elCostoDelEnvio = (subTotalCostos * 0.07);
+  } else if (standad.checked) {
+    elCostoDelEnvio = (subTotalCostos * 0.05);
+  }
+  showTotalCarrito()
+  costoDeEnvio.innerHTML = "USD " +  elCostoDelEnvio.toFixed();
+}
+
+function showTotalCarrito() {
+  precioTotal.innerHTML = "USD " + (subTotalCostos + elCostoDelEnvio) ;
+  
+}
+
+
+/*
+const premium = document.querySelector("#option1");
+const express = document.querySelector("#option2");
+const standad = document.querySelector("#option3");
+const precioSubtotal = document.getElementById("precioSubtotal");
+const envio = document.querySelector("#precioCostoDeEnvio");
+
+// Agregar evento change a los elementos de radio (opciones de envío)
+
+
+// Función para calcular y mostrar el costo de envío
+function calcularCostoDeEnvio(porcentaje) {
+  const costoEnvio = (total * porcentaje) / 100;
+  // Actualizar el elemento HTML que muestra el costo de envío
+  envio.textContent = "$" + costoEnvio.toFixed(1); // Formatear a dos decimales
+  // Actualizar el total
+  actualizarTotal();
+}
+// Función para actualizar el total (subtotal + costo de envío)
+function actualizarTotal() {
+  const subtotal = total;
+  const costoDeEnvio = parseFloat(envio.textContent.substring(1)); // Obtener el costo de envío como número
+  const totalAPagar = subtotal + costoDeEnvio;
+  // Actualizar el elemento HTML que muestra el total
+  document.getElementById("precioTotal").textContent = "$" + totalAPagar.toFixed(1); // Formatear a dos decimales
+}
+// Inicializar el cálculo del costo de envío en función del tipo de envío seleccionado
+if (premium.checked) {
+  calcularCostoDeEnvio(15);
+} else if (express.checked) {
+  calcularCostoDeEnvio(7);
+} else if (standad.checked) {
+  calcularCostoDeEnvio(5);
+}
+*/
+

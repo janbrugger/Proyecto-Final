@@ -33,6 +33,7 @@ async function showData() {
 
   try {
     let product = await getProduct(PRODUCT_INFO_URL + productID + ".json"); //espera a recibir los resultados de la funcion.
+    product.quantity = 1;
     showProducts(product);
   } catch (error) { console.log(error) }
 
