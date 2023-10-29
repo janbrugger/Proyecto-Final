@@ -175,3 +175,86 @@ function addMarker(position) {
 
     marker.setMap(map);
 }
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+//Funcion selecciona tarjeta de credito
+function tarjeta() {
+  document.getElementById("cuentaban").disabled = true;
+  document.getElementById("cardNumber").disabled = false;
+  document.getElementById("expiry").disabled = false;
+  document.getElementById("expiry1").disabled = false;
+  document.getElementById("cvv").disabled = false;
+  const miDiv = document.getElementById("miDiv");
+  var cuentabanco = document.getElementById("cuentaban")
+
+  cuentabanco.value = "";
+  miDiv.innerHTML= "";
+  miDiv.textContent ="Tarjeta de crédito";
+}
+//Funcion selecciona cuenta bancaria
+function cuentaBancaria() {
+
+  document.getElementById("cuentaban").disabled = false;
+  document.getElementById("cardNumber").disabled = true;
+  document.getElementById("expiry").disabled = true;
+  document.getElementById("expiry1").disabled = true;
+  document.getElementById("cvv").disabled = true;
+  var numerito = document.getElementById("cardNumber");
+  var expiracion = document.getElementById("expiry");
+  var elcvv = document.getElementById("cvv");
+  const miDiv = document.getElementById("miDiv");
+  elcvv.value = "";
+  expiracion.value = "";
+  numerito.value = "";
+  miDiv.innerHTML= "";
+  miDiv.textContent ="Transferencia bancaria";
+}
+
+function validarTipoDeEnvio() { //funcion que comprueba si esta seleccionado el tipo de envio.
+  var valid = false;
+  var opciones = document.formulario.options;
+
+  for (var i = 0; i < opciones.length; i++) {
+    if (opciones[i].checked) {
+      valid = true;
+      break;
+    }
+  }
+
+  if (valid) { //si no hay ningun check muestra el mensaje
+    document.getElementById("mensajeNoTipoEnvio").style.display = "none";
+  }
+  else {
+    document.getElementById("mensajeNoTipoEnvio").style.display = "block";
+  }
+}
+
+document.getElementById("btnSubmit").addEventListener("click", function (event) {
+  validarTipoDeEnvio();
+});
+
+var radios = document.forms["formulario"].elements["options"]; //agrega evento a todos los botones radio.
+for (var i = 0; i < radios.length; i++) {
+  radios[i].onclick = function () {
+    document.getElementById("mensajeNoTipoEnvio").style.display = "none";
+  }
+}
