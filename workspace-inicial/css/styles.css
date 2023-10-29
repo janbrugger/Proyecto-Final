@@ -325,4 +325,46 @@ font-size: 15px;
   background: rgb(235, 235, 235);
 }
 
+/* color del icono de tema*/
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
 
+/*color fondo del menu de tema*/
+.btn-bd-primary {
+  --bd-violet-bg: #ff9100;
+  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--bd-violet-bg);
+  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: #ff9100;
+  --bs-btn-hover-border-color: #ff9100;
+  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #ff9100;
+  --bs-btn-active-border-color: #ff9100;
+}
+
+.bd-mode-toggle {
+  z-index: 1500;
+}
+
+.bd-mode-toggle .dropdown-menu .active .bi {
+  display: block !important;
+}
+
+.dropdown-item.active { /*(menu desplegable) color de la opcion seleccionada*/
+  background-color: #ff9100;
+}
+
+.dropdown-item:active { /*(menu desplegable) color cuando se clickea en la opción*/
+  background-color: #ff9100;
+}
+
+.navbar {
+  background-color:rgb(31, 31, 31);
+}

@@ -143,5 +143,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 
     userMenu();
+    themeMenu()
 });
 

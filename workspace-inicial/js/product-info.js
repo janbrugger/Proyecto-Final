@@ -264,6 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
   userMenu();
   showLocalComments(localStorage.getItem("productID"));
   hayComentarios();
+  themeMenu();
 
 
 });
