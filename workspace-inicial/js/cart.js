@@ -41,36 +41,25 @@ function showCartInfo(data){
       <td>${article.currency} <span>${article.unitCost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
       <td><strong>${article.currency} <span>${article.unitCost}</span></strong></td>
-      <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
     container.insertAdjacentHTML('afterbegin', userArticles);
   };
 }
 
-
-// Agregar evento input a los elementos de cantidad
-container.addEventListener("input", function (event) {
-  if (event.target.classList.contains("quantity-input")) {
-    updateSubtotal(event.target);
-  }
-});
-
 //Mostrar info del carrito traida del Localstorage
 document.addEventListener("DOMContentLoaded", function () {
   //showData() funcion que da error ya que no esta definida.
   userMenu();
   showCartData();
-  themeMenu();
   for (const article of articles) {
     container.innerHTML += `
     <tr>
-      <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
+      <td><img onclick="setProductID(${article.id})" src="${article.images[1]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
       <td>${article.name}</td>
       <td>${article.currency} <span>${article.cost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1" ></td>
       <td><strong>${article.currency} <span>${article.cost}</span></strong></td>
-      <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
     showSubTotalCarrito(article.cost)
@@ -207,99 +196,9 @@ function addMarker(position) {
     marker.setMap(map);
 }
 
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
-
-//Funcion selecciona tarjeta de credito
-function tarjeta() {
-  document.getElementById("cuentaban").disabled = true;
-  document.getElementById("cardNumber").disabled = false;
-  document.getElementById("expiry").disabled = false;
-  document.getElementById("expiry1").disabled = false;
-  document.getElementById("cvv").disabled = false;
-  const miDiv = document.getElementById("miDiv");
-  var cuentabanco = document.getElementById("cuentaban")
-
-  cuentabanco.value = "";
-  miDiv.innerHTML= "";
-  miDiv.textContent ="Tarjeta de crédito";
-}
-//Funcion selecciona cuenta bancaria
-function cuentaBancaria() {
-
-  document.getElementById("cuentaban").disabled = false;
-  document.getElementById("cardNumber").disabled = true;
-  document.getElementById("expiry").disabled = true;
-  document.getElementById("expiry1").disabled = true;
-  document.getElementById("cvv").disabled = true;
-  var numerito = document.getElementById("cardNumber");
-  var expiracion = document.getElementById("expiry");
-  var elcvv = document.getElementById("cvv");
-  const miDiv = document.getElementById("miDiv");
-  elcvv.value = "";
-  expiracion.value = "";
-  numerito.value = "";
-  miDiv.innerHTML= "";
-  miDiv.textContent ="Transferencia bancaria";
-}
-
-function validarTipoDeEnvio() { //funcion que comprueba si esta seleccionado el tipo de envio.
-  var valid = false;
-  var opciones = document.formulario.options;
-
-  for (var i = 0; i < opciones.length; i++) {
-    if (opciones[i].checked) {
-      valid = true;
-      break;
-    }
-  }
-
-  if (valid) { //si no hay ningun check muestra el mensaje
-    document.getElementById("mensajeNoTipoEnvio").style.display = "none";
-  }
-  else {
-    document.getElementById("mensajeNoTipoEnvio").style.display = "block";
-  }
-}
-
-document.getElementById("btnSubmit").addEventListener("click", function (event) {
-  validarTipoDeEnvio();
-});
-
-var radios = document.forms["formulario"].elements["options"]; //agrega evento a todos los botones radio.
-for (var i = 0; i < radios.length; i++) {
-  radios[i].onclick = function () {
-    document.getElementById("mensajeNoTipoEnvio").style.display = "none";
-  }
-}
-
-// Función para eliminar un artículo del carrito
-function eliminarArticulo(id) {
-  const carrito = JSON.parse(localStorage.getItem("productosSeleccionados")) || []; 
-  const nuevoCarrito = carrito.filter((article) => article.id !== id); 
-  localStorage.setItem("productosSeleccionados", JSON.stringify(nuevoCarrito));
-  location.reload(); // Recarga la página y actualiza la vista del carrito
-}
 
 // Carrito de compras inicial
-let carrito = [];
+const carrito = [];
 let subTotalCostos = 0;
 let elCostoDelEnvio = costoDeEnvio.value;
 const premium = document.querySelector("#option1");
