@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <td><img onclick="setProductID(${article.id})" src="${article.images[1]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
       <td>${article.name}</td>
       <td>${article.currency} <span>${article.cost}</span></td>
-      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="${article.quantity}" ></td>
+      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1" ></td>
       <td><strong>${article.currency} <span>${article.cost}</span></strong></td>
     </tr>
     `
@@ -70,8 +70,8 @@ function changeCounter(article) {
   const subtotalElement = ;
 }
 */
-const contadorKey = 'contador'; // Clave para el contador en el localStorage
-let contador = parseInt(localStorage.getItem((articles.quantity))) || 0; // Recuperar el valor del contador del localStorage o usar 0 si no existe
+// const contadorKey = 'contador'; // Clave para el contador en el localStorage
+// let contador = parseInt(localStorage.getItem((articles.quantity))) || 0; // Recuperar el valor del contador del localStorage o usar 0 si no existe
 
 
 // Agregar evento input a los elementos de cantidad
@@ -86,18 +86,18 @@ container.addEventListener("input", function (event) {
 function updateSubtotal(inputElement) {
   const row = inputElement.closest("tr");
   const costElement = row.querySelector("td:nth-child(3) span");
-  const quantity = parseInt(articles.quantity) //parseInt(inputElement.value);
+  const quantity = parseInt(inputElement.value); //parseInt(articles.quantity)
   const cost = parseFloat(costElement.textContent);
   const subtotal = quantity * cost;
   const subtotalElement = row.querySelector("td:nth-child(5) span");
 
   subtotalElement.textContent = subtotal;
 
-   // Actualizar el contador
-   contador += quantity;
+  //  // Actualizar el contador
+  //  contador += quantity;
 
-   // Guardar el contador en el localStorage
-   localStorage.setItem(articles.quantity, contador);
+  //  // Guardar el contador en el localStorage
+  //  localStorage.setItem(articles.quantity, contador);
   
   for (const article of articles) {
     showSubTotalCarrito(article.cost)
