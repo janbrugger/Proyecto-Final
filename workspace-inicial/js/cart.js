@@ -49,12 +49,12 @@ function showCartInfo(data){
 }
 
 
-// Agregar evento input a los elementos de cantidad
+// Agrega evento input a los elementos de cantidad
 container.addEventListener("input", function (event) {
   if (event.target.classList.contains("quantity-input")) {
     updateSubtotal(event.target);
 
-    // Obtén el valor del input y el ID del producto
+    // Se obtiene el valor del input y el ID del producto
     const quantity = event.target.value;
     const row = event.target.closest("tr");
     const productId = row.dataset.productId || article.id;
@@ -92,24 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-//posible solucion a guardar la cantidad de articulos en el local storage
-/*
-function changeCounter(article) {
-  const subtotalElement = ;
-}
-*/
-// const contadorKey = 'contador'; // Clave para el contador en el localStorage
-// let contador = parseInt(localStorage.getItem((articles.quantity))) || 0; // Recuperar el valor del contador del localStorage o usar 0 si no existe
-
-
-// Agregar evento input a los elementos de cantidad
-container.addEventListener("input", function (event) {
-  if (event.target.classList.contains("quantity-input")) {
-    updateSubtotal(event.target);
-  }
-});
-
-
 // Función para actualizar el subtotal
 function updateSubtotal(inputElement) {
   const row = inputElement.closest("tr");
@@ -129,8 +111,6 @@ function updateSubtotal(inputElement) {
   subtotal.innerHTML 
   
 };
-
-
 
 
 fetch(url)
@@ -306,18 +286,6 @@ for (var i = 0; i < radios.length; i++) {
   }
 }
 
-// Función para eliminar un artículo del carrito y establecer la cantidad a 1
-function deleteArticle(id) {
-  const cart = JSON.parse(localStorage.getItem("productosSeleccionados")) || [];
-
-  const newCart = cart.filter((article) => article.id !== id);
-  localStorage.removeItem(`quantity_${id}`); //Remueve la cantidad guardada, al volvel a agregar al carro, se carga con 1
-  localStorage.setItem("productosSeleccionados", JSON.stringify(newCart));
-  location.reload(); // Recarga la página y actualiza la vista del carrito
-}
-
-
-
 // Carrito de compras inicial
 let carrito = [];
 let subTotalCostos = 0;
@@ -376,4 +344,12 @@ function showTotalCarrito() {
   
 }
 
+// Función para eliminar un artículo del carrito
+function deleteArticle(id) {
+  const cart = JSON.parse(localStorage.getItem("productosSeleccionados")) || [];
+  const newCart = cart.filter((article) => article.id !== id);
+  localStorage.removeItem(`quantity_${id}`); //Remueve la cantidad guardada, al volvel a agregar al carro, se carga con 1
+  localStorage.setItem("productosSeleccionados", JSON.stringify(newCart));
+  location.reload(); // Recarga la página y actualiza la vista del carrito
+}
 
