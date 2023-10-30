@@ -223,6 +223,7 @@ function addMarker(position) {
   })
 })()
 
+
 //Funcion selecciona tarjeta de credito
 function tarjeta() {
   document.getElementById("cuentaban").disabled = true;
@@ -352,4 +353,21 @@ function showTotalCarrito() {
   
 }
 
+// function showAlertSuccess() {
+//   document.getElementById("alert-success").classList.add("show");
+//   setTimeout(() => {
+//       document.getElementById("alert-success").classList.remove("show")
+//   }, 3000);
 
+// }
+
+// if (valid) { //si no hay ningun check muestra el mensaje
+//   document.getElementById("mensajeNoMetodoSeleccionado").style.display = "none";
+// }
+// else {
+//   document.getElementById("mensajeNoMetodoSeleccionado").style.display = "block";
+// }
+
+// document.getElementById("btnSubmit").addEventListener("click", function (event) {
+// validarTipoDeEnvio();
+// });

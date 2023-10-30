@@ -182,7 +182,7 @@ Total($)
 
             <!-- Button modal -->
             <div class="d-flex align-items-center">
-              <div id="miDiv">
+              <div id="miDiv" required>
                 No ha seleccionado
               </div>
               <div>
@@ -206,7 +206,7 @@ Total($)
                 <div class="modal-body">
 
                   <div id="tarjCredito" class="form-check">
-                    <input class="form-check-input" type="radio" name="radioDefault" id="radio1" onclick="tarjeta()">
+                    <input class="form-check-input" type="radio" name="radioDefault" id="radio1" onclick="tarjeta()" required>
                     <label class="form-check-label" for="flexRadioDefault1">
                       Tarjeta de crédito
                     </label>
@@ -229,14 +229,14 @@ Total($)
                   </div>
                   <div id="transfBancaria" class="form-check">
                     <input class="form-check-input" type="radio" name="radioDefault" onclick="cuentaBancaria()"
-                      id="radio2">
+                      id="radio2" required>
                     <label class="form-check-label" for="flexRadioDefault2">
                       Transferencia bancaria
                     </label>
                     <hr>
                     <div>
                       <label for="cuentab">Número de cuenta</label>
-                      <input class="form-group form-control" id="cuentaban" type="text" name="cuentab">
+                      <input class="form-group form-control" id="cuentaban" type="text" name="cuentab" required>
                     </div> <br>
                   </div>
                   <div class="modal-footer">
@@ -251,6 +251,7 @@ Total($)
           <div class="col-12 text-center">
             <button id="btnSubmit" class="btn btn-primary" type="submit">Finalizar compra</button>
           </div>
+          <br> <br>
         </form>
       </div>
     </div>
@@ -277,7 +278,13 @@ Total($)
       <div></div>
     </div>
   </div>
-  <div id="divThemeMenu"></div>
+  <div id="divThemeMenu">
+    <!-- <div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-success">
+      <p>¡Haz comprado con éxito!</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div> -->
+  </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
