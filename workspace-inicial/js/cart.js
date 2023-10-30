@@ -53,29 +53,36 @@ function showCartInfo(data){
 container.addEventListener("input", function (event) {
   if (event.target.classList.contains("quantity-input")) {
     updateSubtotal(event.target);
+
+    // Obtén el valor del input y el ID del producto
+    const quantity = event.target.value;
+    const row = event.target.closest("tr");
+    const productId = row.dataset.productId || article.id;
+
+    // Almacena la cantidad en localStorage
+    localStorage.setItem(`quantity_${productId}`, quantity);
   }
 });
 
 //Mostrar info del carrito traida del Localstorage
 document.addEventListener("DOMContentLoaded", function () {
-  //showData() funcion que da error ya que no esta definida.
   userMenu();
   showCartData();
-  themeMenu();
   for (const article of articles) {
+    const storedQuantity = localStorage.getItem(`quantity_${article.id}`);
     container.innerHTML += `
-    <tr>
+    <tr data-product-id="${article.id}">
       <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
       <td>${article.name}</td>
       <td>${article.currency} <span>${article.cost}</span></td>
-      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1" ></td>
+      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
       <td><strong>${article.currency} <span>${article.cost}</span></strong></td>
       <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
-    showSubTotalCarrito(article.cost)
   }
 });
+
 
 //posible solucion a guardar la cantidad de articulos en el local storage
 /*
