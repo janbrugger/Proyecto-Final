@@ -69,12 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
   userMenu();
   showCartData();
   
-  // Recorrer los productos y realizar la conversión de UYU a USD si es necesario
+  // Recorre los productos y realiza la conversión de UYU a USD (si esta en UYU)
   for (const article of articles) {
     const storedQuantity = localStorage.getItem(`quantity_${article.id}`);
     
     if (article.currency === "UYU") {
-      article.cost /= 40; // Convierte UYU a USD
+      article.cost /= 40; // Pasa UYU a USD
       article.currency = "USD"; // Actualiza la moneda a "USD"
     }
 
