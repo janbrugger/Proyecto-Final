@@ -41,7 +41,7 @@ function showCartInfo(data){
       <td>${article.currency} <span>${article.unitCost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
       <td><strong>${article.currency} <span>${article.unitCost}</span></strong></td>
-      <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
+      <td><button class="btn btn-danger" onclick="deleteArticle(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
     container.insertAdjacentHTML('afterbegin', userArticles);
@@ -68,8 +68,16 @@ container.addEventListener("input", function (event) {
 document.addEventListener("DOMContentLoaded", function () {
   userMenu();
   showCartData();
+  
+  // Recorrer los productos y realizar la conversión de UYU a USD si es necesario
   for (const article of articles) {
     const storedQuantity = localStorage.getItem(`quantity_${article.id}`);
+    
+    if (article.currency === "UYU") {
+      article.cost /= 40; // Convierte UYU a USD
+      article.currency = "USD"; // Actualiza la moneda a "USD"
+    }
+
     container.innerHTML += `
     <tr data-product-id="${article.id}">
       <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
@@ -77,9 +85,9 @@ document.addEventListener("DOMContentLoaded", function () {
       <td>${article.currency} <span>${article.cost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
       <td><strong>${article.currency} <span>${article.cost}</span></strong></td>
-      <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
+      <td><button class="btn btn-danger" onclick="deleteArticle(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
-    `
+    `;
   }
 });
 
@@ -114,10 +122,15 @@ function updateSubtotal(inputElement) {
   subtotalElement.textContent = subtotal;
   
   for (const article of articles) {
+    (article.cost * article.quantity)
     showSubTotalCarrito(article.cost)
   }
+
+  subtotal.innerHTML 
   
 };
+
+
 
 
 fetch(url)
@@ -293,13 +306,17 @@ for (var i = 0; i < radios.length; i++) {
   }
 }
 
-// Función para eliminar un artículo del carrito
-function eliminarArticulo(id) {
-  const carrito = JSON.parse(localStorage.getItem("productosSeleccionados")) || []; 
-  const nuevoCarrito = carrito.filter((article) => article.id !== id); 
-  localStorage.setItem("productosSeleccionados", JSON.stringify(nuevoCarrito));
+// Función para eliminar un artículo del carrito y establecer la cantidad a 1
+function deleteArticle(id) {
+  const cart = JSON.parse(localStorage.getItem("productosSeleccionados")) || [];
+
+  const newCart = cart.filter((article) => article.id !== id);
+  localStorage.removeItem(`quantity_${id}`); //Remueve la cantidad guardada, al volvel a agregar al carro, se carga con 1
+  localStorage.setItem("productosSeleccionados", JSON.stringify(newCart));
   location.reload(); // Recarga la página y actualiza la vista del carrito
 }
+
+
 
 // Carrito de compras inicial
 let carrito = [];
