@@ -6,7 +6,7 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
-const User = JSON.parse(localStorage.getItem("user")) || []//user es la key con la que identifico la session.
+var User = JSON.parse(localStorage.getItem("user")) || []//user es la key con la que identifico la session.
 const navbar = document.getElementById("navbar");
 const divThemeMenu = document.getElementById("divThemeMenu");
 
