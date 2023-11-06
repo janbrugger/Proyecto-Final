@@ -111,10 +111,20 @@ function updateSubtotal(inputElement) {
   const subtotal = quantity * cost;
   const subtotalElement = row.querySelector("td:nth-child(5) span");
 
+  const superSubtotal = container.querySelector("span");
+  console.log(superSubtotal)
+
   subtotalElement.textContent = subtotal;
   
   for (const article of articles) {
-    showSubTotalCarrito(article.cost)
+    
+    subTotalCostos = article.cost * quantity;
+
+
+  // Actualizar el contenido del elemento HTML precioSubtotal con el nuevo total
+  precioSubtotal.innerHTML = "USD " + subTotalCostos;
+
+    //showSubTotalCarrito(article.cost, quantity)
   }
   
 };
@@ -313,9 +323,8 @@ const tipoEnvio = document.querySelector("#opciones");
 function showSubTotalCarrito(precio) {
   // Agregar el precio al carrito y actualizar el total
   carrito.push(precio);
-  subTotalCostos += precio;
-  //console.log('Precio agregado al carrito:', precio);
-  //console.log('Total del carrito:', total);
+  subTotalCostos = precio;
+
 
   // Actualizar el contenido del elemento HTML precioSubtotal con el nuevo total
   precioSubtotal.innerHTML = "USD " + subTotalCostos;
