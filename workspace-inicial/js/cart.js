@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <td>${article.name}</td>
       <td>${article.currency} <span>${article.cost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
-      <td><strong>${article.currency} <span>${article.cost}</span></strong></td>
+      <td><strong>${article.currency} <span class="costArt">${article.cost}</span></strong></td>
       <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
@@ -116,6 +116,7 @@ function updateSubtotal(inputElement) {
 
   subtotalElement.textContent = subtotal;
   
+  /*
   for (const article of articles) {
     
     subTotalCostos = article.cost * quantity;
@@ -126,7 +127,33 @@ function updateSubtotal(inputElement) {
 
     //showSubTotalCarrito(article.cost, quantity)
   }
+  */
+
+  sumAllCosts()
   
+};
+
+//funcion que suma todos los elementos
+function sumAllCosts(){
+
+  var todosLosPrecios = document.getElementsByClassName("costArt");
+  var preciosArray = [];
+
+  //recorre todos los elementos y obtiene el contenido como número
+  for (var i = 0; i < todosLosPrecios.length; i++){
+    var contenido = todosLosPrecios[i].innerHTML;
+    var numero = parseInt(contenido);
+
+    preciosArray.push(numero);
+  };
+  console.log(preciosArray)
+
+//suma todos los precios del array
+let totalPreciosArray = preciosArray.reduce((a, b) => a + b, 0);
+
+console.log(totalPreciosArray);
+
+precioSubtotal.innerHTML = "USD " + totalPreciosArray
 };
 
 
