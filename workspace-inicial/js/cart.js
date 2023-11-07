@@ -9,6 +9,13 @@ const url = "https://raw.githubusercontent.com/mmejiadeveloper/uruguay-departame
 const precioSubtotal = document.getElementById("precioSubtotal");
 const costoDeEnvio = document.getElementById("precioCostoDeEnvio");
 const precioTotal = document.getElementById("precioTotal");
+const tipoDeCambio = 40;
+
+const premium = document.querySelector("#option1");
+const express = document.querySelector("#option2");
+const standad = document.querySelector("#option3");
+const tipoEnvio = document.querySelector("#opciones");
+let elCostoDelEnvio = costoDeEnvio.value;
 
 //Fecth Carrito
 function getCartInfo(data) {
@@ -40,12 +47,15 @@ function showCartInfo(data){
       <td>${article.name}</td>
       <td>${article.currency} <span>${article.unitCost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
-      <td><strong>${article.currency} <span>${article.unitCost}</span></strong></td>
+      <td><strong class="monedaCurrency">${article.currency}</strong> <strong><span class="costArt">${article.unitCost}</span></strong></td>
       <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
     container.insertAdjacentHTML('afterbegin', userArticles);
   };
+  sumAllCosts()
+  showCostoDeEnvio()
+  showTotalCarrito()
 }
 
 
@@ -68,6 +78,7 @@ container.addEventListener("input", function (event) {
 document.addEventListener("DOMContentLoaded", function () {
   userMenu();
   showCartData();
+  
   for (const article of articles) {
     const storedQuantity = localStorage.getItem(`quantity_${article.id}`);
     container.innerHTML += `
@@ -76,31 +87,24 @@ document.addEventListener("DOMContentLoaded", function () {
       <td>${article.name}</td>
       <td>${article.currency} <span>${article.cost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
-      <td><strong>${article.currency} <span class="costArt">${article.cost}</span></strong></td>
+      <td><strong class="monedaCurrency">${article.currency}</strong> <strong><span class="costArt">${article.cost}</span></strong></td>
       <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
   }
+  sumAllCosts();
+  showCostoDeEnvio()
+  showTotalCarrito()
 });
-
-
-//posible solucion a guardar la cantidad de articulos en el local storage
-/*
-function changeCounter(article) {
-  const subtotalElement = ;
-}
-*/
-// const contadorKey = 'contador'; // Clave para el contador en el localStorage
-// let contador = parseInt(localStorage.getItem((articles.quantity))) || 0; // Recuperar el valor del contador del localStorage o usar 0 si no existe
-
 
 // Agregar evento input a los elementos de cantidad
 container.addEventListener("input", function (event) {
   if (event.target.classList.contains("quantity-input")) {
     updateSubtotal(event.target);
   }
+  showTotalCarrito()
+  showCostoDeEnvio()
 });
-
 
 // Función para actualizar el subtotal
 function updateSubtotal(inputElement) {
@@ -111,51 +115,34 @@ function updateSubtotal(inputElement) {
   const subtotal = quantity * cost;
   const subtotalElement = row.querySelector("td:nth-child(5) span");
 
-  const superSubtotal = container.querySelector("span");
-  console.log(superSubtotal)
-
   subtotalElement.textContent = subtotal;
-  
-  /*
-  for (const article of articles) {
-    
-    subTotalCostos = article.cost * quantity;
-
-
-  // Actualizar el contenido del elemento HTML precioSubtotal con el nuevo total
-  precioSubtotal.innerHTML = "USD " + subTotalCostos;
-
-    //showSubTotalCarrito(article.cost, quantity)
-  }
-  */
-
   sumAllCosts()
-  
 };
 
+let totalPreciosArray = 0;
 //funcion que suma todos los elementos
 function sumAllCosts(){
-
   var todosLosPrecios = document.getElementsByClassName("costArt");
+  var todosLasMonedas = document.getElementsByClassName("monedaCurrency");
   var preciosArray = [];
-
   //recorre todos los elementos y obtiene el contenido como número
   for (var i = 0; i < todosLosPrecios.length; i++){
-    var contenido = todosLosPrecios[i].innerHTML;
-    var numero = parseInt(contenido);
+    var preciosString = todosLosPrecios[i].innerHTML;
+    const precio = parseInt(preciosString);
+    var moneda = todosLasMonedas[i].innerHTML;
 
-    preciosArray.push(numero);
+    if (moneda === "UYU") {
+      preciosArray.push(precio / tipoDeCambio);
+  } else {
+      preciosArray.push(precio)
+  }
   };
-  console.log(preciosArray)
+ 
+  //suma todos los precios del array
+  totalPreciosArray = preciosArray.reduce((a, b) => a + b, 0);
+  precioSubtotal.innerHTML = "USD " + totalPreciosArray;
 
-//suma todos los precios del array
-let totalPreciosArray = preciosArray.reduce((a, b) => a + b, 0);
-
-console.log(totalPreciosArray);
-
-precioSubtotal.innerHTML = "USD " + totalPreciosArray
 };
-
 
 fetch(url)
 .then(response => response.json())
@@ -338,61 +325,25 @@ function eliminarArticulo(id) {
   location.reload(); // Recarga la página y actualiza la vista del carrito
 }
 
-// Carrito de compras inicial
-let carrito = [];
-let subTotalCostos = 0;
-let elCostoDelEnvio = costoDeEnvio.value;
-const premium = document.querySelector("#option1");
-const express = document.querySelector("#option2");
-const standad = document.querySelector("#option3");
-const tipoEnvio = document.querySelector("#opciones");
-
-function showSubTotalCarrito(precio) {
-  // Agregar el precio al carrito y actualizar el total
-  carrito.push(precio);
-  subTotalCostos = precio;
-
-
-  // Actualizar el contenido del elemento HTML precioSubtotal con el nuevo total
-  precioSubtotal.innerHTML = "USD " + subTotalCostos;
-
-  // Guardar el carrito en el localStorage
-  localStorage.setItem('carrito', JSON.stringify(carrito));
-  
-  // Guardar el total en el localStorage
-  localStorage.setItem('subTotalCostos', subTotalCostos);
-
-  showTotalCarrito()
-  showCostoDeEnvio()
-}
-
-// Recuperar el carrito y el total del localStorage al cargar la página
-if (localStorage.getItem('carrito')) {
-  carrito = JSON.parse(localStorage.getItem('carrito'));
-  subTotalCostos = parseFloat(localStorage.getItem('subTotalCostos'));
-}
-
-
 tipoEnvio.addEventListener("change", () => {
   showCostoDeEnvio()
+  showTotalCarrito()
 });
-
 
 function showCostoDeEnvio() {
   if (premium.checked) {
-    elCostoDelEnvio = (subTotalCostos * 0.15);
+    elCostoDelEnvio = (totalPreciosArray * 0.15);
   } else if (express.checked) {
-    elCostoDelEnvio = (subTotalCostos * 0.07);
+    elCostoDelEnvio = (totalPreciosArray * 0.07);
   } else if (standad.checked) {
-    elCostoDelEnvio = (subTotalCostos * 0.05);
+    elCostoDelEnvio = (totalPreciosArray * 0.05);
   }
-  showTotalCarrito()
+
   costoDeEnvio.innerHTML = "USD " +  elCostoDelEnvio.toFixed();
 }
 
 function showTotalCarrito() {
-  precioTotal.innerHTML = "USD " + (subTotalCostos + elCostoDelEnvio) ;
-  
+  precioTotal.innerHTML = "USD " + (totalPreciosArray + elCostoDelEnvio) ;
 }
 
 
