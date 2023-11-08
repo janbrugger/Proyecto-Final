@@ -83,7 +83,7 @@
               <label for="nombre" class="form-label">Primer nombre*</label>
               <input type="text" class="form-control" name= "nombre" id="nombre" required>
               <div class="invalid-feedback">
-                Debe ingresar un nombre.
+                Campo obligatorio
               </div>
             </div>
 
@@ -98,7 +98,7 @@
               <label for="apellido" class="form-label">Primer apellido*</label>
               <input type="text" class="form-control" name="apellido" id="apellido" required>
               <div class="invalid-feedback">
-                Debe ingresar un apellido.
+                Campo obligatorio
               </div>
             </div>
 
@@ -112,9 +112,9 @@
 
             <div class="col-sm-6">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" name="email" id="email" placeholder="example@example.com">
+              <input type="email" class="form-control" name="email" id="email" placeholder="example@example.com"required disabled>
               <div class="invalid-feedback">
-                Debe ingresar un email.     
+                Campo obligatorio     
              </div>
             </div>
 
@@ -128,11 +128,16 @@
               <label for="contacto" class="form-label">Teléfono de contacto*</label>
               <input type="number" class="form-control" id="contacto" required>
               <div class="invalid-feedback">
+                Campo obligatorio
               </div>
             </div>
             
           
-        <button class="btn btn-primary" type="button">Guardar cambios</button>
+        <button class="btn btn-primary" type="submit">Guardar cambios</button>
+         <!-- Alerta de éxito -->
+    <div class="alert alert-success fade" id="success-alert" role="alert">
+    ¡Datos guardados con éxito!
+    </div>
     </div>
 </form>
   </main>
@@ -145,6 +150,12 @@
     </div>
   </footer>
   <div id="divThemeMenu"></div>
+
+  <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
+    <p>Datos guardados correctamente</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>
