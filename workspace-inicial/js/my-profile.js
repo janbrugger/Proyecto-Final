@@ -4,8 +4,6 @@ const uploadButton = document.getElementById("uploadButton");
 const imagenAdicional = document.getElementById("imagenAdicional");
 const imageNavbar = document.getElementById("imageNavbar");
 
-
-
 uploadButton.addEventListener("click", function () {
     const file = fileInput.files[0];
     if (file) {
@@ -19,7 +17,6 @@ uploadButton.addEventListener("click", function () {
             // Guarda la imagen en el Local Storage
             localStorage.setItem("savedImage", imageUrl);
 
-        
         } else {
             console.log("El archivo seleccionado no es una imagen.");
         }
@@ -32,10 +29,7 @@ uploadButton.addEventListener("click", function () {
 const savedImage = localStorage.getItem("savedImage");
 if (savedImage) {
     uploadedImage.src = savedImage;
-
-    
 }
-
 
 document.addEventListener("DOMContentLoaded", function () {
     userMenu();
