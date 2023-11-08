@@ -14,7 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.getElementById("form").addEventListener("submit", (e) => {
     e.preventDefault()
-    setProfileInfo()
+
+    if (nombre.value != "" && apellido.value != "" && email.value != "" && contacto.value != "") {
+        setProfileInfo()
+    }
 });
 
 
@@ -43,17 +46,17 @@ function autocompleteProfileInfo() {
 
 (() => {
     'use strict'
-  
+
     const forms = document.querySelectorAll('.needs-validation')
-  
+
     Array.from(forms).forEach(form => {
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-  
-        form.classList.add('was-validated')
-      }, false)
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
     })
-  })()
+})()
