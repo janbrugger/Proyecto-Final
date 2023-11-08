@@ -78,9 +78,16 @@ container.addEventListener("input", function (event) {
 document.addEventListener("DOMContentLoaded", function () {
   userMenu();
   showCartData();
-  
+
+  // Recorre los productos y realiza la conversión de UYU a USD (si esta en UYU)
   for (const article of articles) {
     const storedQuantity = localStorage.getItem(`quantity_${article.id}`);
+    
+    if (article.currency === "UYU") {
+      article.cost /= 40; // Pasa UYU a USD
+      article.currency = "USD"; // Actualiza la moneda a "USD"
+    }
+  
     container.innerHTML += `
     <tr data-product-id="${article.id}">
       <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
@@ -88,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <td>${article.currency} <span>${article.cost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
       <td><strong class="monedaCurrency">${article.currency}</strong> <strong><span class="costArt">${article.cost}</span></strong></td>
-      <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
+      <td><button class="btn btn-danger" onclick="deleteArticle(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
   }
@@ -102,6 +109,15 @@ container.addEventListener("input", function (event) {
   if (event.target.classList.contains("quantity-input")) {
     updateSubtotal(event.target);
   }
+
+   // Se obtiene el valor del input y el ID del producto
+   const quantity = event.target.value;
+   const row = event.target.closest("tr");
+   const productId = row.dataset.productId || article.id;
+
+   // Almacena la cantidad en localStorage
+   localStorage.setItem(`quantity_${productId}`, quantity);
+
   showTotalCarrito()
   showCostoDeEnvio()
 });
@@ -131,11 +147,13 @@ function sumAllCosts(){
     const precio = parseInt(preciosString);
     var moneda = todosLasMonedas[i].innerHTML;
 
+/*
     if (moneda === "UYU") {
       preciosArray.push(precio / tipoDeCambio);
   } else {
       preciosArray.push(precio)
   }
+  */
   };
  
   //suma todos los precios del array
@@ -318,10 +336,11 @@ for (var i = 0; i < radios.length; i++) {
 }
 
 // Función para eliminar un artículo del carrito
-function eliminarArticulo(id) {
-  const carrito = JSON.parse(localStorage.getItem("productosSeleccionados")) || []; 
-  const nuevoCarrito = carrito.filter((article) => article.id !== id); 
-  localStorage.setItem("productosSeleccionados", JSON.stringify(nuevoCarrito));
+function deleteArticle(id) {
+  const cart = JSON.parse(localStorage.getItem("productosSeleccionados")) || [];
+  const newCart = cart.filter((article) => article.id !== id);
+  localStorage.removeItem(`quantity_${id}`); //Remueve la cantidad guardada, al volvel a agregar al carro, se carga con 1
+  localStorage.setItem("productosSeleccionados", JSON.stringify(newCart));
   location.reload(); // Recarga la página y actualiza la vista del carrito
 }
 
