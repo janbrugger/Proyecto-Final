@@ -40,3 +40,20 @@ function autocompleteProfileInfo() {
     if (User.email) { email.value = User.email; };
     if (User.contact) { contacto.value = User.contact; };
 }
+
+(() => {
+    'use strict'
+  
+    const forms = document.querySelectorAll('.needs-validation')
+  
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+  
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
