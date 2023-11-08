@@ -1,6 +1,21 @@
-const primerNombre = document.querySelector("#nombre");
-const segundoNombre = document.querySelector("#nombre2");
-const primerApellido = document.querySelector("#apellido");
-const segundoApellido = document.querySelector("#apellido2");
-const email = document.querySelector("#email");
-const telefono = document.querySelector("#contacto");
+(() => {
+    'use strict'
+  
+    const forms = document.querySelectorAll('.needs-validation')
+  
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+  
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+
+document.addEventListener("DOMContentLoaded", function () {
+    userMenu();
+    themeMenu();
+});
