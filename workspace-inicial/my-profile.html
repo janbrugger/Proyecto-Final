@@ -62,7 +62,7 @@
       <hr class="my-4">
           <div class="row g-3">
             <div class="col-sm-6">
-              <label for="nombre" class="form-label">Primer nombre</label>
+              <label for="nombre" class="form-label">Primer nombre(*)</label>
               <input type="text" class="form-control" name= "nombre" id="nombre" required>
               <div class="invalid-feedback">
                 Campo obligatorio
@@ -77,7 +77,7 @@
             </div>
 
             <div class="col-sm-6">
-              <label for="apellido" class="form-label">Primer apellido</label>
+              <label for="apellido" class="form-label">Primer apellido(*)</label>
               <input type="text" class="form-control" name="apellido" id="apellido" required>
               <div class="invalid-feedback">
                 Campo obligatorio
@@ -101,9 +101,10 @@
             </div>
 
             <div class="col-sm-6">
-              <label for="contacto" class="form-label">Teléfono de contacto</label>
-              <input type="number" class="form-control" id="contacto">
+              <label for="contacto" class="form-label">Teléfono de contacto(*)</label>
+              <input type="number" class="form-control" id="contacto" required>
               <div class="invalid-feedback">
+                Campo obligatorio
               </div>
             </div>
             
