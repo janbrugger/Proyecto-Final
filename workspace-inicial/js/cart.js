@@ -31,31 +31,9 @@ function getCartInfo(data) {
 async function showCartData() {
   try {
     data_cart = await getCartInfo(CART_INFO_URL + userID + ".json");
-    showCartInfo(data_cart);
   } catch (error) {
     console.log(error);
   }
-}
-
-//Muestra los datos traídos del id del usuario
-function showCartInfo(data){
-  let userArticles = '';
-  for (const article of data.articles) {
-    userArticles += `
-    <tr>
-      <td><img onclick="setProductID(${article.id})" src="${article.image}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
-      <td>${article.name}</td>
-      <td>${article.currency} <span>${article.unitCost}</span></td>
-      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
-      <td><strong>${article.currency}</strong> <strong><span class="costArt">${article.unitCost}</span></strong></td>
-      <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
-    </tr>
-    `
-    container.insertAdjacentHTML('afterbegin', userArticles);
-  };
-  sumAllCosts()
-  showCostoDeEnvio()
-  showTotalCarrito()
 }
 
 
@@ -92,8 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
     <tr data-product-id="${article.id}">
       <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
       <td>${article.name}</td>
-      <td>${article.currency} <span>${article.cost}</span></td>
-      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
+      <td class="">${article.currency} <span>${article.cost}</span></td>
+      <td><input class="col col-sm-5 col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
       <td><strong>${article.currency}</strong> <strong><span class="costArt">${article.cost}</span></strong></td>
       <td><button class="btn btn-danger" onclick="deleteArticle(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
