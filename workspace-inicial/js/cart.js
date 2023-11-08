@@ -9,6 +9,13 @@ const url = "https://raw.githubusercontent.com/mmejiadeveloper/uruguay-departame
 const precioSubtotal = document.getElementById("precioSubtotal");
 const costoDeEnvio = document.getElementById("precioCostoDeEnvio");
 const precioTotal = document.getElementById("precioTotal");
+const tipoDeCambio = 40;
+
+const premium = document.querySelector("#option1");
+const express = document.querySelector("#option2");
+const standad = document.querySelector("#option3");
+const tipoEnvio = document.querySelector("#opciones");
+let elCostoDelEnvio = costoDeEnvio.value;
 
 //Fecth Carrito
 function getCartInfo(data) {
@@ -24,76 +31,77 @@ function getCartInfo(data) {
 async function showCartData() {
   try {
     data_cart = await getCartInfo(CART_INFO_URL + userID + ".json");
-    showCartInfo(data_cart);
   } catch (error) {
     console.log(error);
   }
 }
 
-//Muestra los datos traídos del id del usuario
-function showCartInfo(data){
-  let userArticles = '';
-  for (const article of data.articles) {
-    userArticles += `
-    <tr>
-      <td><img onclick="setProductID(${article.id})" src="${article.image}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
-      <td>${article.name}</td>
-      <td>${article.currency} <span>${article.unitCost}</span></td>
-      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
-      <td><strong>${article.currency} <span>${article.unitCost}</span></strong></td>
-      <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
-    </tr>
-    `
-    container.insertAdjacentHTML('afterbegin', userArticles);
-  };
-}
-
 
 // Agregar evento input a los elementos de cantidad
 container.addEventListener("input", function (event) {
   if (event.target.classList.contains("quantity-input")) {
     updateSubtotal(event.target);
+
+    // Obtén el valor del input y el ID del producto
+    const quantity = event.target.value;
+    const row = event.target.closest("tr");
+    const productId = row.dataset.productId || article.id;
+
+    // Almacena la cantidad en localStorage
+    localStorage.setItem(`quantity_${productId}`, quantity);
   }
 });
 
 //Mostrar info del carrito traida del Localstorage
 document.addEventListener("DOMContentLoaded", function () {
-  //showData() funcion que da error ya que no esta definida.
   userMenu();
   showCartData();
-  themeMenu();
+
+  // Recorre los productos y realiza la conversión de UYU a USD (si esta en UYU)
   for (const article of articles) {
+    const storedQuantity = localStorage.getItem(`quantity_${article.id}`);
+    
+    if (article.currency === "UYU") {
+      article.cost /= 40; // Pasa UYU a USD
+      article.currency = "USD"; // Actualiza la moneda a "USD"
+    }
+  
     container.innerHTML += `
-    <tr>
+    <tr data-product-id="${article.id}">
       <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
       <td>${article.name}</td>
-      <td>${article.currency} <span>${article.cost}</span></td>
-      <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1" ></td>
-      <td><strong>${article.currency} <span>${article.cost}</span></strong></td>
-      <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
+      <td class="">${article.currency} <span>${article.cost}</span></td>
+      <td><input class="col col-sm-5 col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
+      <td><strong>${article.currency}</strong> <strong><span class="costArt">${article.cost}</span></strong></td>
+      <td><button class="btn btn-danger" onclick="deleteArticle(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
-    showSubTotalCarrito(article.cost)
+  const quantityInput = container.querySelector(`tr[data-product-id="${article.id}"] .quantity-input`);
+  updateSubtotal(quantityInput);
   }
+  
+  sumAllCosts();
+  showCostoDeEnvio()
+  showTotalCarrito()
 });
-
-//posible solucion a guardar la cantidad de articulos en el local storage
-/*
-function changeCounter(article) {
-  const subtotalElement = ;
-}
-*/
-// const contadorKey = 'contador'; // Clave para el contador en el localStorage
-// let contador = parseInt(localStorage.getItem((articles.quantity))) || 0; // Recuperar el valor del contador del localStorage o usar 0 si no existe
-
 
 // Agregar evento input a los elementos de cantidad
 container.addEventListener("input", function (event) {
   if (event.target.classList.contains("quantity-input")) {
     updateSubtotal(event.target);
   }
-});
 
+   // Se obtiene el valor del input y el ID del producto
+   const quantity = event.target.value;
+   const row = event.target.closest("tr");
+   const productId = row.dataset.productId || article.id;
+
+   // Almacena la cantidad en localStorage
+   localStorage.setItem(`quantity_${productId}`, quantity);
+
+  showTotalCarrito()
+  showCostoDeEnvio()
+});
 
 // Función para actualizar el subtotal
 function updateSubtotal(inputElement) {
@@ -105,13 +113,28 @@ function updateSubtotal(inputElement) {
   const subtotalElement = row.querySelector("td:nth-child(5) span");
 
   subtotalElement.textContent = subtotal;
-  
-  for (const article of articles) {
-    showSubTotalCarrito(article.cost)
-  }
-  
+  sumAllCosts()
 };
 
+let totalPreciosArray = 0;
+//funcion que suma todos los elementos
+function sumAllCosts(){
+  var todosLosPrecios = document.getElementsByClassName("costArt");
+
+  var preciosArray = [];
+  //recorre todos los elementos y obtiene el contenido como número
+  for (var i = 0; i < todosLosPrecios.length; i++){
+    var preciosString = todosLosPrecios[i].innerHTML;
+    var precio = parseInt(preciosString);
+    preciosArray.push(precio)
+
+  };
+ 
+  //suma todos los precios del array
+  totalPreciosArray = preciosArray.reduce((a, b) => a + b, 0);
+  precioSubtotal.innerHTML = "USD " + totalPreciosArray;
+
+};
 
 fetch(url)
 .then(response => response.json())
@@ -288,69 +311,33 @@ for (var i = 0; i < radios.length; i++) {
 }
 
 // Función para eliminar un artículo del carrito
-function eliminarArticulo(id) {
-  const carrito = JSON.parse(localStorage.getItem("productosSeleccionados")) || []; 
-  const nuevoCarrito = carrito.filter((article) => article.id !== id); 
-  localStorage.setItem("productosSeleccionados", JSON.stringify(nuevoCarrito));
+function deleteArticle(id) {
+  const cart = JSON.parse(localStorage.getItem("productosSeleccionados")) || [];
+  const newCart = cart.filter((article) => article.id !== id);
+  localStorage.removeItem(`quantity_${id}`); //Remueve la cantidad guardada, al volvel a agregar al carro, se carga con 1
+  localStorage.setItem("productosSeleccionados", JSON.stringify(newCart));
   location.reload(); // Recarga la página y actualiza la vista del carrito
 }
 
-// Carrito de compras inicial
-let carrito = [];
-let subTotalCostos = 0;
-let elCostoDelEnvio = costoDeEnvio.value;
-const premium = document.querySelector("#option1");
-const express = document.querySelector("#option2");
-const standad = document.querySelector("#option3");
-const tipoEnvio = document.querySelector("#opciones");
-
-function showSubTotalCarrito(precio) {
-  // Agregar el precio al carrito y actualizar el total
-  carrito.push(precio);
-  subTotalCostos += precio;
-  //console.log('Precio agregado al carrito:', precio);
-  //console.log('Total del carrito:', total);
-
-  // Actualizar el contenido del elemento HTML precioSubtotal con el nuevo total
-  precioSubtotal.innerHTML = "USD " + subTotalCostos;
-
-  // Guardar el carrito en el localStorage
-  localStorage.setItem('carrito', JSON.stringify(carrito));
-  
-  // Guardar el total en el localStorage
-  localStorage.setItem('subTotalCostos', subTotalCostos);
-
-  showTotalCarrito()
-  showCostoDeEnvio()
-}
-
-// Recuperar el carrito y el total del localStorage al cargar la página
-if (localStorage.getItem('carrito')) {
-  carrito = JSON.parse(localStorage.getItem('carrito'));
-  subTotalCostos = parseFloat(localStorage.getItem('subTotalCostos'));
-}
-
-
 tipoEnvio.addEventListener("change", () => {
   showCostoDeEnvio()
+  showTotalCarrito()
 });
-
 
 function showCostoDeEnvio() {
   if (premium.checked) {
-    elCostoDelEnvio = (subTotalCostos * 0.15);
+    elCostoDelEnvio = (totalPreciosArray * 0.15);
   } else if (express.checked) {
-    elCostoDelEnvio = (subTotalCostos * 0.07);
+    elCostoDelEnvio = (totalPreciosArray * 0.07);
   } else if (standad.checked) {
-    elCostoDelEnvio = (subTotalCostos * 0.05);
+    elCostoDelEnvio = (totalPreciosArray * 0.05);
   }
-  showTotalCarrito()
+
   costoDeEnvio.innerHTML = "USD " +  elCostoDelEnvio.toFixed();
 }
 
 function showTotalCarrito() {
-  precioTotal.innerHTML = "USD " + (subTotalCostos + elCostoDelEnvio) ;
-  
+  precioTotal.innerHTML = "USD " + (totalPreciosArray + elCostoDelEnvio) ;
 }
 
 // function showAlertSuccess() {
