@@ -25,6 +25,21 @@
         font-size: 3.5rem;
       }
     }
+
+    .image-container {
+            width: 100px; 
+            height: 100px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc; 
+            object-fit: cover;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+        }
   </style>
 </head>
 
@@ -58,11 +73,14 @@
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
       </div>
       <form id="form" action="#" method="get" class="row mt-4 needs-validation" novalidate>
-      <h1 class="mt-4">Perfil</h1>
+        <div id="profile" class="container d-flex justify-content-between">
+          <h1 class="mt-4">Perfil</h1>
+          <img id="uploadedImage" alt="Imagen" class="image-container" src="img/silueta.webp";>
+        </div>
       <hr class="my-4">
           <div class="row g-3">
             <div class="col-sm-6">
-              <label for="nombre" class="form-label">Primer nombre(*)</label>
+              <label for="nombre" class="form-label">Primer nombre*</label>
               <input type="text" class="form-control" name= "nombre" id="nombre" required>
               <div class="invalid-feedback">
                 Campo obligatorio
@@ -77,7 +95,7 @@
             </div>
 
             <div class="col-sm-6">
-              <label for="apellido" class="form-label">Primer apellido(*)</label>
+              <label for="apellido" class="form-label">Primer apellido*</label>
               <input type="text" class="form-control" name="apellido" id="apellido" required>
               <div class="invalid-feedback">
                 Campo obligatorio
@@ -101,7 +119,13 @@
             </div>
 
             <div class="col-sm-6">
-              <label for="contacto" class="form-label">Teléfono de contacto(*)</label>
+              <label for="image" class="form-label">Imagen de perfil</label>
+              <input type="file" id="fileInput">
+              <button id="uploadButton">Subir Archivo</button>
+          </div>
+
+            <div class="col-sm-6">
+              <label for="contacto" class="form-label">Teléfono de contacto*</label>
               <input type="number" class="form-control" id="contacto" required>
               <div class="invalid-feedback">
                 Campo obligatorio
