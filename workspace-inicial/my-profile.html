@@ -94,7 +94,7 @@
 
             <div class="col-sm-6">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" name="email" id="email" placeholder="example@example.com"required>
+              <input type="email" class="form-control" name="email" id="email" placeholder="example@example.com"required disabled>
               <div class="invalid-feedback">
                 Campo obligatorio     
              </div>
@@ -110,6 +110,10 @@
             
           
         <button class="btn btn-primary" type="submit">Guardar cambios</button>
+         <!-- Alerta de éxito -->
+    <div class="alert alert-success fade" id="success-alert" role="alert">
+    ¡Datos guardados con éxito!
+    </div>
     </div>
 </form>
   </main>

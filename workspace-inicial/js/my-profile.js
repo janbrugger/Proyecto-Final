@@ -15,11 +15,16 @@ document.addEventListener("DOMContentLoaded", function () {
 document.getElementById("form").addEventListener("submit", (e) => {
     e.preventDefault()
 
-    if (nombre.value != "" && apellido.value != "" && email.value != "" && contacto.value != "") {
+    if (nombre.value != "" && apellido.value != "" && contacto.value != "") {
         setProfileInfo()
+        // Mostrar la alerta de éxito
+    document.getElementById('success-alert').classList.add('show');
+    setTimeout(function() {
+      document.getElementById('success-alert').classList.remove('show');
+    }, 3000); 
     }
+    
 });
-
 
 //guarda los datos ingresados en el localStorage
 function setProfileInfo() {
@@ -60,3 +65,4 @@ function autocompleteProfileInfo() {
         }, false)
     })
 })()
+
