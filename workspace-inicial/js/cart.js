@@ -47,7 +47,7 @@ function showCartInfo(data){
       <td>${article.name}</td>
       <td>${article.currency} <span>${article.unitCost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="1"></td>
-      <td><strong class="monedaCurrency">${article.currency}</strong> <strong><span class="costArt">${article.unitCost}</span></strong></td>
+      <td><strong>${article.currency}</strong> <strong><span class="costArt">${article.unitCost}</span></strong></td>
       <td><button class="btn btn-danger" onclick="eliminarArticulo(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
@@ -94,11 +94,14 @@ document.addEventListener("DOMContentLoaded", function () {
       <td>${article.name}</td>
       <td>${article.currency} <span>${article.cost}</span></td>
       <td><input class="col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
-      <td><strong class="monedaCurrency">${article.currency}</strong> <strong><span class="costArt">${article.cost}</span></strong></td>
+      <td><strong>${article.currency}</strong> <strong><span class="costArt">${article.cost}</span></strong></td>
       <td><button class="btn btn-danger" onclick="deleteArticle(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     `
+  const quantityInput = container.querySelector(`tr[data-product-id="${article.id}"] .quantity-input`);
+  updateSubtotal(quantityInput);
   }
+  
   sumAllCosts();
   showCostoDeEnvio()
   showTotalCarrito()
@@ -139,21 +142,14 @@ let totalPreciosArray = 0;
 //funcion que suma todos los elementos
 function sumAllCosts(){
   var todosLosPrecios = document.getElementsByClassName("costArt");
-  var todosLasMonedas = document.getElementsByClassName("monedaCurrency");
+
   var preciosArray = [];
   //recorre todos los elementos y obtiene el contenido como número
   for (var i = 0; i < todosLosPrecios.length; i++){
     var preciosString = todosLosPrecios[i].innerHTML;
-    const precio = parseInt(preciosString);
-    var moneda = todosLasMonedas[i].innerHTML;
+    var precio = parseInt(preciosString);
+    preciosArray.push(precio)
 
-/*
-    if (moneda === "UYU") {
-      preciosArray.push(precio / tipoDeCambio);
-  } else {
-      preciosArray.push(precio)
-  }
-  */
   };
  
   //suma todos los precios del array
