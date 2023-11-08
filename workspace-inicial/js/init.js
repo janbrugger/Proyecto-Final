@@ -55,6 +55,7 @@ let userMenu = function () { //funcion para mostrar usuario en navbar.
           <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
             ${User.email}
+            <img class="object-fit-cover" id="imageNavbar" width=25px height=25px alt="Imagen" class="image-container" src="img/silueta.webp";>
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
             <li><a class="dropdown-item" href="my-profile.html">Mi perfil <svg xmlns="http://www.w3.org/2000/svg"
@@ -89,9 +90,21 @@ let userMenu = function () { //funcion para mostrar usuario en navbar.
     </div>
   </li>`
   }
+
+  loadImageNavbar()
   logout();
 
 };
+
+// Carga la imagen guardada si existe
+function loadImageNavbar() {
+  const savedImage = localStorage.getItem("savedImage");
+  const imageNavbar = document.getElementById("imageNavbar");
+
+  if (savedImage) {
+    imageNavbar.src = savedImage;
+  }
+}
 
 let verificacionLogin = function () { //Verificacion del login:
   if (User.email == undefined || User.email === "" || User.password == undefined || User.password.length < 6) { //si se cumple redirecciona al login.

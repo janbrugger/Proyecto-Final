@@ -25,6 +25,21 @@
         font-size: 3.5rem;
       }
     }
+
+    .image-container {
+            width: 100px; 
+            height: 100px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc; 
+            object-fit: cover;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+        }
   </style>
 </head>
 
@@ -58,7 +73,10 @@
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
       </div>
       <form id="form" action="#" method="get" class="row mt-4 needs-validation" novalidate>
-      <h1 class="mt-4">Perfil</h1>
+        <div id="profile" class="container d-flex justify-content-between">
+          <h1 class="mt-4">Perfil</h1>
+          <img id="uploadedImage" alt="Imagen" class="image-container" src="img/silueta.webp";>
+        </div>
       <hr class="my-4">
           <div class="row g-3">
             <div class="col-sm-6">
@@ -99,6 +117,12 @@
                 Debe ingresar un email.     
              </div>
             </div>
+
+            <div class="col-sm-6">
+              <label for="image" class="form-label">Imagen de perfil</label>
+              <input type="file" id="fileInput">
+              <button id="uploadButton">Subir Archivo</button>
+          </div>
 
             <div class="col-sm-6">
               <label for="contacto" class="form-label">Teléfono de contacto*</label>
