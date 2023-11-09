@@ -24,11 +24,14 @@ uploadButton.addEventListener("click", function () {
             localStorage.setItem("savedImage", imageUrl);
 
         } else {
-            console.log("El archivo seleccionado no es una imagen.");
+            document.getElementById('error-alert').classList.add('show');
+      setTimeout(function() {
+        document.getElementById('error-alert').classList.remove('show');
+      }, 3000); 
+    
         }
-    } else {
-        console.log("Ningún archivo seleccionado.");
     }
+    
 });
 
 // Carga la imagen guardada si existe
