@@ -19,7 +19,7 @@ let originalData = [];
 //función fetch de los datos de la api
 function getData() { 
       try {
-        fetch(PRODUCTS_URL + categoryID + ".json")
+        fetch(PRODUCTS_URL + categoryID)
         .then(response => response.json())
         .then(data => {
             originalData = data.products; //aqui se almacenan los datos en el array originalData

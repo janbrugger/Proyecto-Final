@@ -8,7 +8,8 @@ pero se podría utilizar MariaDB
 const fs = require("fs");
 const path = require("path");
 
-const filePath = path.join(__dirname, "../emercado-api/cats/cat.json");
+const filePath = path.join(__dirname, "../json/users.json");
+
 
 const data = fs.readFileSync(filePath, "utf-8");
 const users = JSON.parse(data);
