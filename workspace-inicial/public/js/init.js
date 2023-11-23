@@ -20,10 +20,17 @@ let hideSpinner = function () {
   document.getElementById("spinner-wrapper").style.display = "none";
 }
 
+var myHeaders = new Headers();
+myHeaders.append("access-token", localStorage.getItem("access-token"));
+
+var requestOptions = {
+  headers: myHeaders
+}
+
 let getJSONData = function (url) {
   let result = {};
   showSpinner();
-  return fetch(url)
+  return fetch(url, requestOptions)
     .then(response => {
       if (response.ok) {
         return response.json();

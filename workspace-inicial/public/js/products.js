@@ -16,10 +16,17 @@ const btnOrdenRelev = document.getElementById("sortBySoldCount");
 
 let originalData = []; 
 
+var myHeaders = new Headers();
+myHeaders.append("access-token", localStorage.getItem("access-token"));
+
+var requestOptions = {
+  headers: myHeaders
+}
+
 //función fetch de los datos de la api
 function getData() { 
       try {
-        fetch(PRODUCTS_URL + categoryID)
+        fetch(PRODUCTS_URL + categoryID, requestOptions)
         .then(response => response.json())
         .then(data => {
             originalData = data.products; //aqui se almacenan los datos en el array originalData
