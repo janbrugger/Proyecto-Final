@@ -32,19 +32,19 @@ function getComments(data) {
 async function showData() {
 
   try {
-    let product = await getProduct(PRODUCT_INFO_URL + productID + ".json"); //espera a recibir los resultados de la funcion.
+    let product = await getProduct(PRODUCT_INFO_URL + productID); //espera a recibir los resultados de la funcion.
     product.quantity = 1;
     showProducts(product);
   } catch (error) { console.log(error) }
 
   try {
-    let comments = await getComments(PRODUCT_INFO_COMMENTS_URL + productID + ".json");
+    let comments = await getComments(PRODUCT_INFO_COMMENTS_URL + productID);
     showComments(comments);
     hayComentarios()
   } catch (error) { console.log(error) }
 
   try {
-    let related = await getProduct(PRODUCT_INFO_URL + productID + ".json");
+    let related = await getProduct(PRODUCT_INFO_URL + productID);
     showRelatedProducts(related);
   } catch (error) { console.log(error) }
 
