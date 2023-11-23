@@ -52,7 +52,7 @@ app.use("/api/categories_products", (req, res, next) => {
 });
 //----
 
-// Middleware que autoriza a realizar peticiones a /api/categories_products
+// Middleware que autoriza a realizar peticiones a /api/products
 app.use("/api/products", (req, res, next) => {
   try {
     const decoded = jwt.verify(req.headers["access-token"], SECRET_KEY);
