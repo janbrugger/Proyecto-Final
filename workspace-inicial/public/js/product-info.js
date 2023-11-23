@@ -7,11 +7,16 @@ const btnComment = document.getElementById("btnComment");
 const relatedProducts = document.getElementById("related-products-container")
 const relatedProductsTitle = document.getElementById("related-products-title")
 
+var myHeaders = new Headers();
+myHeaders.append("access-token", localStorage.getItem("access-token"));
 
+var requestOptions = {
+  headers: myHeaders
+}
 
 function getProduct(data) {
   return new Promise((resolve, reject) => { //la funcion devuelve una promesa
-    fetch(data)
+    fetch(data, requestOptions)
       .then(response => response.json())
       .then(data => resolve(data)) //si obtenemos la data devolvemos una promesa resuelta
       .catch(error => reject(error)) //en caso contrario devolvemos una promesa rechazada

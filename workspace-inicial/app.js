@@ -21,7 +21,7 @@ app.post("/login", (req,res)=>{
   if(username ==="admin@email.com" && password === "admin"){
     const token = jwt.sign({username}, SECRET_KEY);
     res.status(200).json({token});
-    console.log("entro")
+    console.log("Inicio de sesión correcto")
   }else{
     res.status(401).json({messaje: "Usuario y/o contraseña incorrecta"});
   }
@@ -42,6 +42,18 @@ app.use("/api/categories", (req, res, next) => {
 
 // Middleware que autoriza a realizar peticiones a /api/categories_products
 app.use("/api/categories_products", (req, res, next) => {
+  try {
+    const decoded = jwt.verify(req.headers["access-token"], SECRET_KEY);
+    console.log(decoded);
+    next();
+  } catch (err) {
+    res.status(401).json({ message: "Usuario no autorizado" });
+  }
+});
+//----
+
+// Middleware que autoriza a realizar peticiones a /api/categories_products
+app.use("/api/products", (req, res, next) => {
   try {
     const decoded = jwt.verify(req.headers["access-token"], SECRET_KEY);
     console.log(decoded);
