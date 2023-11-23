@@ -107,20 +107,20 @@ function loadImageNavbar() {
 }
 
 let verificacionLogin = function () { //Verificacion del login:
-  if (User.email == undefined || User.email === "" || User.password == undefined || User.password.length < 6) { //si se cumple redirecciona al login.
+  if (!localStorage.getItem("access-token")) { //si se cumple redirecciona al login.
     alert("Inicia sesion para continuar");
     window.location.href = "login.html";
     return true;
   };
 };
 
-//funcion para eliminar "user" del localStorage
+//funcion para eliminar "access-token" del localStorage
 let logout = function () {
   try {
     const itemLogout = document.getElementById("itemLogout"); //itemLogout es el id del dropdown-item "Cerrar sesion"
 
     itemLogout.addEventListener("click", function () {
-      localStorage.removeItem("user")
+      localStorage.removeItem("access-token")
     })
   } catch (error) {
     console.log(error); //error que se genera al intentar obtener el elemento "logout"
