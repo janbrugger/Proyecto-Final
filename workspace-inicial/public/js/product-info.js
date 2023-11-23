@@ -38,7 +38,7 @@ async function showData() {
   } catch (error) { console.log(error) }
 
   try {
-    let comments = await getComments(PRODUCT_INFO_COMMENTS_URL + productID + ".json");
+    let comments = await getComments(PRODUCT_INFO_COMMENTS_URL + productID);
     showComments(comments);
     hayComentarios()
   } catch (error) { console.log(error) }
