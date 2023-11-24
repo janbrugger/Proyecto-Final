@@ -10,10 +10,18 @@ const getComments = (req, res) => {
   }
 };
 
+const createComment = (req, res) => {
+  const createdComment = commentsModel.createComment(req.params.id, req.body);
+  if (createdComment) {
+    res.status(200).json(createdComment);
+  } else {
+    res.status(500).json({ message: "Ha ocurrido un error" });
+  }
+};
 
 
 module.exports = {
 
     getComments,
-
+    createComment,
 };

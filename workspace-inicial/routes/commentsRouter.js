@@ -8,5 +8,6 @@ const commentsController = require("../controllers/commentsController");
 
 
 commentsRouter.get("/:id", commentsController.getComments);
+commentsRouter.post("/:id", commentsController.createComment);
 
 module.exports = commentsRouter;
