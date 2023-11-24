@@ -1,8 +1,9 @@
 const productID = localStorage.getItem("productID");
 const container = document.getElementById("products-container");
-const commentsContainer = document.getElementById("comments-container")
+const commentsContainer = document.getElementById("comments-container");
 const rating = document.getElementById("rating");
 const selectedRating = document.getElementById("selected-rating");
+  
 const btnComment = document.getElementById("btnComment");
 const relatedProducts = document.getElementById("related-products-container")
 const relatedProductsTitle = document.getElementById("related-products-title")
@@ -115,26 +116,7 @@ function compararPorFecha(a, b) {
   return fechaB - fechaA;
 }
 
-//Función que muestra los comentarios ya ingresados de cada producto
-function showComments(data_comments) {
-  data_comments.sort(compararPorFecha);
-  for (const comment of data_comments) {
-    commentsContainer.innerHTML += `
-      <div class="list-group-item container border border-secondary-subtle rounded my-2 p-1">
-       <div class="d-flex flex-wrap justify-content-between ">
-          <h6 class="fw-bold ">${comment.user}</h6>
-          <span>
-          ${stars(comment.score)}
-          </span>
-        </div>
-        <div>
-          <p class="mb-1">${comment.description}</p>
-          <small class="text-muted">${comment.dateTime}</small>
-        </div>
-      </div>
-      `
-  }
-};
+
 
 
 //Función que muestra los productos relacionados
@@ -208,72 +190,68 @@ rating.addEventListener("click", (event) => {
   }
 });
 
-//agrega comentario con usuario y fecha actual 
-btnComment.addEventListener("click", () => {
-  const comment = document.getElementById("opinion");
-  const ratingValue = selectedRating.textContent;
 
-  // Obtiene la fecha actual
-const fechaHoraActual = new Date();
-
-// Obtiene el año, mes y día
-const year = fechaHoraActual.getFullYear();
-const month = (fechaHoraActual.getMonth() + 1).toString().padStart(2, '0'); // Agrega un cero inicial si es necesario
-const day = fechaHoraActual.getDate().toString().padStart(2, '0'); // Agrega un cero inicial si es necesario
-
-// Obtiene la hora, minuto y segundo
-const hours = fechaHoraActual.getHours().toString().padStart(2, '0');
-const minutes = fechaHoraActual.getMinutes().toString().padStart(2, '0');
-const seconds = fechaHoraActual.getSeconds().toString().padStart(2, '0');
-
-// Crea la cadena de fecha y hora con el formato deseado
-const fechaHoraFormateada = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
-
-  if (comment.value != "" && ratingValue != 0) {
-    const comentarioGuardado = `
-    <div class="list-group-item container border border-secondary-subtle rounded my-2 p-1">
-     <div class="d-flex flex-wrap justify-content-between ">
-        <h6 class="fw-bold ">${User.email}</h6>
-        <span>
-        ${stars(ratingValue)}
-        </span>
+//Funcionalidad de los comentarios
+//Función que muestra los comentarios
+function showComments(data_comments) {
+  data_comments.sort(compararPorFecha);
+  commentsContainer.innerHTML = "";
+  for (const comment of data_comments) {
+    commentsContainer.innerHTML += `
+      <div class="list-group-item container border border-secondary-subtle rounded my-2 p-1">
+       <div class="d-flex flex-wrap justify-content-between ">
+          <h6 class="fw-bold ">${comment.user}</h6>
+          <span>
+          ${stars(comment.score)}
+          </span>
+        </div>
+        <div>
+          <p class="mb-1">${comment.description}</p>
+          <small class="text-muted">${comment.dateTime}</small>
+        </div>
       </div>
-      <div>
-        <p class="mb-1">${comment.value}</p>
-        <small class="text-muted">${fechaHoraFormateada}</small>
-      </div>
-    </div>
-    `
-
-
-    saveLocalComment(localStorage.getItem("productID"), comentarioGuardado)
-    commentsContainer.insertAdjacentHTML("afterbegin", comentarioGuardado)
-
-
-    comment.value = "";  //se limpia el textarea
-    selectedRating.textContent = 0;   //se vuelve a 0 el contador de estrellas seleccionadas
-    const allStars = document.querySelectorAll(".star");
-    allStars.forEach((star) => {    //se remueven todas las estrellas seleccionadas
-      star.classList.remove("selected");
-      hayComentarios()
-    });
-
-  } else {
-    alert("Debe agregar un comentario y una puntuación")
+      `
   }
 
-});
+};
 
-document.addEventListener("DOMContentLoaded", function () {
-  showData();
-  userMenu();
-  showLocalComments(localStorage.getItem("productID"));
-  hayComentarios();
-  themeMenu();
+//alerta si hay error al realizar comentarios
+function showAlert() {
+  document.getElementById("alert-error").classList.add("show");
+  window.setTimeout(() => document.getElementById("alert-error").classList.remove("show"), 3000)
+  resultsElement = document.getElementById("results").innerHTML = "";
+}
+
+//hace get a los comentarios
+function getAll() {
+  requestCRUD('GET').then((response) => response ? showComments(response) : showAlert());
+}
+
+//hace post a los comentarios que se desean enviar
+function postDatos(data) {
+    requestCRUD('POST', data).then((response) => response ? getAll(response) : showAlert());
+}
 
 
-});
+//Retorna la hora y fecha actuales formateada para ingresarla en los comentarios
+function horaActualizada(){
+    // Obtiene la fecha actual
+    const fechaHoraActual = new Date();
+
+    // Obtiene el año, mes y día
+    const year = fechaHoraActual.getFullYear();
+    const month = (fechaHoraActual.getMonth() + 1).toString().padStart(2, '0'); // Agrega un cero inicial si es necesario
+    const day = fechaHoraActual.getDate().toString().padStart(2, '0'); // Agrega un cero inicial si es necesario
+
+    // Obtiene la hora, minuto y segundo
+    const hours = fechaHoraActual.getHours().toString().padStart(2, '0');
+    const minutes = fechaHoraActual.getMinutes().toString().padStart(2, '0');
+    const seconds = fechaHoraActual.getSeconds().toString().padStart(2, '0');
+
+    // Crea la cadena de fecha y hora con el formato deseado
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+}
 
 
 
@@ -286,35 +264,36 @@ function hayComentarios() { //verifica si hay comentarios y cambia la propiedad 
 }
 
 
-//funcion que guarda el comentario junto con el id del producto en localStorage
-function saveLocalComment(productID, comentario) {
+document.addEventListener("DOMContentLoaded", function () {
+  showData();
+  userMenu();
+  hayComentarios();
+  themeMenu();
 
-  //obtiene los comentarios del localStorage si los hay
-  const comentariosExistentes = JSON.parse(localStorage.getItem("comentarios")) || {};
+//funcionalidad del botón para enviar comentarios
+btnComment.addEventListener("click", () => {
+  const comment = document.getElementById("opinion");
+  const ratingValue = selectedRating.textContent;
 
-  if (!comentariosExistentes[productID]) { //verifica si ya hay un arreglo de comentarios, de lo contrario crea uno vacio
-    comentariosExistentes[productID] = []
+  if (comment.value != "" && ratingValue != 0) {
+    let score = selectedRating.textContent;
+    let description = comment.value;
+    postDatos({ score: selectedRating.textContent, description: description, user: User.email, dateTime: horaActualizada()});
+    [score, description].forEach(element => element.value = "");
 
-  }
-
-  comentariosExistentes[productID].push(comentario)
-
-  localStorage.setItem("comentarios", JSON.stringify(comentariosExistentes))
-
-}
-
-//funcion que muestra los comentarios que coincidan con el id del producto.
-function showLocalComments(productID) {
-
-  const comentarios = JSON.parse(localStorage.getItem("comentarios")) || {}
-
-  if (comentarios[productID]) {
-    comentarios[productID].forEach(comentario => {
-      commentsContainer.insertAdjacentHTML("afterbegin", comentario)
-
-    })
+    comment.value = "";  //se limpia el textarea
+    selectedRating.textContent = 0;   //se vuelve a 0 el contador de estrellas seleccionadas
+    const allStars = document.querySelectorAll(".star");
+    allStars.forEach((star) => {    //se remueven todas las estrellas seleccionadas
+      star.classList.remove("selected");
+      hayComentarios()
+    });
   } else {
-    console.log("no hay comentarios")
+    alert("Debe agregar un comentario y una puntuación")
   }
+});
 
-}
+
+});
+
+

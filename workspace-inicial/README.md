@@ -3,3 +3,8 @@ bienvenid@ a nuestro hermoso proyecto final <3
 
 email: admin@email.com
 password: admin
+
+Recuerda iniciar la terminal desde la carpeta "workspace-inicial" (una manera es haciendo click derecho en la carpeta y => Open In Integrated Terminal)
+
+npm install
+npm run dev
