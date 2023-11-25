@@ -83,15 +83,15 @@ function showProducts(data) {
       productosSeleccionados.push(data);
       localStorage.setItem("productosSeleccionados", JSON.stringify(productosSeleccionados));
       // Mostrar la alerta de éxito
-      document.getElementById('success-alert').classList.add('show');
+      document.getElementById('success-alert').classList.remove('d-none');
       setTimeout(function() {
-        document.getElementById('success-alert').classList.remove('show');
+        document.getElementById('success-alert').classList.add('d-none');
       }, 3000); 
     } else {
       // Mostrar la alerta de error
-      document.getElementById('error-alert').classList.add('show');
+      document.getElementById('error-alert').classList.remove('d-none');
       setTimeout(function() {
-        document.getElementById('error-alert').classList.remove('show');
+        document.getElementById('error-alert').classList.add('d-none');
       }, 3000); 
     }
   });
