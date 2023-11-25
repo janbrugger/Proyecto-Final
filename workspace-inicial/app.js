@@ -6,6 +6,7 @@ const categoryRouter = require("./routes/categoryRouter");
 const categoryProductRouter = require("./routes/categoryProductRouter");
 const productsRouter = require("./routes/productsRouter");
 const commentsRouter = require("./routes/commentsRouter");
+const buyRouter = require("./routes/buyRouter");
 
 const app = express();
 const port = 3000;
@@ -74,6 +75,8 @@ app.use("/api/categories_products", categoryProductRouter); //productos segun la
 app.use("/api/products", productsRouter); //detalles de cada producto
 
 app.use("/api/products_comments", commentsRouter); //comentarios de cada producto
+
+app.use("/api/cart", buyRouter); //buy message
 
 
 app.listen(port, () => {

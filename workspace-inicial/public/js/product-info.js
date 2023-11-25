@@ -278,7 +278,11 @@ btnComment.addEventListener("click", () => {
   if (comment.value != "" && ratingValue != 0) {
     let score = selectedRating.textContent;
     let description = comment.value;
-    postDatos({ score: selectedRating.textContent, description: description, user: User.email, dateTime: horaActualizada()});
+    postDatos({ 
+      score: selectedRating.textContent, 
+      description: description, 
+      user: User.email, 
+      dateTime: horaActualizada()});
     [score, description].forEach(element => element.value = "");
 
     comment.value = "";  //se limpia el textarea
