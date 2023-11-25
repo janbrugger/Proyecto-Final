@@ -15,7 +15,7 @@ var requestOptions = {
   headers: myHeaders
 }
 
-function getProduct(data) {
+function getData(data) {
   return new Promise((resolve, reject) => { //la funcion devuelve una promesa
     fetch(data, requestOptions)
       .then(response => response.json())
@@ -24,36 +24,33 @@ function getProduct(data) {
   });
 }
 
-//Función que trae los comentarios ya ingresados de cada producto
-function getComments(data) {
-  return new Promise((resolve, reject) => {
-    fetch(data)
-      .then(response => response.json())
-      .then(data => resolve(data))
-      .catch(error => reject(error))
-  });
-}
-
 
 async function showData() {
 
   try {
-    let product = await getProduct(PRODUCT_INFO_URL + productID); //espera a recibir los resultados de la funcion.
+    let product = await getData(PRODUCT_INFO_URL + productID); //espera a recibir los resultados de la funcion.
     product.quantity = 1;
     showProducts(product);
   } catch (error) { console.log(error) }
 
   try {
-    let comments = await getComments(PRODUCT_INFO_COMMENTS_URL + productID);
+    let comments = await getData(PRODUCT_INFO_COMMENTS_URL + productID);
     showComments(comments);
     hayComentarios()
   } catch (error) { console.log(error) }
 
   try {
-    let related = await getProduct(PRODUCT_INFO_URL + productID);
+    let related = await getData(PRODUCT_INFO_URL + productID);
     showRelatedProducts(related);
   } catch (error) { console.log(error) }
 
+}
+
+async function logBuyMessage(){
+  try {
+    let message = await getData(CART_BUY_URL);
+    console.log(message)
+  } catch (error) { console.log(error) }
 }
 
 //Función que muestra los detalles de cada producto
@@ -79,28 +76,32 @@ function showProducts(data) {
 
   const btnCarrito = document.getElementById("btnCarrito")
   const productosSeleccionados = JSON.parse(localStorage.getItem("productosSeleccionados")) || [];
+  const productoExistente = productosSeleccionados.find(product => product.id === data.id)
 
   btnCarrito.addEventListener('click', () => {
-
-    const productoExistente = productosSeleccionados.find(product => product.id === data.id)
-
-    // comprueba si ya existe ese producto en el array, si no existe lo agrega.
-    if (!productoExistente) {
-      productosSeleccionados.push(data);
-      localStorage.setItem("productosSeleccionados", JSON.stringify(productosSeleccionados));
-      // Mostrar la alerta de éxito
-      document.getElementById('success-alert').classList.add('show');
-      setTimeout(function() {
-        document.getElementById('success-alert').classList.remove('show');
-      }, 3000); 
-    } else {
-      // Mostrar la alerta de error
-      document.getElementById('error-alert').classList.add('show');
-      setTimeout(function() {
-        document.getElementById('error-alert').classList.remove('show');
-      }, 3000); 
-    }
+    addToCart();
   });
+  
+  let addToCart = () => {
+    // comprueba si ya existe ese producto en el array, si no existe lo agrega.
+  if (!productoExistente) {
+    productosSeleccionados.push(data);
+    localStorage.setItem("productosSeleccionados", JSON.stringify(productosSeleccionados));
+    logBuyMessage()
+    // Mostrar la alerta de éxito
+    document.getElementById('success-alert').classList.add('show');
+    setTimeout(function() {
+      document.getElementById('success-alert').classList.remove('show');
+    }, 3000); 
+  } else {
+    // Mostrar la alerta de error
+    document.getElementById('error-alert').classList.add('show');
+    setTimeout(function() {
+      document.getElementById('error-alert').classList.remove('show');
+    }, 3000); 
+  }
+  }
+
 
 const btnGoToCart = document.getElementById("btnViewCart");
 btnGoToCart.addEventListener('click', () => {

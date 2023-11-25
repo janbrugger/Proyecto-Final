@@ -65,6 +65,18 @@ app.use("/api/products", (req, res, next) => {
 });
 //----
 
+// Middleware que autoriza a realizar peticiones a /api/cart
+app.use("/api/cart", (req, res, next) => {
+  try {
+    const decoded = jwt.verify(req.headers["access-token"], SECRET_KEY);
+    console.log(decoded);
+    next();
+  } catch (err) {
+    res.status(401).json({ message: "Usuario no autorizado" });
+  }
+});
+//----
+
 
 app.use("/api/users", userRouter); //users
 

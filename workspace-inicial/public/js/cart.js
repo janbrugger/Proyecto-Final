@@ -17,48 +17,9 @@ const standad = document.querySelector("#option3");
 const tipoEnvio = document.querySelector("#opciones");
 let elCostoDelEnvio = costoDeEnvio.value;
 
-//Fecth Carrito
-function getCartInfo(data) {
-  return new Promise((resolve, reject) => {
-    fetch(data)
-      .then(response => response.json())
-      .then(data => resolve(data))
-      .catch(error => reject(error))
-  });
-}
-
-// Mostrar información del carrito
-async function showCartData() {
-  try {
-    data_cart = await getCartInfo(CART_INFO_URL + userID + ".json");
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 
-// Agregar evento input a los elementos de cantidad
-container.addEventListener("input", function (event) {
-  if (event.target.classList.contains("quantity-input")) {
-    updateSubtotal(event.target);
-
-    // Obtén el valor del input y el ID del producto
-    const quantity = event.target.value;
-    const row = event.target.closest("tr");
-    const productId = row.dataset.productId || article.id;
-
-    // Almacena la cantidad en localStorage
-    localStorage.setItem(`quantity_${productId}`, quantity);
-  }
-  showTotalCarrito()
-  showCostoDeEnvio()
-});
-
-//Mostrar info del carrito traida del Localstorage
-document.addEventListener("DOMContentLoaded", function () {
-  userMenu();
-  showCartData();
-
+function showCartData(){
   // Recorre los productos y realiza la conversión de UYU a USD (si esta en UYU)
   for (const article of articles) {
     const storedQuantity = localStorage.getItem(`quantity_${article.id}`);
@@ -85,8 +46,32 @@ document.addEventListener("DOMContentLoaded", function () {
   sumAllCosts();
   showCostoDeEnvio()
   showTotalCarrito()
+
+}
+
+// Agregar evento input a los elementos de cantidad
+container.addEventListener("input", function (event) {
+  if (event.target.classList.contains("quantity-input")) {
+    updateSubtotal(event.target);
+
+    // Obtén el valor del input y el ID del producto
+    const quantity = event.target.value;
+    const row = event.target.closest("tr");
+    const productId = row.dataset.productId || article.id;
+
+    // Almacena la cantidad en localStorage
+    localStorage.setItem(`quantity_${productId}`, quantity);
+  }
+  showTotalCarrito()
+  showCostoDeEnvio()
 });
 
+//  DOMContentLoaded
+document.addEventListener("DOMContentLoaded", function () {
+  userMenu();
+  showCartData();
+});
+//----
 
 // Función para actualizar el subtotal
 function updateSubtotal(inputElement) {
