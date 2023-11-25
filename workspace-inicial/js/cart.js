@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     container.innerHTML += `
     <tr data-product-id="${article.id}">
-      <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
+      <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active d-none d-md-block d-lg-block" style="max-height: 80px;"></img></td>
       <td>${article.name}</td>
       <td class="">${article.currency} <span>${article.cost}</span></td>
       <td><input class="col-5 col-sm-5 col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
