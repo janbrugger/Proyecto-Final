@@ -39,17 +39,19 @@ nav a {
   }
 }
 
-.jumbotron {
-  height: 50vh;
-  padding: 5em inherit;
-  margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back2.png');
-  background-size: cover;
-  background-position: block;
-  background-repeat: no-repeat;
-  color: black;
-  font-weight: bold;
+@media (min-width: 768px) {
+  .jumbotron {
+    height: 50vh;
+    padding: 5em inherit;
+    margin-bottom: 0;
+    background-color: #53C0FB;
+    background: url('../img/cover_back2.png');
+    background-size: cover;
+    background-position: block;
+    background-repeat: no-repeat;
+    color: black;
+    font-weight: bold;
+  }
 }
 
 @media (min-width: 768px) {
