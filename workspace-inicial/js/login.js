@@ -56,3 +56,21 @@ logForm.addEventListener("submit",  (e) => {
         window.location.href = "index.html";
     }
 });
+
+// Rerefencias a campo de contraseña y al botón show
+const passwordInput = document.querySelector("#floatingPassword");
+const passwordButton = document.querySelector("#password-addon");
+const passwordText = document.querySelector("#password-text");
+let isPasswordVisible = false;
+
+// Evento de clic al botón show
+passwordButton.addEventListener("click", () => {
+    if (!isPasswordVisible) {
+        passwordInput.type = "text";
+        passwordText.textContent = "Hide";
+    } else {
+        passwordInput.type = "password";
+        passwordText.textContent = "Show";
+    }
+    isPasswordVisible = !isPasswordVisible;
+});
