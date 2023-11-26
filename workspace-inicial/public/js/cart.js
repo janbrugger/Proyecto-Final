@@ -31,10 +31,10 @@ function showCartData(){
   
     container.innerHTML += `
     <tr data-product-id="${article.id}">
-      <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active" style="max-height: 80px;"></img></td>
+      <td><img onclick="setProductID(${article.id})" src="${article.images[0]}" class="img-fluid mt-2 cursor-active d-none d-md-block d-lg-block" style="max-height: 80px;"></img></td>
       <td>${article.name}</td>
       <td class="">${article.currency} <span>${article.cost}</span></td>
-      <td><input class="col col-sm-5 col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
+      <td><input class="col-5 col-sm-5 col-lg-2 quantity-input" type="number" min="1" value="${storedQuantity || article.quantity}"></td>
       <td><strong>${article.currency}</strong> <strong><span class="costArt">${article.cost}</span></strong></td>
       <td><button class="btn btn-danger" onclick="deleteArticle(${article.id})"><i class="fas fa-trash-alt"></i></button></td>
     </tr>
@@ -70,6 +70,7 @@ container.addEventListener("input", function (event) {
 document.addEventListener("DOMContentLoaded", function () {
   userMenu();
   showCartData();
+  themeMenu()
 });
 //----
 

@@ -39,11 +39,11 @@
   <main>
     <div>
       <div class="container" id="cart-container">
-          <h1 class="mt-4">Carrito de compras</h1>
+        <h1 class="mt-4">Carrito de compras</h1>
         <br>
         <h3>Articulos a comprar</h3>
         <br>
-        <table class="table">
+        <table class="table-responsive col-12">
           <thead>
             <tr>
               <th></th>
@@ -61,16 +61,16 @@
           <h3>Tipo de envío</h3>
           <div id="opciones" class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary">
-              <input type="radio" class="form-check-input" name="options" id="option1" autocomplete="off" onclick="showCostoDeEnvio()"
-                checked required>Premium 2 a 5 dias (15%)
+              <input type="radio" class="form-check-input" name="options" id="option1" autocomplete="off"
+                onclick="showCostoDeEnvio()" checked required>Premium 2 a 5 dias (15%)
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" class="form-check-input" name="options" id="option2" autocomplete="off" onclick="showCostoDeEnvio()"
-                required>Express 5 a 8 dias (7%)
+              <input type="radio" class="form-check-input" name="options" id="option2" autocomplete="off"
+                onclick="showCostoDeEnvio()" required>Express 5 a 8 dias (7%)
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" class="form-check-input" name="options" id="option3" autocomplete="off" onclick="showCostoDeEnvio()"
-                required>Standard 12 a 15 dias (5%)
+              <input type="radio" class="form-check-input" name="options" id="option3" autocomplete="off"
+                onclick="showCostoDeEnvio()" required>Standard 12 a 15 dias (5%)
             </label>
           </div>
 
@@ -83,7 +83,7 @@
             <h3>Dirección de envío</h3>
 
             <div class="row mb-2">
-              <div class="col-5">
+              <div class="col-6 col-md-5 col-lg-5">
                 <label for="Departamento" id="Dpto" class="form-label">Departamento</label>
                 <select class="form-select" id="Departamento" required>
                   <option selected disabled value="">Selecciona...</option>
@@ -93,7 +93,7 @@
                 </div>
               </div>
 
-              <div class="col-4">
+              <div class="col-6 col-md-4 col-lg-4">
                 <label for="ciudades" class="form-label">Ciudad:</label>
                 <select class="form-select" id="ciudades" required>
                 </select>
@@ -104,7 +104,7 @@
             </div>
 
             <div class="row mb-2">
-              <div class="col-5">
+              <div class="col-6 col-md-5 col-lg-5">
                 <label for="inputAddress" class="form-label">Calle:</label>
                 <input type="text" class="form-control" name="inputAddress" id="inputAddress"
                   placeholder="Ansina esq. Espinosa" required>
@@ -113,7 +113,7 @@
                 </div>
               </div>
 
-              <div class="col-4">
+              <div class="col-6 col-md-4 col-lg-4">
                 <label for="inputNumber" class="form-label">Número:</label>
                 <input type="number" min="1" class="form-control" name="inputNumber" id="inputNumber" placeholder="1234"
                   required>
@@ -124,7 +124,7 @@
             </div>
 
             <div class="row mb-2">
-              <div class="form-group col-5">
+              <div class="form-group col-6 col-md-5 col-lg-5">
                 <label for="inputCorner" class="form-label">Esquina:</label>
                 <input type="text" class="form-control" name="inputCorner" id="inputCorner"
                   placeholder="Esquina Gastón Ramón" required>
@@ -142,32 +142,38 @@
 
           <hr />
 
-<!-- Costos de envio -->
-<div class="container">
-  <h2 class="p-3">Costos</h2>
-    <div class="row border p-3">
-      <div class="col-9 m-0">
-        <h3 class="subtotal">Subtotal</h3>
-        <p class="muted">costo unitario de envio</p>
-      </div>
-      <div class="col-3"><h3 id="precioSubtotal" class="float-end h4" >$$$</h3></div>
-    </div>
+          <!-- Costos de envio -->
+          <div class="container">
+            <h2 class="p-3">Costos</h2>
+            <div class="row border p-3">
+              <div class="col-9 m-0">
+                <h3 class="subtotal">Subtotal</h3>
+                <p class="muted">costo unitario de envio</p>
+              </div>
+              <div class="col-3">
+                <h3 id="precioSubtotal" class="float-end h4">$$$</h3>
+              </div>
+            </div>
 
-    <div class="row border p-3">
-      <div class="col-9 m-0">
-        <h3 class="">Costo de envio</h3>
-        <p class="muted">segun el tipo de envio</p>
-      </div>
-      <div class="col-3"><h3 id="precioCostoDeEnvio" class="float-end h4" >$$$</h3></div>
-    </div>
-    
-    <div class="row border p-3">
-      <div class="col-9 m-0">
-        <h3 class="align-middle">Total</h3>
-       </div>
-       <div class="col-3"><h3 id="precioTotal" class="float-end h4">$$$</h3></div>
-    </div>
-</div>
+            <div class="row border p-3">
+              <div class="col-9 m-0">
+                <h3 class="">Costo de envio</h3>
+                <p class="muted">segun el tipo de envio</p>
+              </div>
+              <div class="col-3">
+                <h3 id="precioCostoDeEnvio" class="float-end h4">$$$</h3>
+              </div>
+            </div>
+
+            <div class="row border p-3">
+              <div class="col-9 m-0">
+                <h3 class="align-middle">Total</h3>
+              </div>
+              <div class="col-3">
+                <h3 id="precioTotal" class="float-end h4">$$$</h3>
+              </div>
+            </div>
+          </div>
 
           <hr />
 
@@ -200,7 +206,8 @@
                 <div class="modal-body">
 
                   <div id="tarjCredito" class="form-check">
-                    <input class="form-check-input" type="radio" name="radioDefault" id="radio1" onclick="tarjeta()" required>
+                    <input class="form-check-input" type="radio" name="radioDefault" id="radio1" onclick="tarjeta()"
+                      required>
                     <label class="form-check-label" for="flexRadioDefault1">
                       Tarjeta de crédito
                     </label>
