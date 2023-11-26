@@ -69,7 +69,7 @@ app.post("/articles", async (req, res) => {
 
 // PUT a carrito
 app.put("/articles/:id", async (req, res) => {
-  /* COMPLETA EL CÓDIGO NECESARIO:
+  /*
      Para que se pueda actualizar el objeto asociado al índice indicado en la URL 
    */
      let conn;
@@ -93,7 +93,7 @@ app.put("/articles/:id", async (req, res) => {
 
 // DELETE a carrito
 app.delete("/articles/:id", async(req, res) => {
-  /* COMPLETA EL CÓDIGO NECESARIO:
+  /*
      Para que se pueda eliminar el objeto asociado al índice indicado en la URL 
    */
      let conn;
@@ -178,7 +178,6 @@ app.use("/api/cart", (req, res, next) => {
 
 
 
-app.use("/api/users", userRouter); //users
 
 app.use("/api/categories", categoryRouter); //categorias
 
