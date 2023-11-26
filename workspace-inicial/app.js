@@ -53,8 +53,8 @@ app.post("/articles", async (req, res) => {
      
        conn = await pool.getConnection();
        const response = await conn.query(
-        `INSERT INTO articles(name, quantity, cost, currency, image) VALUE(?, ?, ?, ?, ?)`,
-        [req.body.name, req.body.quantity, req.body.cost, req.body.currency, req.body.image]
+        `INSERT INTO articles(id, name, quantity, cost, currency, image) VALUE(?, ?, ?, ?, ?, ?)`,
+        [req.body.id, req.body.name, req.body.quantity, req.body.cost, req.body.currency, req.body.image]
         );
      
            res.json({id: parseInt(response.insertId), ...req.body});

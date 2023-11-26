@@ -6,5 +6,5 @@ password: admin
 
 Recuerda iniciar la terminal desde la carpeta "workspace-inicial" (una manera es haciendo click derecho en la carpeta y => Open In Integrated Terminal)
 
-npm install
-npm run dev
+Para guardar los productos comprados en el servidor:
+-Importar base_de_datos_cart.sql a HeidiSQL y Ejectuar

@@ -21,20 +21,20 @@ USE `carrito`;
 
 -- Volcando estructura para tabla carrito.articles
 CREATE TABLE IF NOT EXISTS `articles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT 1,
   `cost` int(11) NOT NULL DEFAULT 0,
   `currency` varchar(50) NOT NULL,
   `image` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12314 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Volcando datos para la tabla carrito.articles: ~3 rows (aproximadamente)
 INSERT INTO `articles` (`id`, `name`, `quantity`, `cost`, `currency`, `image`) VALUES
-	(2, 'a', 1, 2, 'USD', 'a'),
-	(333, 'a', 132, 2, 'USD', 'a'),
-	(12312, 'a', 1, 2, 'USD', 'a');
+	(40281, 'Computadora de escritorio', 1, 2599, 'USD', 'img/prod40281_1.jpg'),
+	(60801, 'Juego de comedor', 1, 4000, 'UYU', 'img/prod60801_1.jpg'),
+	(60803, 'Armario', 1, 8000, 'UYU', 'img/prod60803_1.jpg');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

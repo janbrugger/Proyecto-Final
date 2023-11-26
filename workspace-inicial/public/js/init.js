@@ -3,7 +3,7 @@ const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publi
 const PRODUCTS_URL = "/api/categories_products/";
 const PRODUCT_INFO_URL = "api/products/";
 const PRODUCT_INFO_COMMENTS_URL = "api/products_comments/";
-const CART_INFO_URL = "api/cart/";
+const CART_INFO_URL = "/articles";
 const CART_BUY_URL = "api/cart";
 const EXT_TYPE = ".json";
 var User = JSON.parse(localStorage.getItem("user")) || []//user es la key con la que identifico la session.
@@ -289,11 +289,11 @@ function themeMenu() {
   })
 })()
 
-async function requestCRUD(method, data) {
+async function requestCRUD(method, data, endpoint) {
   let result;
   switch (method) {
       case 'GET':
-          let getResponse = await fetch(PRODUCT_INFO_COMMENTS_URL + productID);
+          let getResponse = await fetch(endpoint);
           result = getResponse.ok ? getResponse.json() : false;
           break;
 
@@ -312,7 +312,7 @@ async function requestCRUD(method, data) {
           break;
 
       case 'POST':
-          let postResponse = await fetch(PRODUCT_INFO_COMMENTS_URL + productID, {
+          let postResponse = await fetch(endpoint, {
               method: method,
               headers: { 'Content-Type': 'application/json'},
               body: JSON.stringify(data)
