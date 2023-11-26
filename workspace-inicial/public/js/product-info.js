@@ -29,7 +29,7 @@ async function showData() {
 
   try {
     let product = await getData(PRODUCT_INFO_URL + productID); //espera a recibir los resultados de la funcion.
-    // product.quantity = 1;
+    product.quantity = 1;
     showProducts(product);
   } catch (error) { console.log(error) }
 
@@ -75,35 +75,19 @@ function showProducts(data) {
   </div>`
 
   const btnCarrito = document.getElementById("btnCarrito")
-
-
-  btnCarrito.addEventListener('click', async  () => {
-   await addToCart();
-  });
-
- 
-async function addToCart() {
   const productosSeleccionados = JSON.parse(localStorage.getItem("productosSeleccionados")) || [];
-  const productoLocal = productosSeleccionados.find(product => product.id === data.id)
+  const productoExistente = productosSeleccionados.find(product => product.id === data.id)
 
-    const getResponse = await getCart()
-    const productoExistente = getResponse.find(article => article.id === data.id)
+  btnCarrito.addEventListener('click', () => {
+    addToCart();
+  });
+  
+  let addToCart = () => {
     // comprueba si ya existe ese producto en el array, si no existe lo agrega.
-  if (!productoExistente || !productoLocal) {
-
-  productosSeleccionados.push(data); //guarda en local storage
-  localStorage.setItem("productosSeleccionados", JSON.stringify(productosSeleccionados));
-
-    postCart({ //solicitud POST a la base de datos del carrito
-      id: data.id,
-      name: data.name,
-      quantity: 1,
-      cost: data.cost,
-      currency: data.currency,
-      image: data.images[0]})
-
-    logBuyMessage()//Trae mensaje de que la compra se hizo con exito (buy.json)
-
+  if (!productoExistente) {
+    productosSeleccionados.push(data);
+    localStorage.setItem("productosSeleccionados", JSON.stringify(productosSeleccionados));
+    logBuyMessage()
     // Mostrar la alerta de éxito
     document.getElementById('success-alert').classList.remove('d-none');
     setTimeout(function() {
@@ -118,23 +102,6 @@ async function addToCart() {
   }
   }
 
-//GET a articulos del carrito
-async function getCart(data) {
-  try {
-    const response = await requestCRUD('GET', data, CART_INFO_URL);
-    console.log(response)
-    return response || [];
-  } catch (error) {
-    console.error('Error al obtener el carrito:', error);
-    return [];
-  }
-}
-
-//POST al carrito
-function postCart(data) {
-  requestCRUD('POST', data, CART_INFO_URL).then((response) => response ? getCart(response) : showAlert());
-}
-
 
 const btnGoToCart = document.getElementById("btnViewCart");
 btnGoToCart.addEventListener('click', () => {
@@ -143,6 +110,12 @@ btnGoToCart.addEventListener('click', () => {
 
 };
 
+
+function compararPorFecha(a, b) {
+  const fechaA = new Date(a.dateTime);
+  const fechaB = new Date(b.dateTime);
+  return fechaB - fechaA;
+}
 
 
 
@@ -243,13 +216,7 @@ function showComments(data_comments) {
 
 };
 
-function compararPorFecha(a, b) {
-  const fechaA = new Date(a.dateTime);
-  const fechaB = new Date(b.dateTime);
-  return fechaB - fechaA;
-}
-
-//alerta si hay error al realizar comentarios o comprar el producto
+//alerta si hay error al realizar comentarios
 function showAlert() {
   document.getElementById("alert-error").classList.add("show");
   window.setTimeout(() => document.getElementById("alert-error").classList.remove("show"), 3000)
@@ -257,13 +224,13 @@ function showAlert() {
 }
 
 //hace get a los comentarios
-function getAll(data) {
-  requestCRUD('GET', data, PRODUCT_INFO_COMMENTS_URL + productID).then((response) => response ? showComments(response) : showAlert());
+function getAll() {
+  requestCRUD('GET').then((response) => response ? showComments(response) : showAlert());
 }
 
 //hace post a los comentarios que se desean enviar
 function postDatos(data) {
-    requestCRUD('POST', data, PRODUCT_INFO_COMMENTS_URL + productID).then((response) => response ? getAll(response) : showAlert());
+    requestCRUD('POST', data).then((response) => response ? getAll(response) : showAlert());
 }
 
 
