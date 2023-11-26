@@ -29,7 +29,7 @@ async function showData() {
 
   try {
     let product = await getData(PRODUCT_INFO_URL + productID); //espera a recibir los resultados de la funcion.
-    // product.quantity = 1;
+    product.quantity = 1;
     showProducts(product);
   } catch (error) { console.log(error) }
 
