@@ -2,7 +2,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = "CLAVE SECRETA"
-const userRouter = require("./routes/userRouter");
 const categoryRouter = require("./routes/categoryRouter");
 const categoryProductRouter = require("./routes/categoryProductRouter");
 const productsRouter = require("./routes/productsRouter");
