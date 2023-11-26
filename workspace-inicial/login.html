@@ -24,22 +24,20 @@
         </div>
         <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
 
-        <div class="form-floating mb-3 ms-4 me-4">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">Email address</label>
+        <div class="mb-3 ms-4 me-4">
+          <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+          </div>
         </div>
-        
         <!--campo de password con btn de mostrar ocultar-->
-      <div class="form-floating ms-4 me-4">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" aria-label="Password"
-          aria-describedby="password-addon">
-        <label for="floatingPassword">Password</label>
-        <div class="input-group-append float-end">
-          <button class="btn btn-outline-secondary" type="button" id="password-addon">
-            <span id="password-text">Show</span> <!-- Cambiado a "Show" en inglés -->
-          </button>
+        <div class="ms-4 me-4">
+          <div class="form-floating input-group">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+            <button class="btn btn-outline-secondary" type="button" id="password-addon">Show</button>
+          </div>
         </div>
-      </div>
 
         <div class="p-3 checkbox mt-3 mb-3">
           <label>
