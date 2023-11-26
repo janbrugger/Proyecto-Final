@@ -39,17 +39,19 @@ nav a {
   }
 }
 
-.jumbotron {
-  height: 50vh;
-  padding: 5em inherit;
-  margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back2.png');
-  background-size: cover;
-  background-position: block;
-  background-repeat: no-repeat;
-  color: black;
-  font-weight: bold;
+@media (min-width: 768px) {
+  .jumbotron {
+    height: 50vh;
+    padding: 5em inherit;
+    margin-bottom: 0;
+    background-color: #53C0FB;
+    background: url('../img/cover_back2.png');
+    background-size: cover;
+    background-position: block;
+    background-repeat: no-repeat;
+    color: black;
+    font-weight: bold;
+  }
 }
 
 @media (min-width: 768px) {
@@ -215,21 +217,25 @@ a.custom-card:hover {
   color: white;
   font-size: 1.3rem;
 }
+
 .error {
   background-color: rgb(43, 32, 139);
 }
 
 .rating {
-  font-size: 24px; /* Tamaño de las estrellas */
+  font-size: 24px;
+  /* Tamaño de las estrellas */
 }
 
 .star {
-  color: #ccc; /* Color de las estrellas apagadas */
+  color: #ccc;
+  /* Color de las estrellas apagadas */
   cursor: pointer;
 }
 
 .selected {
-  color: #ffcc00; /* Color de las estrellas al hacer click */
+  color: #ffcc00;
+  /* Color de las estrellas al hacer click */
 }
 
 /* dark mode */
@@ -237,74 +243,73 @@ a.custom-card:hover {
   float: left;
 }
 
-input[type=checkbox]{
-	height: 0;
-	width: 0;
-	visibility: hidden;
-}
+
 
 label.switch {
-	cursor: pointer;
-	text-indent: -9999px;
-	width: 70px;
-	height: 30px;
-	background: grey;
-	display: block;
-	border-radius: 100px;
-	position: relative;
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 70px;
+  height: 30px;
+  background: grey;
+  display: block;
+  border-radius: 100px;
+  position: relative;
   left: 15px;
 }
 
 label.switch:after {
-	content: '';
-	position: absolute;
-	top: 2px;
-	left: 2px;
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
   bottom: 2px;
-	width: 26px;
-	height: 26px;
-	background: #fff;
-	border-radius: 90px;
-	transition: 0.3s;
+  width: 26px;
+  height: 26px;
+  background: #fff;
+  border-radius: 90px;
+  transition: 0.3s;
 }
 
-input:checked + label {
-	background: #5b9fc4;
+input:checked+label {
+  background: #5b9fc4;
 }
 
-input:checked + label:after {
-	left: calc(100% - 3px);
-	transform: translateX(-100%);
+input:checked+label:after {
+  left: calc(100% - 3px);
+  transform: translateX(-100%);
 }
 
 label.switch:active:after {
-	width: 100px;
+  width: 100px;
 }
 
-/* Media for Phone size */
-.form-control{
-  padding-left: 0px !important;
-  padding-right: 0px !important;
+@media (max-width: 767px) {
+
+  /* Media for Phone size */
+  .form-control {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
 }
 
-.card-body{
-  padding: 0em 0.7em 0.5em ;
+.card-body {
+  padding: 0em 0.7em 0.5em;
 }
 
 .card-text {
-font-size: 15px;
+  font-size: 15px;
 }
 
-.sm-fs{
+.sm-fs {
   font-size: 0.7em;
 }
 
 
 #mensajeNoComentarios {
- display: none;
+  display: none;
 }
 
-#mapDiv{
+#mapDiv {
   width: 100%;
   height: 300px;
 }
@@ -321,6 +326,7 @@ font-size: 15px;
   height: 40px;
   cursor: pointer;
 }
+
 .custom-map-control-button:hover {
   background: rgb(235, 235, 235);
 }
@@ -357,14 +363,16 @@ font-size: 15px;
   display: block !important;
 }
 
-.dropdown-item.active { /*(menu desplegable) color de la opcion seleccionada*/
+.dropdown-item.active {
+  /*(menu desplegable) color de la opcion seleccionada*/
   background-color: #ff9100;
 }
 
-.dropdown-item:active { /*(menu desplegable) color cuando se clickea en la opción*/
+.dropdown-item:active {
+  /*(menu desplegable) color cuando se clickea en la opción*/
   background-color: #ff9100;
 }
 
 .navbar {
-  background-color:rgb(31, 31, 31);
+  background-color: rgb(31, 31, 31);
 }
